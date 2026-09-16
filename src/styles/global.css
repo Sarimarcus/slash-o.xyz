@@ -555,6 +555,29 @@ html:not(.live-field) .field {
   max-width: 14rem;
 }
 
+/* ---------- the void (404) ---------- */
+
+/* A plate with nothing to plot: linen only, no field, no static plot. The
+   live-field class must not suppress anything here because nothing loads. */
+.band--void {
+  min-height: calc(100svh - 4.2rem);
+}
+.band--void .field,
+html:not(.live-field) .band--void .field {
+  background: var(--linen);
+}
+.band--void .hero-copy h1 {
+  max-width: 18ch;
+}
+.band--void .lede + .lede {
+  margin-top: 1rem;
+}
+.void-path {
+  font-family: inherit;
+  font-variant-numeric: tabular-nums lining-nums;
+  overflow-wrap: anywhere;
+}
+
 /* ---------- contact & colophon ---------- */
 
 .contact-email {

@@ -38,6 +38,33 @@
         ],
         "createdAt": "2026-09-16T19:32:49.370Z",
         "reason": "computed padding verified in browser 2026-09-16: .meta>div 12px top, .margin 44.8px desktop / 20px mobile; detector cannot resolve custom properties"
+      },
+      {
+        "rule": "gray-on-color",
+        "value": "*",
+        "files": [
+          "dist/404.html"
+        ],
+        "createdAt": "2026-09-16T21:32:51.644Z",
+        "reason": "same oxide button as index; user-confirmed, 4.6:1"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "dist/404.html"
+        ],
+        "createdAt": "2026-09-16T21:32:51.654Z",
+        "reason": "same .meta/.margin rules as index, computed padding verified 12px/44.8px; detector cannot resolve custom properties"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "dist/404.html"
+        ],
+        "createdAt": "2026-09-16T21:32:51.666Z",
+        "reason": "user pinned aged linen #E4DFD1 as the ground in the brief"
       }
     ]
   }

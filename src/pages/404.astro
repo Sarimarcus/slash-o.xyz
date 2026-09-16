@@ -1,19 +1,63 @@
 ---
+/**
+ * The 404: a survey of a place that is not there. Same plate, same margin,
+ * same instruments, all reading zero. The one measurement is the address the
+ * visitor asked for, echoed by a small script (static hosting cannot know it
+ * at build time); without JavaScript the line says "this address".
+ */
 import Base from '@/layouts/Base.astro';
 import PlateHead from '@/components/PlateHead.astro';
+import { NOT_FOUND } from '@/data/copy';
+import { LEVELS } from '@/hero/noise.js';
 ---
 
-<Base title="Not found" description="This page does not exist." indexable={false}>
+<Base title="Not surveyed" description="This page does not exist." indexable={false}>
   <PlateHead hide={['readings']} />
   <main>
-    <section class="band" aria-labelledby="nf-title">
+    <section class="band band--hero band--void" aria-labelledby="nf-title">
+      <div class="field" aria-hidden="true"></div>
+
       <div class="margin">
-        <h1 id="nf-title" class="band-title">Nothing measured here</h1>
+        <dl class="meta readout">
+          <div>
+            <dt>Isotherm</dt>
+            <dd>0.0 <span class="unit">°</span></dd>
+          </div>
+          <div>
+            <dt>Contour</dt>
+            <dd>0 / {LEVELS}</dd>
+          </div>
+          <div>
+            <dt>Zone</dt>
+            <dd>none</dd>
+          </div>
+          <div>
+            <dt>Probe</dt>
+            <dd>lost</dd>
+          </div>
+          <div>
+            <dt>{NOT_FOUND.measuredAs}</dt>
+            <dd><code class="void-path" data-path>{NOT_FOUND.fallbackPath}</code></dd>
+          </div>
+        </dl>
+        <p class="readout-note">{NOT_FOUND.readoutNote}</p>
       </div>
+
       <div class="content">
-        <p class="intro">There is no page at this address.</p>
-        <p><a href="/">Back to the plate</a></p>
+        <div class="hero-copy">
+          <h1 id="nf-title">{NOT_FOUND.title}</h1>
+          {NOT_FOUND.body.map((p) => <p class="lede">{p}</p>)}
+          <p class="actions">
+            <a class="button" href="/">{NOT_FOUND.back}</a>
+          </p>
+        </div>
       </div>
     </section>
   </main>
 </Base>
+
+<script>
+  // The requested path, as text. textContent never interprets markup.
+  const el = document.querySelector('[data-path]');
+  if (el) el.textContent = location.pathname + location.search;
+</script>

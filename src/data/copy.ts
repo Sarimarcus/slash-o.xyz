@@ -191,3 +191,15 @@ export const COLOPHON = {
   ],
   source: 'Source on GitHub',
 } as const;
+
+export const NOT_FOUND = {
+  title: 'This altitude was not surveyed.',
+  body: [
+    'There is no page at this address. It was either never written, moved without leaving a forwarding note, or is a typo, which is the most common cause of missing pages and the least often blamed.',
+    'Nothing here rose above the baseline, so nothing was plotted.',
+  ],
+  measuredAs: 'measured as',
+  fallbackPath: 'this address',
+  back: 'Back to the plate',
+  readoutNote: 'Readings taken at the requested address. All instruments agree.',
+} as const;
