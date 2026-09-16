@@ -11,7 +11,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "todo": "grep -rn 'TODO(content)' src astro.config.mjs || echo 'No content placeholders left.'"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

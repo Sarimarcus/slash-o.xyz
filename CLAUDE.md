@@ -15,6 +15,7 @@ scaffold deliberately holds no aesthetic opinion so there is nothing to unwind.
 | `npm run build` | Static build into `dist/` |
 | `npm run preview` | Serve the built `dist/` locally |
 | `npm run check` | `astro check` — TypeScript and template typecheck |
+| `npm run todo` | Lists every `TODO(content)` placeholder still in the source |
 
 `npm run build` and `npm run check` are the entire quality gate; CI runs both on
 every push and pull request (`.github/workflows/ci.yml`). There is no linter and

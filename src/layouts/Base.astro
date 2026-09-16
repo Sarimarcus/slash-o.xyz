@@ -29,6 +29,10 @@ const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
 // 2. build.format: 'file' makes the pathname '/index.html' and '/404.html' at
 //    build time, while @astrojs/sitemap emits '/' and the served URL is '/404'.
 //    Left alone, canonical and sitemap would disagree about the same page.
+//
+// Note for the first nested route: src/pages/about/index.astro emits
+// '/about/index.html', which this reduces to '/about/' — a trailing slash,
+// against trailingSlash: 'never'. Strip it here when that route exists.
 const canonicalPath = Astro.url.pathname.replace(/index\.html$/, '').replace(/\.html$/, '');
 const canonical = new URL(canonicalPath, SITE_URL).href;
 ---
