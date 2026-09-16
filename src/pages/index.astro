@@ -1,11 +1,226 @@
 ---
 import Base from '@/layouts/Base.astro';
-import { SITE } from '@/data/site';
+import PlateHead from '@/components/PlateHead.astro';
+import Hero from '@/components/Hero.astro';
+import Band from '@/components/Band.astro';
+import Row from '@/components/Row.astro';
+import { SITE, PERSON, isPlaceholder, displayName } from '@/data/site';
+import { PROBLEMS, WORK, READINGS, SITES, TERMS, CONTACT, COLOPHON } from '@/data/copy';
+import { FACTORY } from '@/data/factory';
+import { OWNED_SITES, readSitemap } from '@/data/sites';
+
+// Build-time facts. Sitemaps are fetched now, on the build machine.
+const siteReadings = await Promise.all(OWNED_SITES.map(readSitemap));
+
+// The readings band stays out of production while any figure is a placeholder.
+// In dev it renders with the placeholders marked, so the layout can be seen.
+const readingsReal = READINGS.items.every(
+  (r) => !isPlaceholder(r.measured) && !isPlaceholder(r.done) && !isPlaceholder(r.after),
+);
+const showReadings = readingsReal || import.meta.env.DEV;
+
+const factoryText = (s: string) =>
+  s
+    .replace('{agents}', String(FACTORY.agents))
+    .replace('{validators}', String(FACTORY.validators))
+    .replace('{gates}', String(FACTORY.gates))
+    .replace('{tests}', String(FACTORY.testSuites));
+
+const buildIso = new Date().toISOString();
+const buildDate = buildIso.slice(0, 10);
+const colophon = COLOPHON.lines.map((l) =>
+  l.replace('{kb}', '%%PAGE_KB%%').replace('{commit}', '%%COMMIT%%').replace('{date}', buildDate),
+);
+
+const figLetters = ['a', 'b', 'c', 'd'];
+const hasEmail = !isPlaceholder(PERSON.email);
+const hasCalendar = !isPlaceholder(PERSON.calendar);
+// Placeholder marking is a dev aid; production says plainly what is pending.
+const ph = (v: string) => import.meta.env.DEV && isPlaceholder(v);
+const bookHref = hasCalendar ? PERSON.calendar : hasEmail ? `mailto:${PERSON.email}` : '#contact';
+const fmt = new Intl.NumberFormat('en-GB');
 ---
 
 <Base title={SITE.name}>
-  <main class="mx-auto max-w-2xl px-6 py-24">
-    <h1 class="text-4xl font-semibold tracking-tight">{SITE.name}</h1>
-    <p class="mt-4 text-lg">{SITE.tagline}</p>
+  <PlateHead hide={showReadings ? [] : ['readings']} />
+
+  <main>
+    <Hero />
+
+    <Band id="problems" title={PROBLEMS.title}>
+      <p class="intro">{PROBLEMS.intro}</p>
+      <Fragment slot="rows">
+        {PROBLEMS.items.map((it) => (
+          <Row>
+            <dl class="note" slot="margin">
+              <dt>measured as</dt>
+              {it.measures.map((m) => <dd>{m}</dd>)}
+            </dl>
+            <h3>{it.title}</h3>
+            <p>{it.body}</p>
+          </Row>
+        ))}
+      </Fragment>
+    </Band>
+
+    <Band id="work" title={WORK.title}>
+      <Fragment slot="rows">
+        {WORK.items.map((it) => (
+          <Row>
+            <dl class="note" slot="margin">
+              <dt>leaves behind</dt>
+              {it.artefacts.map((a) => <dd>{a}</dd>)}
+            </dl>
+            <h3>{it.title}</h3>
+            {it.body.map((p) => <p>{p}</p>)}
+          </Row>
+        ))}
+      </Fragment>
+    </Band>
+
+    {showReadings && (
+      <Band id="readings" title={READINGS.title}>
+        <p class="intro">{READINGS.intro}</p>
+        <Fragment slot="rows">
+          {READINGS.items.map((r, i) => (
+            <Row>
+              <dl class="note" slot="margin">
+                <dt>fig. {figLetters[i]}</dt>
+                <dd>{r.site}</dd>
+              </dl>
+              <figure class="reading">
+                <figcaption>
+                  <span class="fig">Fig. {figLetters[i]}</span> <span class="site">{r.site}</span>
+                </figcaption>
+                <p class:list={{ placeholder: ph(r.measured) }}>{r.measured}</p>
+                <p class:list={{ placeholder: ph(r.done) }}>{r.done}</p>
+                <p class:list={['after', { placeholder: ph(r.after) }]}>{r.after}</p>
+              </figure>
+            </Row>
+          ))}
+        </Fragment>
+      </Band>
+    )}
+
+    <Band id="sites" title={SITES.title}>
+      <p class="intro">{SITES.intro}</p>
+      <Fragment slot="rows">
+        {OWNED_SITES.map((s, i) => (
+          <Row>
+            <dl class="note" slot="margin">
+              <dt>{SITES.marginUrls}</dt>
+              <dd><span class:list={{ live: siteReadings[i].live }}>{fmt.format(siteReadings[i].urls)}</span></dd>
+              <dt>{SITES.marginLastmod}</dt>
+              <dd>{siteReadings[i].lastmod}</dd>
+            </dl>
+            <p>
+              <a class="site-link" href={s.url} rel="me">{s.domain}</a>
+              <span class="site-what">{s.what}</span>
+            </p>
+          </Row>
+        ))}
+        <Row>
+          <dl class="note" slot="margin">
+            <dt>{SITES.marginMeasured}</dt>
+            <dd>{FACTORY.measuredOn}</dd>
+            <dt>{SITES.marginCommits}</dt>
+            <dd>{fmt.format(FACTORY.commits)}</dd>
+          </dl>
+          {SITES.factory.map((p) => <p>{factoryText(p)}</p>)}
+          <p>
+            <a href={FACTORY.repo}>The factory's source</a>, counted on {FACTORY.measuredOn}.
+          </p>
+        </Row>
+      </Fragment>
+    </Band>
+
+    <Band id="terms" title={TERMS.title}>
+      <Fragment slot="rows">
+        <Row>
+          <dl class="note" slot="margin">
+            <dt>{TERMS.audit.title}</dt>
+            {TERMS.audit.margin.map((m) => <dd>{m}</dd>)}
+          </dl>
+          <h3>{TERMS.audit.title}</h3>
+          {TERMS.audit.body.map((p) => <p>{p}</p>)}
+        </Row>
+        <Row>
+          <dl class="note" slot="margin">
+            <dt>{TERMS.retainer.title}</dt>
+            {TERMS.retainer.margin.map((m) => <dd>{m}</dd>)}
+          </dl>
+          <h3>{TERMS.retainer.title}</h3>
+          {TERMS.retainer.body.map((p) => <p>{p}</p>)}
+        </Row>
+        <Row>
+          <div class="refusal">
+            <h3>{TERMS.refusal.title}</h3>
+            <p>
+              <span class="mark-text"><span class="slash">/</span>O</span> {TERMS.refusal.lead}
+            </p>
+            <p>{TERMS.refusal.body}</p>
+          </div>
+          <p class="capacity">{TERMS.capacity}</p>
+        </Row>
+        <Row>
+          <dl class="note" slot="margin">
+            <dt>{TERMS.languages.title}</dt>
+            {TERMS.languages.margin.map((m) => <dd>{m}</dd>)}
+          </dl>
+          <h3>{TERMS.languages.title}</h3>
+          <p>{TERMS.languages.body}</p>
+          <p class="actions">
+            <a class="button" href={bookHref}>Book a diagnostic</a>
+          </p>
+        </Row>
+      </Fragment>
+    </Band>
+
+    <Band id="contact" title={CONTACT.title}>
+      <dl class="meta" slot="margin">
+        <div>
+          <dt>{PERSON.city}, {CONTACT.marginLabel}</dt>
+          <dd><time data-clock data-tz={PERSON.timeZone} datetime={buildIso}>{CONTACT.marginStatic}</time></dd>
+        </div>
+      </dl>
+      <p class="intro">{CONTACT.body}</p>
+      {hasEmail ? (
+        <p><a class="contact-email" href={`mailto:${PERSON.email}`}>{PERSON.email}</a></p>
+      ) : (
+        <p class:list={['pending', { placeholder: ph(PERSON.email) }]}>{CONTACT.emailPending}</p>
+      )}
+      {hasCalendar && (
+        <p>{CONTACT.calendarLead} <a href={PERSON.calendar}>Book a first call</a>.</p>
+      )}
+      <p class="person">
+        <strong class:list={{ placeholder: ph(PERSON.surname) }}>{displayName()}</strong>
+        <span class="role">{PERSON.role}</span>
+      </p>
+    </Band>
   </main>
+
+  <footer class="colophon">
+    <div class="margin" aria-hidden="true"></div>
+    <div class="content">
+      {colophon.map((l) => <p>{l}</p>)}
+      <p><a href={SITE.repo}>{COLOPHON.source}</a></p>
+    </div>
+  </footer>
 </Base>
+
+<script>
+  // Madrid local time in the contact margin, updated on the minute. Without
+  // JavaScript the element reads "Central European Time".
+  const clock = document.querySelector<HTMLElement>('[data-clock]');
+  if (clock) {
+    const tz = clock.dataset.tz;
+    const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: tz, timeZoneName: 'short' });
+    const tick = () => {
+      const now = new Date();
+      clock.textContent = fmt.format(now);
+      clock.setAttribute('datetime', now.toISOString());
+      setTimeout(tick, 60_000 - (now.getSeconds() * 1000 + now.getMilliseconds()));
+    };
+    tick();
+  }
+</script>

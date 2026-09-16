@@ -1,0 +1,24 @@
+---
+/**
+ * The /O mark: a slash in oxide and an O in ink, drawn at the same stroke so
+ * the slash cuts the paper rather than sitting beside the letter. The slash
+ * runs from (22,36) to (34,4): about 70° from the horizontal, the one angle
+ * every hatch and tick on the page shares.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 64 40"
+  role="img"
+  aria-labelledby="mark-title"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title id="mark-title">Slash O</title>
+  <path class="mark-slash" d="M22 36 L34 4" fill="none" stroke-width="5" stroke-linecap="butt" />
+  <circle class="mark-o" cx="47.5" cy="20" r="13.5" fill="none" stroke-width="5" />
+</svg>

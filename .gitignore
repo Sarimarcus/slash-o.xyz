@@ -22,3 +22,10 @@ node_modules/
 
 .DS_Store
 *.log
+
+# Impeccable per-developer state and review captures.
+.impeccable/config.local.json
+.impeccable/review/
+
+# Claude Code machine-local settings (the design hook is registered here).
+.claude/settings.local.json

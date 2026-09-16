@@ -1,9 +1,9 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import tailwindcss from '@tailwindcss/vite';
 
 import { SITE_URL } from './src/data/site.ts';
+import provenance from './src/integrations/provenance.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,19 +21,14 @@ export default defineConfig({
   trailingSlash: 'never',
   build: {
     format: 'file',
-    // Small stylesheets go inline to save a round trip; large ones stay
-    // external. Note this is why the CSP in public/_headers needs
-    // style-src 'unsafe-inline'.
-    inlineStylesheets: 'auto',
+    // The single stylesheet is small enough to inline, which saves the one
+    // round trip that would otherwise sit between HTML and first paint. This is
+    // why the CSP in public/_headers needs style-src 'unsafe-inline'.
+    inlineStylesheets: 'always',
   },
 
   compressHTML: true,
 
-  integrations: [sitemap()],
-
-  vite: {
-    // Tailwind v4 is a Vite plugin, not an Astro integration — @astrojs/tailwind
-    // was for v3 and is deprecated.
-    plugins: [tailwindcss()],
-  },
+  // provenance fills the colophon's commit and page-weight tokens after build.
+  integrations: [sitemap(), provenance()],
 });

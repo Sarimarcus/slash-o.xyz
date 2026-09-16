@@ -1,0 +1,44 @@
+{
+  "hook": {
+    "enabled": true,
+    "limits": {
+      "maxFindings": 5,
+      "maxChars": 8000
+    }
+  },
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "dist/index.html",
+          "src/styles/global.css"
+        ],
+        "createdAt": "2026-09-16T19:32:33.804Z",
+        "reason": "user pinned aged linen #E4DFD1 as the ground in the brief (2026-09-16)"
+      },
+      {
+        "rule": "gray-on-color",
+        "value": "*",
+        "files": [
+          "dist/index.html",
+          "src/styles/global.css"
+        ],
+        "createdAt": "2026-09-16T19:32:49.351Z",
+        "reason": "user confirmed in plan: linen #E4DFD1 text on the oxide button, the page's one filled button; measured 4.6:1"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "dist/index.html"
+        ],
+        "createdAt": "2026-09-16T19:32:49.370Z",
+        "reason": "computed padding verified in browser 2026-09-16: .meta>div 12px top, .margin 44.8px desktop / 20px mobile; detector cannot resolve custom properties"
+      }
+    ]
+  }
+}

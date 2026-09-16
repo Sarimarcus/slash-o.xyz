@@ -1,0 +1,31 @@
+---
+/**
+ * One band of the plate. The first row carries the band's title in the margin
+ * column and the intro in the content column; further rows (Row.astro) carry a
+ * passage each, with its note in the margin beside it. Below 48rem the margin
+ * becomes a header row above the content.
+ */
+interface Props {
+  id: string;
+  title: string;
+  class?: string;
+}
+const { id, title, class: className } = Astro.props;
+const titleId = `${id}-title`;
+// A band with no intro renders no content cell, so the title row is only as tall
+// as the title and narrow screens get no empty block.
+const hasIntro = Astro.slots.has('default');
+---
+
+<section id={id} class:list={['band', className]} aria-labelledby={titleId}>
+  <div class="margin">
+    <h2 id={titleId} class="band-title">{title}</h2>
+    <slot name="margin" />
+  </div>
+  {hasIntro && (
+    <div class="content">
+      <slot />
+    </div>
+  )}
+  <slot name="rows" />
+</section>

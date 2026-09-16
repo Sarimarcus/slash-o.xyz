@@ -1,0 +1,16 @@
+---
+/**
+ * One ruled row of a band: the note in the margin column sits beside the
+ * passage it annotates, on a shared hairline. Uses subgrid so the row's two
+ * cells align with the band's columns.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<div class:list={['row', className]}>
+  <div class="row-margin"><slot name="margin" /></div>
+  <div class="row-content"><slot /></div>
+</div>

@@ -1,12 +1,19 @@
 ---
 import Base from '@/layouts/Base.astro';
+import PlateHead from '@/components/PlateHead.astro';
 ---
 
-<Base title="Page not found" description="This page does not exist." indexable={false}>
-  <main class="mx-auto max-w-2xl px-6 py-24">
-    <h1 class="text-4xl font-semibold tracking-tight">Page not found</h1>
-    <p class="mt-4 text-lg">
-      <a href="/" class="underline">Back to the homepage</a>
-    </p>
+<Base title="Not found" description="This page does not exist." indexable={false}>
+  <PlateHead hide={['readings']} />
+  <main>
+    <section class="band" aria-labelledby="nf-title">
+      <div class="margin">
+        <h1 id="nf-title" class="band-title">Nothing measured here</h1>
+      </div>
+      <div class="content">
+        <p class="intro">There is no page at this address.</p>
+        <p><a href="/">Back to the plate</a></p>
+      </div>
+    </section>
   </main>
 </Base>

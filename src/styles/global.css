@@ -1,20 +1,691 @@
 /*
- * The single stylesheet, imported once by src/layouts/Base.astro.
+ * The single stylesheet, imported once by src/layouts/Base.astro and inlined
+ * into the HTML at build.
  *
- * Deliberately unopinionated: Tailwind's defaults are left intact and no design
- * tokens are declared yet. The design system lands in the @theme block below.
+ * The page is a scientific plate: one paper, structure drawn in a darker paper,
+ * ink for text, hairlines in lichen, two poles (altitude blue, oxide) for the
+ * field, the mark and the one filled button. Six colour values, no dark mode.
+ * One typeface with its optical-size axis. One angle, the slash's, for every
+ * hatch and tick. No radius, no shadow, no gradient as decoration.
  */
 
-@import "tailwindcss";
+/* ---------- tokens ---------- */
 
-/*
- * Design tokens go here. Tailwind v4 turns every custom property in this block
- * into utilities and CSS variables — e.g. `--color-ink: #111` yields both
- * `text-ink` / `bg-ink` and `var(--color-ink)`.
- *
- * @theme {
- *   --color-*: …;
- *   --font-*: …;
- *   --text-*: …;
- * }
- */
+:root {
+  --linen: #e4dfd1;
+  --linen-shade: #d3ccba;
+  --ink: #24302b;
+  --lichen: #6e7f5c;
+  --altitude: #3c5a6b;
+  --oxide: #9c4b2f;
+
+  /* Derived, not a seventh value: the margin column's tint. */
+  --margin-tint: color-mix(in srgb, var(--linen) 55%, var(--linen-shade));
+
+  /* The slash's angle from the horizontal, and its complement for CSS gradients
+     (a gradient's angle is perpendicular to the stripes it draws). */
+  --slash: 70deg;
+  --hatch: 160deg;
+
+  --margin-w: clamp(9.5rem, 17vw, 14rem);
+  --gutter: clamp(1.25rem, 3.5vw, 3rem);
+  --band-pad: clamp(3rem, 7vw, 6rem);
+
+  --fs-h1: clamp(2.75rem, 2rem + 4.1vw, 5.5rem);
+  --fs-h2: clamp(1.75rem, 1.45rem + 1.1vw, 2.25rem);
+  --fs-lede: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem);
+  --fs-body: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --fs-ui: 0.9375rem;
+  --fs-caption: 0.8125rem;
+
+  --measure: 66ch;
+
+  color-scheme: light;
+}
+
+/* ---------- type ---------- */
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/source-serif-4-opsz-normal.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/source-serif-4-opsz-italic.woff2') format('woff2-variations');
+}
+/* Metric-adjusted fallback so the h1 does not shift when the webfont lands. */
+@font-face {
+  font-family: 'Source Serif Fallback';
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 95%;
+  ascent-override: 92%;
+  descent-override: 26%;
+}
+
+/* ---------- base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--linen);
+  color: var(--ink);
+  font-family: 'Source Serif 4', 'Source Serif Fallback', Georgia, serif;
+  font-size: 100%;
+  font-optical-sizing: auto;
+  font-synthesis: none;
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--lichen) var(--linen-shade);
+  caret-color: var(--oxide);
+  accent-color: var(--altitude);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-size: var(--fs-body);
+  /* The plate's margin column, continuous down the whole page: a tint, then a
+     1px rule in the darker paper, then the linen ground. Bands only draw their
+     own horizontal rules on top of this. */
+  background:
+    linear-gradient(
+      90deg,
+      var(--margin-tint) 0 calc(var(--margin-w) - 1px),
+      var(--linen-shade) calc(var(--margin-w) - 1px) var(--margin-w),
+      transparent var(--margin-w)
+    )
+    no-repeat;
+}
+
+::selection {
+  background: var(--altitude);
+  color: var(--linen);
+}
+
+:focus-visible {
+  outline: 2px solid var(--altitude);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--altitude);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- plate head: mark and path nav ---------- */
+
+.plate-head {
+  display: grid;
+  grid-template-columns: var(--margin-w) minmax(0, 1fr);
+  align-items: center;
+  border-bottom: 1px solid var(--linen-shade);
+  position: relative;
+  z-index: 2;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.9rem var(--gutter);
+  text-decoration: none;
+}
+.mark svg {
+  display: block;
+  width: 3.25rem;
+  height: auto;
+}
+.mark .mark-slash {
+  stroke: var(--oxide);
+}
+.mark .mark-o {
+  stroke: var(--ink);
+}
+
+.path-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  padding: 0.9rem var(--gutter);
+  list-style: none;
+}
+.path-nav a {
+  font-size: var(--fs-ui);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.path-nav a:hover {
+  text-decoration: underline;
+}
+.path-nav a[aria-current='true'] {
+  color: var(--oxide);
+  text-decoration: underline;
+  text-decoration-color: var(--oxide);
+}
+
+/* Inline mark in running text: the slash in oxide, once on the page. */
+.mark-text .slash {
+  color: var(--oxide);
+}
+
+/* ---------- bands ---------- */
+
+.band {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--margin-w) minmax(0, 1fr);
+  border-top: 1px solid var(--linen-shade);
+}
+
+/* The lichen tick where each band rule crosses the margin edge, set at the
+   slash's angle. A plate's altitude rules are ticked this way. */
+.band::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: calc(var(--margin-w) - 1px);
+  width: 1px;
+  height: 1rem;
+  background: var(--lichen);
+  transform: rotate(calc(90deg - var(--slash)));
+}
+
+.margin {
+  padding: var(--band-pad) var(--gutter) var(--band-pad) var(--gutter);
+  font-size: var(--fs-caption);
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.band-title {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+  margin-bottom: 1.5rem;
+}
+
+.content {
+  padding: var(--band-pad) var(--gutter);
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+}
+
+.content > * + * {
+  margin-top: 1.25rem;
+}
+
+.content h3 {
+  font-size: var(--fs-lede);
+  font-weight: 500;
+  line-height: 1.3;
+  margin-top: 2.5rem;
+}
+.content h3 + p {
+  margin-top: 0.5rem;
+}
+
+.intro {
+  font-size: var(--fs-lede);
+  line-height: 1.45;
+}
+
+/* Margin annotations: label in italic, values in tabular figures, each group
+   ruled off with a hairline in the darker paper. */
+.meta {
+  display: grid;
+  gap: 0.35rem;
+}
+.meta > div {
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--linen-shade);
+}
+.meta > div:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.meta dt {
+  font-style: italic;
+}
+.meta dd {
+  margin: 0.1rem 0 0;
+}
+.meta dd + dd {
+  margin-top: 0.05rem;
+}
+.meta .live {
+  color: var(--altitude);
+}
+
+/* ---------- ruled rows: a note beside its passage ---------- */
+
+.row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  /* One hairline across the whole plate, margin and body alike. */
+  border-top: 1px solid var(--linen-shade);
+}
+.row-margin,
+.row-content {
+  padding: 1.5rem var(--gutter);
+}
+.row-margin {
+  font-size: var(--fs-caption);
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.row-content {
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+}
+.row-content > * + * {
+  margin-top: 0.75rem;
+}
+.row-content h3 {
+  margin-top: 0;
+}
+.row:last-child > * {
+  padding-bottom: var(--band-pad);
+}
+.row-margin:empty {
+  padding: 0;
+}
+.band:has(.row) > .margin,
+.band:has(.row) > .content {
+  padding-bottom: 1.5rem;
+}
+/* With rows below, the intro sits against the first rule beside the title's
+   last lines rather than floating at the top of a tall cell. */
+.band:has(.row) > .content {
+  align-self: end;
+}
+.band:has(.row) > .margin .band-title {
+  margin-bottom: 0;
+}
+.note dt {
+  font-style: italic;
+}
+.note dd {
+  margin: 0.1rem 0 0;
+}
+.note dd + dd {
+  margin-top: 0.05rem;
+}
+.note .live {
+  color: var(--altitude);
+}
+
+/* ---------- keyed list (where I am useful) ---------- */
+
+.keyed {
+  list-style: none;
+  padding: 0;
+}
+.keyed > li {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--linen-shade);
+}
+.keyed > li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.keyed h3 {
+  margin-top: 0;
+}
+.keyed p + p {
+  margin-top: 0.75rem;
+}
+
+/* ---------- readings as figure captions ---------- */
+
+.readings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 3rem;
+  margin-top: 2rem;
+}
+.reading {
+  border-top: 1px solid var(--linen-shade);
+  padding-top: 1rem;
+}
+.reading .fig {
+  font-style: italic;
+}
+.reading .site {
+  font-weight: 500;
+}
+.reading p {
+  margin-top: 0.5rem;
+}
+.reading .after {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ---------- owned sites ---------- */
+
+.site-link {
+  font-weight: 500;
+  font-size: var(--fs-lede);
+}
+.site-what {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* ---------- terms ---------- */
+
+/* The refusal is drawn as a hatched field, the way a plate marks terrain that
+   is excluded from the survey. Hatching at the slash's angle. */
+.refusal {
+  padding: 1.75rem var(--gutter);
+  border-top: 1px solid var(--linen-shade);
+  border-bottom: 1px solid var(--linen-shade);
+  background: repeating-linear-gradient(
+    var(--hatch),
+    var(--linen-shade) 0 1px,
+    transparent 1px 9px
+  );
+}
+.refusal h3 {
+  margin-top: 0;
+}
+.refusal p + p {
+  margin-top: 0.75rem;
+}
+
+.capacity {
+  margin-top: 1.5rem;
+}
+.pending {
+  font-style: italic;
+}
+
+/* ---------- buttons ---------- */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  background: var(--oxide);
+  color: var(--linen);
+  font-size: var(--fs-ui);
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  border: 1px solid var(--oxide);
+}
+.button:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.button:focus-visible {
+  outline-color: var(--ink);
+}
+
+.text-link {
+  font-size: var(--fs-ui);
+  font-weight: 500;
+}
+
+/* ---------- hero ---------- */
+
+.band--hero {
+  border-top: 0;
+  min-height: calc(100svh - 4.2rem);
+  grid-template-rows: minmax(0, 1fr);
+  isolation: isolate;
+}
+.band--hero::before {
+  display: none;
+}
+
+/* The field fills the hero. Visitors who never get the live canvas (reduced
+   motion, no JavaScript, no WebGL2) see /field-rest.svg: the same field at
+   rest, plotted at build. Live visitors are marked before first paint and
+   never fetch it, so the plot-in draws onto blank linen. */
+.field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--linen);
+}
+html:not(.live-field) .field {
+  background: var(--linen) url('/field-rest.svg') center / cover no-repeat;
+}
+.field canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.band--hero .margin,
+.band--hero .content {
+  position: relative;
+  z-index: 1;
+}
+.band--hero .margin {
+  align-self: start;
+  background: transparent;
+}
+.band--hero .content {
+  align-self: end;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+}
+
+.hero-copy h1 {
+  font-size: var(--fs-h1);
+  font-weight: 560;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  max-width: 14ch;
+}
+.hero-copy .lede {
+  margin-top: 1.5rem;
+  font-size: var(--fs-lede);
+  line-height: 1.45;
+  max-width: 52ch;
+}
+
+.readout dd {
+  font-size: 1rem;
+}
+.readout .unit {
+  font-style: italic;
+}
+.readout-note {
+  margin-top: 1rem;
+  max-width: 14rem;
+}
+
+/* ---------- contact & colophon ---------- */
+
+.contact-email {
+  font-size: var(--fs-lede);
+  font-weight: 500;
+}
+.person {
+  margin-top: 2rem;
+}
+.person .role {
+  display: block;
+}
+
+.colophon {
+  display: grid;
+  grid-template-columns: var(--margin-w) minmax(0, 1fr);
+  border-top: 1px solid var(--linen-shade);
+}
+.colophon .content {
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+}
+.colophon .content > * + * {
+  margin-top: 0.5rem;
+}
+
+/* ---------- placeholder guard (dev only) ---------- */
+
+.placeholder {
+  color: var(--oxide);
+  outline: 1px dashed var(--oxide);
+  outline-offset: 2px;
+}
+
+/* ---------- narrow screens: the margin becomes a header row ---------- */
+
+@media (max-width: 47.99rem) {
+  body {
+    background: var(--linen);
+  }
+  .plate-head,
+  .band,
+  .colophon {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .plate-head .mark {
+    padding-bottom: 0.25rem;
+  }
+  .path-nav ul {
+    padding-top: 0.25rem;
+    gap: 0.25rem 1.1rem;
+  }
+  .band::before {
+    display: none;
+  }
+  .margin {
+    padding: 2rem var(--gutter) 0;
+    background: var(--margin-tint);
+    border-bottom: 1px solid var(--linen-shade);
+    padding-bottom: 1.25rem;
+  }
+  .band-title {
+    margin-bottom: 1rem;
+  }
+  .meta {
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 0.5rem 1.5rem;
+  }
+  .meta > div,
+  .meta > div:first-child {
+    border-top: 0;
+    padding: 0;
+  }
+  .content {
+    padding: 2rem var(--gutter) 3rem;
+  }
+  .readings {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .band--hero {
+    min-height: auto;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .band--hero .margin {
+    background: transparent;
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  .band--hero .content {
+    padding-top: 20vh;
+    padding-bottom: 2.5rem;
+  }
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* On a narrow plate the note follows its passage as a footnote, never a
+     label above the heading. */
+  .row-margin {
+    order: 2;
+    padding: 0 var(--gutter) 1.5rem;
+  }
+  .row-content {
+    padding: 1.25rem var(--gutter) 0.75rem;
+  }
+  .row:last-child > .row-margin {
+    padding-bottom: 2.5rem;
+  }
+  .band:has(.row) > .content {
+    padding-bottom: 1.25rem;
+  }
+  .row-margin:empty {
+    padding: 0;
+  }
+  .hero-copy h1 {
+    max-width: none;
+  }
+  .readout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .readout-note {
+    display: none;
+  }
+}
+
+/* ---------- wide plates ---------- */
+
+@media (min-width: 90rem) {
+  :root {
+    --measure: 70ch;
+  }
+}

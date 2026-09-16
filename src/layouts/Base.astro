@@ -3,8 +3,8 @@
  * The document shell every page renders into.
  *
  * It owns the things that must be identical and correct on every URL — the
- * canonical link, the social card tags, the stylesheet — so a page component
- * only has to supply its own title, description and body.
+ * canonical link, the social card tags, the stylesheet, the font preload — so a
+ * page component only has to supply its own title, description and body.
  */
 import { SITE, SITE_URL } from '@/data/site';
 import '@/styles/global.css';
@@ -20,7 +20,7 @@ interface Props {
 
 const { title, description = SITE.description, indexable = true } = Astro.props;
 
-const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
+const pageTitle = title === SITE.name ? `${SITE.name}: ${SITE.tagline}` : `${title}: ${SITE.name}`;
 
 // Two corrections, both load-bearing:
 //
@@ -29,10 +29,6 @@ const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
 // 2. build.format: 'file' makes the pathname '/index.html' and '/404.html' at
 //    build time, while @astrojs/sitemap emits '/' and the served URL is '/404'.
 //    Left alone, canonical and sitemap would disagree about the same page.
-//
-// Note for the first nested route: src/pages/about/index.astro emits
-// '/about/index.html', which this reduces to '/about/' — a trailing slash,
-// against trailingSlash: 'never'. Strip it here when that route exists.
 const canonicalPath = Astro.url.pathname.replace(/index\.html$/, '').replace(/\.html$/, '');
 const canonical = new URL(canonicalPath, SITE_URL).href;
 ---
@@ -48,9 +44,32 @@ const canonical = new URL(canonicalPath, SITE_URL).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {!indexable && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#e4dfd1" />
+
+    {/* Visitors who will get the live canvas never fetch the static plot. Runs
+        before first paint; reduced motion and no-JS keep the plot. If the hero
+        module has not gone live within a few seconds (blocked script, no
+        WebGL2, slow network), the plot comes back rather than blank linen. */}
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('live-field');
+        setTimeout(function () {
+          if (!document.querySelector('.is-live')) document.documentElement.classList.remove('live-field');
+        }, 4000);
+      }
+    </script>
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {/* The roman is on the h1, which is the LCP element; preload only that one. */}
+    <link
+      rel="preload"
+      href="/fonts/source-serif-4-opsz-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
@@ -58,7 +77,7 @@ const canonical = new URL(canonicalPath, SITE_URL).href;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
 
     <slot name="head" />
   </head>

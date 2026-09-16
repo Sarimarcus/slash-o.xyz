@@ -9,8 +9,9 @@
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
   Cross-Origin-Opener-Policy: same-origin
   # 'unsafe-inline' on style-src is required by astro.config's
-  # build.inlineStylesheets: 'auto', which inlines small stylesheets into the
-  # document. On script-src it covers Astro's inlined module scripts.
+  # build.inlineStylesheets: 'always', which inlines the stylesheet into the
+  # document. On script-src it covers the one inline head script (the
+  # live-field class) and Astro's inlined module scripts.
   #
   # This is a real weakening, and it is acceptable only while the site stays as
   # it is: no form, no user input, no third-party script, no server — nothing
@@ -24,3 +25,12 @@
 # Astro fingerprints everything under /_astro, so it can be cached forever.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Fonts are versioned by filename (subset + axis range in the name); change the
+# name when the file changes.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The static plot changes whenever the shader constants do; a day is enough.
+/field-rest.svg
+  Cache-Control: public, max-age=86400

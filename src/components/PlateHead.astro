@@ -1,0 +1,59 @@
+---
+/**
+ * The plate's header row: the mark in the margin column, the anchor nav across
+ * the content column. Nav labels are the fragment paths themselves, so the
+ * slash does typographic and navigational work at once.
+ */
+import Mark from './Mark.astro';
+import { NAV } from '@/data/copy';
+
+interface Props {
+  /** Fragment ids to leave out (a band hidden in production). */
+  hide?: string[];
+}
+const { hide = [] } = Astro.props;
+const items = NAV.filter((n) => !hide.includes(n.href.replace(/^\/?#/, '')));
+---
+
+<header class="plate-head">
+  <a class="mark" href="/" aria-label="Slash O, home"><Mark /></a>
+  <nav class="path-nav" aria-label="Sections">
+    <ul>
+      {items.map((n) => (
+        <li><a href={n.href} data-nav>{n.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  // Marks the band currently in view. Progressive: without it the nav is a
+  // plain list of anchors.
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[data-nav]'));
+  const sections = links
+    .map((a) => document.getElementById(a.hash.slice(1)))
+    .filter((s): s is HTMLElement => s !== null);
+  if (sections.length && 'IntersectionObserver' in window) {
+    const visible = new Map<Element, number>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) visible.set(e.target, e.isIntersecting ? e.intersectionRatio : 0);
+        let best: Element | null = null;
+        let bestRatio = 0;
+        for (const [el, ratio] of visible) {
+          if (ratio > bestRatio) {
+            best = el;
+            bestRatio = ratio;
+          }
+        }
+        for (const a of links) {
+          const on = best !== null && a.hash === `#${best.id}`;
+          if (on) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
+        }
+      },
+      { rootMargin: '-25% 0px -55% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
+    );
+    sections.forEach((s) => io.observe(s));
+  }
+</script>
