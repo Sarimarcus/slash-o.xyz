@@ -1,0 +1,24 @@
+# Build output. Cloudflare Pages rebuilds this from source on every deploy.
+dist/
+
+# Astro's generated types and content cache.
+.astro/
+
+node_modules/
+
+# Impeccable's design.json IS the design system and stays tracked; the review
+# screenshots and mock renders it produces along the way are large and
+# regenerable.
+.impeccable/review/
+.impeccable/mocks/
+
+# Browser-automation scratch output.
+.playwright-mcp/
+
+# Secrets never belong in the repo, and this site has no build-time secret.
+.env
+.env.*
+!.env.example
+
+.DS_Store
+*.log

@@ -1,0 +1,65 @@
+---
+/**
+ * The document shell every page renders into.
+ *
+ * It owns the things that must be identical and correct on every URL — the
+ * canonical link, the social card tags, the stylesheet — so a page component
+ * only has to supply its own title, description and body.
+ */
+import { SITE, SITE_URL } from '@/data/site';
+import '@/styles/global.css';
+
+interface Props {
+  /** Page title. Suffixed with the site name unless it already is the site name. */
+  title: string;
+  /** Falls back to the site-wide description. */
+  description?: string;
+  /** False on pages that must stay out of search results, e.g. 404. */
+  indexable?: boolean;
+}
+
+const { title, description = SITE.description, indexable = true } = Astro.props;
+
+const pageTitle = title === SITE.name ? SITE.name : `${title} — ${SITE.name}`;
+
+// Two corrections, both load-bearing:
+//
+// 1. Astro.url carries the dev server's origin, so rebuild against the
+//    canonical one — otherwise previews advertise localhost as canonical.
+// 2. build.format: 'file' makes the pathname '/index.html' and '/404.html' at
+//    build time, while @astrojs/sitemap emits '/' and the served URL is '/404'.
+//    Left alone, canonical and sitemap would disagree about the same page.
+const canonicalPath = Astro.url.pathname.replace(/index\.html$/, '').replace(/\.html$/, '');
+const canonical = new URL(canonicalPath, SITE_URL).href;
+---
+
+<!doctype html>
+<html lang={SITE.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {!indexable && <meta name="robots" content="noindex, follow" />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={SITE.ogLocale} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <slot name="head" />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

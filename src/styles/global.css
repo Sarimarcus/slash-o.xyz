@@ -1,0 +1,20 @@
+/*
+ * The single stylesheet, imported once by src/layouts/Base.astro.
+ *
+ * Deliberately unopinionated: Tailwind's defaults are left intact and no design
+ * tokens are declared yet. The design system lands in the @theme block below.
+ */
+
+@import "tailwindcss";
+
+/*
+ * Design tokens go here. Tailwind v4 turns every custom property in this block
+ * into utilities and CSS variables — e.g. `--color-ink: #111` yields both
+ * `text-ink` / `bg-ink` and `var(--color-ink)`.
+ *
+ * @theme {
+ *   --color-*: …;
+ *   --font-*: …;
+ *   --text-*: …;
+ * }
+ */

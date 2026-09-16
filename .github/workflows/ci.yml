@@ -1,0 +1,50 @@
+name: CI — build & typecheck
+
+# The whole quality gate for this repo. There is no linter and no test runner:
+# `astro build` catches broken imports, bad config and invalid templates, and
+# `astro check` catches type errors. Anything those two accept, ships.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Cancel a superseded run when new commits land on the same ref.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          # Astro 7 requires Node >=22.12. Cloudflare Pages builds on 22.
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (hard gate)
+        run: npm run build
+
+      # A missing @astrojs/check would make this step pass without checking
+      # anything, so its absence is an error rather than a skip.
+      - name: Typecheck (hard gate)
+        run: |
+          if [ -d node_modules/@astrojs/check ]; then
+            npx astro check --minimumSeverity error
+          else
+            echo "::error::@astrojs/check not installed — typecheck cannot run"
+            exit 1
+          fi

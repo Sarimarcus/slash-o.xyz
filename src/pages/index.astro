@@ -1,0 +1,11 @@
+---
+import Base from '@/layouts/Base.astro';
+import { SITE } from '@/data/site';
+---
+
+<Base title={SITE.name}>
+  <main class="mx-auto max-w-2xl px-6 py-24">
+    <h1 class="text-4xl font-semibold tracking-tight">{SITE.name}</h1>
+    <p class="mt-4 text-lg">{SITE.tagline}</p>
+  </main>
+</Base>
