@@ -19,7 +19,7 @@ export const SITE = {
   mark: '/O',
   tagline: 'Evidence before intervention.',
   description:
-    'Independent advisory CTO for digital media groups. I measure how the engineering behaves before anyone changes it, coding agents included. No implementation.',
+    'Independent advisory CTO for digital media groups. I measure how the engineering behaves before anyone changes it, coding agents included. I never sell the fix.',
   /** BCP 47 tag for <html lang>. */
   locale: 'en',
   /** Open Graph wants the underscored form. */

@@ -43,9 +43,11 @@ He ran engineering inside a multi-site European media portfolio rather than
 observing one from a consultancy. He does not sell a package. Engagements have taken
 two shapes, a fixed-scope look at something specific and a standing advisory
 arrangement, and which one fits, how long it runs and what it costs are decided per
-case, after the conversation rather than before it. He does not sell implementation
-and refuses to sell it on the back of his own findings. The refusals are the selling
-point, and they are on the page so a reader can rule himself out without asking.
+case, after the conversation rather than before it. He builds, daily and with agents,
+and says so; what he refuses is narrower and absolute: he does not sell the fix he
+recommends, and he will not take the implementation contract that follows his own
+findings. The refusals are the selling point, and they are on the page so a reader
+can rule himself out without asking.
 
 He develops with coding agents as his primary method, and runs three content sites
 through an agent-operated factory with its own quality gates. That practice is

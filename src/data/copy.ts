@@ -107,7 +107,7 @@ export const WORK = {
     title: 'Where I am not',
     intro: 'The same honesty in the other direction. If your situation is one of these, a conversation wastes your time and mine.',
     items: [
-      'Implementation. I do not build what I recommend, for the reason set out below.',
+      'Building the fix for a problem you paid me to find. That one is a rule; there is a section on it below.',
       'Anything that competes with Webedia Group, where I am employed. I advise in a personal capacity and I keep that line clean.',
       'TODO(content): one or two more, in your words \u2014 the group size, the stage, or the kind of work you would turn down.',
     ],
@@ -166,9 +166,9 @@ export const HOW = {
   refusal: {
     title: 'What I do not do',
     /** The mark appears mid-sentence exactly once on the page, here. */
-    lead: 'does not do implementation.',
+    lead: 'does not sell the fix it recommends.',
     body:
-      'I do not build what I recommend, and I do not sell an implementation contract on the back of my own findings. If what I find says you need a team, I will help you find one and I will not be it. An auditor who also sells the fix has already decided what the fix is.',
+      'I build. I do it every day, with agents, on the sites above. What I will not do is find you a problem and then sell you the solution to it. If what I measure says you need a team, I will help you find one and I will not be it. An auditor who also sells the fix has already decided what the fix is.',
   },
   capacity:
     'I advise in a personal capacity. Webedia is not party to any engagement, and I do not take work that competes with it.',

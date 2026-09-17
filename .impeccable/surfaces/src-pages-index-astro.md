@@ -53,9 +53,10 @@ about 70°) everywhere. No shadows, no radius, no gradients as decoration.
 STORY: within seconds the visitor sees a measured field being drawn and a headline
 that says measurement comes first. They read three failures they recognise, four
 places this person is useful (including how to let coding agents in without losing
-the baseline), evidence they can check by clicking, two products and one refusal,
-and a way to write. They believe this person measures before he speaks, and forward
-the terms.
+the baseline), the places he says he is not useful, evidence they can check by
+clicking, the shape a working relationship takes and the one rule behind it, and a
+way to write. They believe this person measures before he speaks, and decide whether
+it is worth a conversation.
 
 FIRST VIEWPORT: full-viewport isoline field on linen, contours in blue-to-oxide
 with brighter every third, plotting in over 1.8s. Header row: `/O` mark in the margin
