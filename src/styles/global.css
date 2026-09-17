@@ -523,6 +523,17 @@ html:not(.live-field) .field {
 .band--hero .margin {
   align-self: start;
   background: transparent;
+  /* The margin is an instrument, not a caption. Pinned, it stays with the
+     reader for the length of the descent, which is the only way the Zone
+     reading can be watched changing: zone is scrollY over the hero's height,
+     so an unpinned readout leaves the viewport while it still says 0.0x.
+     top: 0 because the margin's own band padding is the visual offset. */
+  position: sticky;
+  top: 0;
+  /* Pinned, the band's bottom padding is dead space that only shortens how far
+     the instrument can travel before it is released. The column is transparent
+     and starts at the top, so dropping it changes nothing at rest. */
+  padding-bottom: 0;
 }
 .band--hero .content {
   align-self: end;
@@ -668,6 +679,7 @@ html:not(.live-field) .band--void .field {
     background: transparent;
     border-bottom: 0;
     padding-bottom: 0;
+    position: static;
   }
   .band--hero .content {
     padding-top: 20vh;
