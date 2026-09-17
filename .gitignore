@@ -23,9 +23,13 @@ node_modules/
 .DS_Store
 *.log
 
-# Impeccable per-developer state and review captures.
+# Impeccable per-developer state and review captures. The hook state files carry
+# absolute local paths, so they are ignored here rather than only in
+# .git/info/exclude, which does not travel with a clone.
 .impeccable/config.local.json
 .impeccable/review/
+.impeccable/hook.cache.json
+.impeccable/hook.pending.json
 
 # Claude Code machine-local settings (the design hook is registered here).
 .claude/settings.local.json
