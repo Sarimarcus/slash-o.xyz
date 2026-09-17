@@ -4,6 +4,14 @@
  * the slash cuts the paper rather than sitting beside the letter. The slash
  * runs from (22,36) to (34,4): about 70° from the horizontal, the one angle
  * every hatch and tick on the page shares.
+ *
+ * The O is not a circle. It is a circle of radius 13.5 whose radius the hero's
+ * field displaces, sampled at 84 steps around uv (0.9147, 0.1741) with the
+ * constants in src/hero/noise.js, the deviation centred on the ring's own mean
+ * so the letter keeps the size a plain circle would have. It runs from 96.2%
+ * to 104.8% of nominal: legible as an O at 16px, visibly drawn from something
+ * at 190px. The path is recorded here rather than computed at run time — the
+ * mark is in the head of every page and must cost nothing.
  */
 interface Props {
   class?: string;
@@ -20,5 +28,5 @@ const { class: className } = Astro.props;
 >
   <title id="mark-title">Slash O</title>
   <path class="mark-slash" d="M22 36 L34 4" fill="none" stroke-width="5" stroke-linecap="butt" />
-  <circle class="mark-o" cx="47.5" cy="20" r="13.5" fill="none" stroke-width="5" />
+  <path class="mark-o" d="M61 20L61 21L60.9 22L60.7 23L60.5 24L60.1 24.9L59.6 25.8L59.1 26.7L58.5 27.5L57.8 28.2L57.1 28.9L56.4 29.6L55.7 30.2L54.9 30.8L54.1 31.4L53.2 31.8L52.3 32.2L51.4 32.5L50.4 32.8L49.5 33L48.5 33.2L47.5 33.3L46.5 33.4L45.5 33.4L44.5 33.3L43.5 33.1L42.5 32.7L41.6 32.3L40.7 31.7L39.9 31.1L39.1 30.5L38.4 29.8L37.7 29.1L37.1 28.3L36.5 27.5L35.9 26.7L35.4 25.8L35 24.9L34.5 24L34.2 23L33.9 22.1L33.7 21L33.6 20L33.5 19L33.6 17.9L33.7 16.9L34 15.8L34.3 14.8L34.8 13.9L35.3 13L35.9 12.1L36.6 11.3L37.4 10.6L38.2 10L39.1 9.5L40 9.1L40.9 8.7L41.9 8.3L42.8 7.9L43.7 7.5L44.6 7.2L45.5 6.9L46.5 6.7L47.5 6.6L48.5 6.5L49.5 6.6L50.5 6.7L51.5 7L52.5 7.3L53.4 7.7L54.3 8.1L55.2 8.7L56 9.3L56.8 10L57.5 10.7L58.1 11.5L58.7 12.4L59.2 13.2L59.7 14.1L60 15.1L60.4 16L60.6 17L60.8 18L60.9 19Z" fill="none" stroke-width="5" stroke-linejoin="round" />
 </svg>
