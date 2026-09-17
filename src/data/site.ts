@@ -36,10 +36,10 @@ export const PERSON = {
   city: 'Madrid',
   /** IANA zone for the contact band's clock. */
   timeZone: 'Europe/Madrid',
-  /** TODO(content): the address that receives enquiries. */
-  email: 'TODO(content): email',
-  /** TODO(content): booking URL. Hidden until real; the button falls back to email. */
-  calendar: 'TODO(content): calendar url',
+  /** The address that receives enquiries. */
+  email: 'hello@slash-o.xyz',
+  /** Booking page. The primary button points here; email is the fallback. */
+  calendar: 'https://calendar.proton.me/bookings#Z2PrOwwdoCL1ehvCZ_DK88_3T2FkLV756Yuj8DU3Q-Y=',
   languages: ['English', 'French', 'Spanish'],
 } as const;
 
