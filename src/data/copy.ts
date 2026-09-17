@@ -186,6 +186,7 @@ export const COLOPHON = {
   /** {kb}, {commit} and {date} are filled at build by src/integrations/provenance.mjs and the page. */
   lines: [
     'Set in Source Serif 4. No third-party script, no analytics, no cookies.',
+    "The plate is Humboldt and Bonpland's Tableau physique des Andes (1807): measure a baseline, draw isolines from it, theorise after. The field above is computed, not drawn, from the same method.",
     'Built with coding agents under the same discipline as the sites above: build and typecheck as hard gates in CI, a design detector run before shipping.',
     '{kb} KB transferred before the hero chunk is requested. Commit {commit}, built {date}.',
   ],
