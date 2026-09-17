@@ -7,21 +7,23 @@ related_targets: []
 
 ## Scope & mode
 
-`src/pages/index.astro`, the site's only page. Mode: **Persuade**. The visitor decides
-whether to commission a diagnostic audit and forwards the terms internally.
+`src/pages/index.astro`, the site's only page. Mode: **Persuade**. The page makes no
+offer and no promise: it shows the work and the refusals, and the visitor decides
+whether it is worth a conversation.
 
 ## Audience & job
 
 CEOs, CPOs and PE operating partners at media groups, already sold to by a Big Four
 consultancy and unimpressed. Two arrival situations, about equal: after a
-conversation (confirm and give them the terms) and cold from LinkedIn or a referral
-(establish who this is first). Job: read in three minutes, forward the terms.
+conversation (confirm who this is) and cold from LinkedIn or a referral (establish
+who this is first). Job: read in three minutes and judge whether he can help.
 
 ## Action / task
 
-Primary: "Book a diagnostic" (calendar link, mailto until the URL exists).
-Secondary: "See the terms" (anchor to the engagement band). Success is offline: the
-terms forwarded to a CEO or board.
+Primary: "Book a call" (calendar link, mailto if the URL is ever cleared).
+Secondary: "See what I will not do" (anchor to the how-I-work band). Success is
+offline and two-sided: a qualified reader writes or books, an unqualified one
+correctly decides not to.
 
 ## Content & proof
 
@@ -60,8 +62,8 @@ with brighter every third, plotting in over 1.8s. Header row: `/O` mark in the m
 column, path-style anchor nav across the content column. Margin column (left, ~9.5rem)
 shows four live readouts in 13px caption size: isotherm value, contour n/9, zone,
 probe x/y. Content column, lower-left: h1 "Evidence before intervention." at
-44 to 72px, a 40-word lede at 20 to 22px, then the filled oxide button "Book a
-diagnostic" and the underlined text link "See the terms". The h1 is the LCP element;
+44 to 72px, a lede at 20 to 22px, then the filled oxide button "Book a call" and the
+underlined text link "See what I will not do". The h1 is the LCP element;
 the canvas arrives after idle and intersection.
 
 FORM: the annotated plate with descent, position 1 of the ordered structures

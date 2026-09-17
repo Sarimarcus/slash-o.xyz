@@ -15,9 +15,10 @@ situations: after a conversation with Olivier (the page confirms who he is and g
 them terms to forward), or cold from LinkedIn or a referral link (the page has to
 establish who he is first).
 
-The job they are doing: deciding whether to commission a diagnostic audit, and
-getting the terms in front of a CEO or a board. The decision is made offline. A
-successful visit ends with the terms being forwarded internally, not with a form.
+The job they are doing: judging from the evidence on the page whether this person can
+help them, and deciding whether it is worth a conversation. The decision is made
+offline. A successful visit ends with a note or a booked call — or with a correct
+decision not to write. It never ends with a form.
 
 ## Product Purpose
 
@@ -26,8 +27,9 @@ advisory practice as CTO for digital media groups. It exists to state what he se
 what he refuses to sell, and why his method is different, in a form a skeptical
 executive can read in three minutes and forward.
 
-Success: a qualified buyer forwards the terms and books a diagnostic. Failure: the
-page reads like a consultancy template.
+Success: a qualified reader starts a conversation, and an unqualified one decides from
+the page that Olivier is not the right person. Failure: the page reads like a
+consultancy template, or promises an outcome nobody has measured yet.
 
 ## Positioning
 
@@ -38,10 +40,12 @@ let into it, so that what agents break can later be separated from what was alre
 broken.
 
 He ran engineering inside a multi-site European media portfolio rather than
-observing one from a consultancy. He sells two things only: a diagnostic audit (2 to
-4 weeks, fixed fee, written report) and an advisory retainer (monthly, capped hours).
-He does not sell implementation and refuses to sell it on the back of his own audit.
-The refusal is a selling point.
+observing one from a consultancy. He does not sell a package. Engagements have taken
+two shapes, a fixed-scope look at something specific and a standing advisory
+arrangement, and which one fits, how long it runs and what it costs are decided per
+case, after the conversation rather than before it. He does not sell implementation
+and refuses to sell it on the back of his own findings. The refusals are the selling
+point, and they are on the page so a reader can rule himself out without asking.
 
 He develops with coding agents as his primary method, and runs three content sites
 through an agent-operated factory with its own quality gates. That practice is
@@ -62,8 +66,8 @@ evidence, not a feature.
 ## Capabilities and Constraints
 
 - One page with anchor navigation, seven bands: hero, what usually goes wrong, where
-  I am useful, four readings from recent work, I still run my own sites, how this
-  works, contact.
+  I am useful (closing with its mirror, "Where I am not"), four readings from recent
+  work, I still run my own sites, how I work, contact.
 - Contact is an email link and a calendar link. No form (CSP and product decision).
 - Must work with JavaScript disabled and under `prefers-reduced-motion`; WCAG AA
   contrast; visible keyboard focus.
@@ -72,8 +76,9 @@ evidence, not a feature.
   JavaScript budget 60 KB gzipped.
 - Stack (existing scaffold): Astro 7, static, vanilla JS, plain CSS. OGL for the
   hero's single fullscreen quad. Fonts self-hosted.
-- Undecided: surname, email address, calendar URL. Marked `TODO(content)` and
-  hidden by `isPlaceholder()` until real.
+- Undecided: surname, and the last "Where I am not" item. Marked `TODO(content)` and
+  hidden by `isPlaceholder()` until real. Enquiries go to hello@slash-o.xyz and the
+  primary button to the Proton bookings page.
 
 ## Brand Commitments
 
@@ -118,6 +123,9 @@ evidence, not a feature.
    with the terms intact.
 5. Performance is the pitch. A site selling Core Web Vitals audits ships fast or
    contradicts itself.
+6. Show, do not promise. The page states what he does, what he has measured and what
+   he refuses. It does not scope, price or guarantee an outcome ahead of the
+   conversation that would define it.
 
 ## Accessibility & Inclusion
 

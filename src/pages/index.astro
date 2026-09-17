@@ -5,7 +5,7 @@ import Hero from '@/components/Hero.astro';
 import Band from '@/components/Band.astro';
 import Row from '@/components/Row.astro';
 import { SITE, PERSON, isPlaceholder, displayName } from '@/data/site';
-import { PROBLEMS, WORK, READINGS, SITES, TERMS, CONTACT, COLOPHON } from '@/data/copy';
+import { HERO, PROBLEMS, WORK, READINGS, SITES, HOW, CONTACT, COLOPHON } from '@/data/copy';
 import { FACTORY } from '@/data/factory';
 import { OWNED_SITES, readSitemap } from '@/data/sites';
 
@@ -38,6 +38,7 @@ const hasCalendar = !isPlaceholder(PERSON.calendar);
 // Placeholder marking is a dev aid; production says plainly what is pending.
 const ph = (v: string) => import.meta.env.DEV && isPlaceholder(v);
 const bookHref = hasCalendar ? PERSON.calendar : hasEmail ? `mailto:${PERSON.email}` : '#contact';
+const notUseful = WORK.notUseful.items.filter((i) => !isPlaceholder(i));
 const fmt = new Intl.NumberFormat('en-GB');
 ---
 
@@ -75,6 +76,15 @@ const fmt = new Intl.NumberFormat('en-GB');
             {it.body.map((p) => <p>{p}</p>)}
           </Row>
         ))}
+        {notUseful.length > 0 && (
+          <Row>
+            <h3>{WORK.notUseful.title}</h3>
+            <p>{WORK.notUseful.intro}</p>
+            <ul class="keyed">
+              {notUseful.map((i) => <li>{i}</li>)}
+            </ul>
+          </Row>
+        )}
       </Fragment>
     </Band>
 
@@ -134,43 +144,35 @@ const fmt = new Intl.NumberFormat('en-GB');
       </Fragment>
     </Band>
 
-    <Band id="terms" title={TERMS.title}>
+    <Band id="how" title={HOW.title}>
       <Fragment slot="rows">
         <Row>
           <dl class="note" slot="margin">
-            <dt>{TERMS.audit.title}</dt>
-            {TERMS.audit.margin.map((m) => <dd>{m}</dd>)}
+            <dt>{HOW.engagement.title}</dt>
+            {HOW.engagement.margin.map((m) => <dd>{m}</dd>)}
           </dl>
-          <h3>{TERMS.audit.title}</h3>
-          {TERMS.audit.body.map((p) => <p>{p}</p>)}
-        </Row>
-        <Row>
-          <dl class="note" slot="margin">
-            <dt>{TERMS.retainer.title}</dt>
-            {TERMS.retainer.margin.map((m) => <dd>{m}</dd>)}
-          </dl>
-          <h3>{TERMS.retainer.title}</h3>
-          {TERMS.retainer.body.map((p) => <p>{p}</p>)}
+          <h3>{HOW.engagement.title}</h3>
+          {HOW.engagement.body.map((p) => <p>{p}</p>)}
         </Row>
         <Row>
           <div class="refusal">
-            <h3>{TERMS.refusal.title}</h3>
+            <h3>{HOW.refusal.title}</h3>
             <p>
-              <span class="mark-text"><span class="slash">/</span>O</span> {TERMS.refusal.lead}
+              <span class="mark-text"><span class="slash">/</span>O</span> {HOW.refusal.lead}
             </p>
-            <p>{TERMS.refusal.body}</p>
+            <p>{HOW.refusal.body}</p>
           </div>
-          <p class="capacity">{TERMS.capacity}</p>
+          <p class="capacity">{HOW.capacity}</p>
         </Row>
         <Row>
           <dl class="note" slot="margin">
-            <dt>{TERMS.languages.title}</dt>
-            {TERMS.languages.margin.map((m) => <dd>{m}</dd>)}
+            <dt>{HOW.languages.title}</dt>
+            {HOW.languages.margin.map((m) => <dd>{m}</dd>)}
           </dl>
-          <h3>{TERMS.languages.title}</h3>
-          <p>{TERMS.languages.body}</p>
+          <h3>{HOW.languages.title}</h3>
+          <p>{HOW.languages.body}</p>
           <p class="actions">
-            <a class="button" href={bookHref}>Book a diagnostic</a>
+            <a class="button" href={bookHref}>{HERO.primary}</a>
           </p>
         </Row>
       </Fragment>

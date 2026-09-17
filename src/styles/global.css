@@ -364,7 +364,7 @@ strong {
   color: var(--altitude);
 }
 
-/* ---------- keyed list (where I am useful) ---------- */
+/* ---------- keyed list (where I am not) ---------- */
 
 .keyed {
   list-style: none;
@@ -421,7 +421,7 @@ strong {
   margin-top: 0.25rem;
 }
 
-/* ---------- terms ---------- */
+/* ---------- how I work ---------- */
 
 /* The refusal is drawn as a hatched field, the way a plate marks terrain that
    is excluded from the survey. Hatching at the slash's angle. */

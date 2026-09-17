@@ -11,16 +11,16 @@ export const NAV = [
   { href: '/#work', label: '/work' },
   { href: '/#readings', label: '/readings' },
   { href: '/#sites', label: '/sites' },
-  { href: '/#terms', label: '/terms' },
+  { href: '/#how', label: '/how' },
   { href: '/#contact', label: '/contact' },
 ] as const;
 
 export const HERO = {
   h1: 'Evidence before intervention.',
   lede:
-    'I audit the engineering of media groups before anyone changes it, coding agents included. A measured baseline first, because the obvious fixes cost traffic and nobody can prove it afterwards. Two to four weeks, a written report, no implementation contract behind it.',
-  primary: 'Book a diagnostic',
-  secondary: 'See the terms',
+    'I audit the engineering of media groups before anyone changes it, coding agents included. A measured baseline first, because the obvious fixes cost traffic and nobody can prove it afterwards. Below is what I look for, what I found in my own sites, and what I will not do. Read it and decide whether it is worth a conversation.',
+  primary: 'Book a call',
+  secondary: 'See what I will not do',
   readoutNote: 'A live reading of the field under the cursor. On touch, the centre of the plate.',
   readoutStaticNote: 'The field at rest. Values recorded at build.',
 } as const;
@@ -34,7 +34,8 @@ export interface Failure {
 
 export const PROBLEMS = {
   title: 'What usually goes wrong',
-  intro: 'Three things I find in most media groups, usually in this order.',
+  intro:
+    'Three things I find in most media groups, usually in this order. If none of them sound like your group, I am probably not the person to call.',
   items: [
     {
       title: 'CMS sprawl from acquisitions',
@@ -97,6 +98,20 @@ export const WORK = {
       artefacts: ['agent-readiness baseline', 'architecture tests', 'mutation score', 'CI documentation gates'],
     },
   ] satisfies Area[],
+  /**
+   * The mirror of the four areas above: the reader decides from both halves.
+   * Items that are still `TODO(content)` are filtered out of the page rather
+   * than printed, the same way a placeholder reading is.
+   */
+  notUseful: {
+    title: 'Where I am not',
+    intro: 'The same honesty in the other direction. If your situation is one of these, a conversation wastes your time and mine.',
+    items: [
+      'Implementation. I do not build what I recommend, for the reason set out below.',
+      'Anything that competes with Webedia Group, where I am employed. I advise in a personal capacity and I keep that line clean.',
+      'TODO(content): one or two more, in your words \u2014 the group size, the stage, or the kind of work you would turn down.',
+    ],
+  },
 } as const;
 
 export interface Reading {
@@ -138,44 +153,37 @@ export const SITES = {
   marginCommits: 'commits',
 } as const;
 
-export const TERMS = {
-  title: 'How this works',
-  audit: {
-    title: 'Diagnostic audit',
+export const HOW = {
+  title: 'How I work',
+  engagement: {
+    title: 'If I can help',
     body: [
-      'Two to four weeks. A fixed fee, agreed before we start. You get a written report: the measured baseline, the findings ranked, and what I would do first and why.',
-      'If coding agents are on your roadmap, the report includes the agent-readiness reading.',
+      'Engagements have taken two shapes: a fixed-scope look at something specific, and a standing advisory arrangement. Which one fits, how long it runs and what it costs are decided per case, after the conversation, not before it.',
+      'I do not have a package to sell you.',
     ],
-    margin: ['2 to 4 weeks', 'fixed fee', 'written report'],
-  },
-  retainer: {
-    title: 'Advisory retainer',
-    body: [
-      'Monthly, with capped hours. I sit in the meetings where the decisions are made, review what is proposed, and keep the baseline honest as things change.',
-      'Cancel at the end of any month.',
-    ],
-    margin: ['monthly', 'capped hours', 'cancel monthly'],
+    margin: ['agreed per case', 'priced after the conversation'],
   },
   refusal: {
     title: 'What I do not do',
     /** The mark appears mid-sentence exactly once on the page, here. */
     lead: 'does not do implementation.',
     body:
-      'I do not build what I recommend, and I do not sell an implementation contract on the back of my own audit. If the report says you need a team, I will help you find one and I will not be it. An auditor who also sells the fix has already decided what the fix is.',
+      'I do not build what I recommend, and I do not sell an implementation contract on the back of my own findings. If what I find says you need a team, I will help you find one and I will not be it. An auditor who also sells the fix has already decided what the fix is.',
   },
   capacity:
     'I advise in a personal capacity. Webedia is not party to any engagement, and I do not take work that competes with it.',
   languages: {
     title: 'Working languages',
-    body: 'English, French and Spanish. Reports are written in English unless you ask otherwise.',
+    body: 'English, French and Spanish. Anything I write for you is in English unless you ask otherwise.',
     margin: ['EN', 'FR', 'ES'],
   },
 } as const;
 
 export const CONTACT = {
   title: 'Contact',
-  body: 'Write to me with the group, the titles, and what you think is wrong. I reply within two working days.',
-  calendarLead: 'Or book a first call directly.',
+  body:
+    'Write to me with the group, the titles, and what you think is wrong. I reply within two working days. If I cannot help, I will say so, and I will try to tell you who can.',
+  calendarLead: 'Or book a call directly.',
   marginLabel: 'local time',
   marginStatic: 'Central European Time',
   /** Shown in production while the address is still a placeholder. */

@@ -18,7 +18,7 @@ const restN = contourIndex(rest);
 const bookHref = isPlaceholder(PERSON.calendar)
   ? isPlaceholder(PERSON.email)
     ? '#contact'
-    : `mailto:${PERSON.email}?subject=Diagnostic%20audit`
+    : `mailto:${PERSON.email}?subject=A%20conversation`
   : PERSON.calendar;
 ---
 
@@ -54,7 +54,7 @@ const bookHref = isPlaceholder(PERSON.calendar)
       <p class="lede">{HERO.lede}</p>
       <p class="actions">
         <a class="button" href={bookHref}>{HERO.primary}</a>
-        <a class="text-link" href="#terms">{HERO.secondary}</a>
+        <a class="text-link" href="#how">{HERO.secondary}</a>
       </p>
     </div>
   </div>

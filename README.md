@@ -24,7 +24,7 @@ Components hide a fake value rather than print it (`isPlaceholder()` in
 | Where | What | Effect while a placeholder |
 | --- | --- | --- |
 | `src/data/site.ts` → `PERSON.surname` | Surname | Only the first name is shown |
-| `src/data/site.ts` → `PERSON.email` | Contact address | Production prints "Email address to follow" (CONTACT.emailPending); "Book a diagnostic" points to `#contact` |
+| `src/data/site.ts` → `PERSON.email` | Contact address | Production prints "Email address to follow" (CONTACT.emailPending); "Book a call" points to `#contact` |
 | `src/data/site.ts` → `PERSON.calendar` | Booking URL | The calendar line is hidden; the button falls back to `mailto:` |
 | `src/data/copy.ts` → `READINGS.items` | Four measured cases from the owned sites | The whole band and its nav entry are hidden in production; visible in `npm run dev` with placeholders outlined |
 
