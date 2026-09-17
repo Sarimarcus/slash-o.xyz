@@ -77,7 +77,17 @@ const canonical = new URL(canonicalPath, SITE_URL).href;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={new URL('/og.png', SITE_URL).href} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={SITE.ogImageAlt} />
+
+    {/* summary_large_image, not summary: the card is a plate, and a 1200x630
+        plate cropped to a 120px square thumbnail is a grey smudge. */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={new URL('/og.png', SITE_URL).href} />
+    <meta name="twitter:image:alt" content={SITE.ogImageAlt} />
 
     <slot name="head" />
   </head>

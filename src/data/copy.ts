@@ -195,7 +195,7 @@ export const COLOPHON = {
   lines: [
     'Set in Source Serif 4. No third-party script, no analytics, no cookies.',
     "The plate is Humboldt and Bonpland's Tableau physique des Andes (1807): measure a baseline, draw isolines from it, theorise after. The field above is computed, not drawn, from the same method.",
-    'The mark is cut from that field too: the O is a circle whose radius the field displaces, sampled at uv 0.9147, 0.1741 with the constants in src/hero/noise.js.',
+    'The mark is optically sized, like the type it sits beside: a true circle at the sizes it ships at, and on the card image an O whose radius that same field displaces, sampled at uv 0.9147, 0.1741.',
     'Built with coding agents under the same discipline as the sites above: build and typecheck as hard gates in CI, a design detector run before shipping.',
     '{kb} KB transferred before the hero chunk is requested. Commit {commit}, built {date}.',
   ],

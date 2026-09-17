@@ -24,6 +24,9 @@ export const SITE = {
   locale: 'en',
   /** Open Graph wants the underscored form. */
   ogLocale: 'en_GB',
+  /** Alt text for /og.png, the social card. */
+  ogImageAlt:
+    'The plate: the hero field at rest, drawn as isolines, with the slash-O mark set in a cartouche over it.',
   /** Public repository, cited in the colophon. */
   repo: 'https://github.com/Sarimarcus/slash-o.xyz',
 } as const;

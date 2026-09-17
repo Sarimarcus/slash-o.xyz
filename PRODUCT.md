@@ -71,6 +71,12 @@ evidence, not a feature.
   I am useful (closing with its mirror, "Where I am not"), four readings from recent
   work, I still run my own sites, how I work, contact.
 - Contact is an email link and a calendar link. No form (CSP and product decision).
+- A social card at `/og.png`, 1200x630, rasterised at build from the same field
+  the hero plots. The page exists to be forwarded, and a forwarded link renders as
+  a card; it had none. The card carries no type, so no font has to be rasterised on
+  the build machine: the title and description beside it are the platform's.
+- The mark is optically sized. A true circle at the sizes it ships at, and the
+  field-displaced O on the card, which is the only surface large enough to read it.
 - Must work with JavaScript disabled and under `prefers-reduced-motion`; WCAG AA
   contrast; visible keyboard focus.
 - Performance is part of the pitch: the h1 must be the LCP element; the hero's WebGL
