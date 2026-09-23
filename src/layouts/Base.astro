@@ -49,12 +49,17 @@ const canonical = new URL(canonicalPath, SITE_URL).href;
     {/* Visitors who will get the live canvas never fetch the static plot. Runs
         before first paint; reduced motion and no-JS keep the plot. If the hero
         module has not gone live within a few seconds (blocked script, no
-        WebGL2, slow network), the plot comes back rather than blank linen. */}
+        WebGL2, slow network), the plot comes back rather than blank linen.
+        A visit that starts at the top also holds back the mark's slash, which
+        is cut once the last contour lands; one that starts at an anchor, and
+        any visit whose field never goes live, sees it at once. */}
     <script is:inline>
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.documentElement.classList.add('live-field');
+        var root = document.documentElement;
+        root.classList.add('live-field');
+        if (!location.hash) root.classList.add('mark-pending');
         setTimeout(function () {
-          if (!document.querySelector('.is-live')) document.documentElement.classList.remove('live-field');
+          if (!document.querySelector('.is-live')) root.classList.remove('live-field', 'mark-pending');
         }, 4000);
       }
     </script>
@@ -62,7 +67,7 @@ const canonical = new URL(canonicalPath, SITE_URL).href;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    {/* The roman is on the h1, which is the LCP element; preload only that one. */}
+    {/* The roman sets the hero text, the LCP element; preload only that one. */}
     <link
       rel="preload"
       href="/fonts/source-serif-4-opsz-normal.woff2"

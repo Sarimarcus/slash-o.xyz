@@ -56,4 +56,65 @@ const items = NAV.filter((n) => !hide.includes(n.href.replace(/^\/?#/, '')));
     );
     sections.forEach((s) => io.observe(s));
   }
+
+  // Arrival. Following an in-page link rules off the band it lands on (the
+  // .arrived rule in global.css) once the scroll has settled, so the mark is
+  // drawn where the reader is looking, not halfway down a smooth scroll.
+  // Landing on the refusal also redraws its hatch behind a 70deg edge.
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const TAN_SLASH = Math.tan((70 * Math.PI) / 180);
+  let pending = 0;
+
+  function settled(): Promise<void> {
+    return new Promise((resolve) => {
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        window.removeEventListener('scrollend', finish);
+        resolve();
+      };
+      if ('onscrollend' in window) {
+        window.addEventListener('scrollend', finish, { once: true });
+        // No scroll happens when the target is already in place.
+        setTimeout(finish, 1200);
+      } else {
+        setTimeout(finish, 700);
+      }
+    });
+  }
+
+  function sweepHatch(row: HTMLElement) {
+    if (reduced.matches || !row.animate) return;
+    const { width, height } = row.getBoundingClientRect();
+    const run = height / TAN_SLASH;
+    const edge = (x: number) => `polygon(0 0, ${x}px 0, ${x - run}px 100%, 0 100%)`;
+    row.animate([{ clipPath: edge(0) }, { clipPath: edge(width + run) }], {
+      duration: 700,
+      easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+      pseudoElement: '::before',
+    });
+  }
+
+  async function arrive(id: string) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const ticket = ++pending;
+    await settled();
+    if (ticket !== pending) return;
+    const band = el.closest<HTMLElement>('.band:not(.band--hero)');
+    document.querySelectorAll('.band.arrived').forEach((b) => b.classList.remove('arrived'));
+    if (band) {
+      void band.offsetWidth; // restart the draw on a repeat visit
+      band.classList.add('arrived');
+    }
+    const refusal = el.closest<HTMLElement>('.row--refusal');
+    if (refusal) sweepHatch(refusal);
+  }
+
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest?.<HTMLAnchorElement>('a[href*="#"]');
+    if (!a || a.pathname !== location.pathname || !a.hash) return;
+    arrive(decodeURIComponent(a.hash.slice(1)));
+  });
 </script>

@@ -258,6 +258,37 @@ html.mark-cut .mark .mark-slash {
   border-top: 1px solid var(--linen-shade);
 }
 
+/* Arrival: following a link to a band rules it off again, left to right in
+   altitude, the colour of what was linked to. The plate head script adds
+   .arrived once the scroll has settled; the rule stays until the next
+   arrival. Under reduced motion it appears without being drawn. */
+.band::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--altitude);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+.band.arrived::after {
+  transform: scaleX(1);
+  animation: rule-draw 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .band.arrived::after {
+    animation: none;
+  }
+}
+
 /* The lichen tick where each band rule crosses the margin edge, set at the
    slash's angle. A plate's altitude rules are ticked this way. */
 .band::before {

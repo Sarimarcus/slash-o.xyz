@@ -1,8 +1,8 @@
 ---
 /**
  * The hero band: the live field, the readouts in the margin, the headline and
- * the two actions. The h1 is the page's LCP element: it is plain HTML painted
- * before any script is requested. The field's script loads after idle time and
+ * the two actions. The LCP element is hero text (the h1, or on phones the lede),
+ * plain HTML painted before any script is requested. The field's script loads after idle time and
  * intersection, and never under prefers-reduced-motion.
  */
 import { HERO } from '@/data/copy';
@@ -91,9 +91,9 @@ const bookHref = isPlaceholder(PERSON.calendar)
           host.querySelector('[data-note-live]')?.removeAttribute('hidden');
           host.querySelector('[data-note-static]')?.setAttribute('hidden', '');
         } else {
-          document.documentElement.classList.remove('live-field');
+          document.documentElement.classList.remove('live-field', 'mark-pending');
         }
       })
-      .catch(() => document.documentElement.classList.remove('live-field'));
+      .catch(() => document.documentElement.classList.remove('live-field', 'mark-pending'));
   }
 </script>

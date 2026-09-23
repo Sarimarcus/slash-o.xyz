@@ -19,7 +19,7 @@ const MAX_FPS = 40;           // the field drifts slowly; 60 buys heat
 const PLOT_MS = 1800;         // plot-in duration
 const POINTER_EASE = 0.04;    // per frame at MAX_FPS: weather, not a UI control
 const ZONE_EASE = 0.1;        // per frame at MAX_FPS: a fling eases in over ~0.3s instead of jumping the zoom
-const READOUT_MS = 100;       // how often the margin text updates
+const READOUT_EASE = 0.3;     // per frame at MAX_FPS: the isotherm glides to its value in ~0.2s rather than stepping
 
 const hexToRgb = (hex) => {
   const n = parseInt(hex.trim().slice(1), 16);
@@ -127,11 +127,17 @@ export function initHero({ host, field, copy, readout }) {
     x: readout.querySelector('[data-r="x"]'),
     y: readout.querySelector('[data-r="y"]'),
   };
-  let lastReadout = 0;
+  // The field is sampled every frame and the isotherm shown eases toward it,
+  // so the figure runs through its values instead of jumping between them.
+  // Text is written only when the printed value changes. Zone and probe are
+  // already eased upstream; the contour count stays a count.
+  let shownT = null;
+  const printed = {};
+  const write = (key, text) => {
+    if (out[key] && printed[key] !== text) out[key].textContent = printed[key] = text;
+  };
   const dec3 = (v) => v.toFixed(3).replace(/^0/, '');
-  function updateReadout(now, time, plot) {
-    if (now - lastReadout < READOUT_MS) return;
-    lastReadout = now;
+  function updateReadout(time, plot) {
     const f = sampleField({
       u: eased.x,
       v: eased.y,
@@ -143,11 +149,13 @@ export function initHero({ host, field, copy, readout }) {
       probe: eased.probe,
     });
     const n = plot < 1 ? contoursPlotted(plot) : contourIndex(f);
-    if (out.t) out.t.textContent = isotherm(f, zone).toFixed(1);
-    if (out.n) out.n.textContent = String(n);
-    if (out.z) out.z.textContent = zone.toFixed(2);
-    if (out.x) out.x.textContent = dec3(eased.x);
-    if (out.y) out.y.textContent = dec3(eased.y);
+    const t = isotherm(f, zone);
+    shownT = shownT === null ? t : shownT + (t - shownT) * READOUT_EASE;
+    write('t', shownT.toFixed(1));
+    write('n', String(n));
+    write('z', zone.toFixed(2));
+    write('x', dec3(eased.x));
+    write('y', dec3(eased.y));
   }
 
   // ---- loop ----
@@ -157,6 +165,7 @@ export function initHero({ host, field, copy, readout }) {
   let last = 0;
   let started = 0;
   let elapsed = 0;
+  let cut = false;
 
   function frame(now) {
     if (!running) return;
@@ -181,7 +190,12 @@ export function initHero({ host, field, copy, readout }) {
     uniforms.uPlot.value = plot;
 
     renderer.render({ scene: mesh });
-    updateReadout(now, elapsed, plot);
+    updateReadout(elapsed, plot);
+    // Once the last contour lands, the mark's slash is cut (global.css).
+    if (plot === 1 && !cut) {
+      cut = true;
+      document.documentElement.classList.replace('mark-pending', 'mark-cut');
+    }
   }
 
   let inView = true;
@@ -201,6 +215,12 @@ export function initHero({ host, field, copy, readout }) {
     ([e]) => {
       inView = e.isIntersecting;
       inView ? start() : stop();
+      // Scrolled away before the plot finished: cut the slash now rather than
+      // leave the header without it.
+      if (!inView && !cut) {
+        cut = true;
+        document.documentElement.classList.replace('mark-pending', 'mark-cut');
+      }
     },
     { threshold: 0 },
   ).observe(host);
