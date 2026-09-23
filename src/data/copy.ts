@@ -143,7 +143,7 @@ export const READINGS = {
 export const SITES = {
   title: 'I still run my own sites, with agents',
   intro:
-    'Three sites, owned, operated and published to. They are where I test what I recommend before I recommend it.',
+    'Three sites I own and run myself. Anything I recommend, I have tried on them first.',
   factory: [
     'They are run through one content factory. Each agent has a role and a written brief. A piece of content passes validators before it publishes, every commit and push runs through gates, and a build-determinism check runs before anything deploys.',
     'Nothing publishes because an agent said it was fine. It publishes because the gates passed, and the gates have their own tests.',
