@@ -1,5 +1,8 @@
 #version 300 es
 precision highp float;
+// The hash needs 32-bit integers. Fragment ints default to mediump, which
+// Mali runs at 16 bits: the hash overflows and the whole field goes flat.
+precision highp int;
 
 // The hero field: domain-warped value-noise FBM drawn as isolines, an isotherm
 // chart being plotted. Everything the page does to it arrives as a uniform.
