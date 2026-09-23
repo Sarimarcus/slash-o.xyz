@@ -26,17 +26,16 @@ export const AXIS_MIN = -6;
 export const AXIS_SPAN = 30;
 export const AXIS_ZONE = 6;
 
-const fract = (x) => fr(x - Math.floor(x));
 const mix = (a, b, t) => fr(a + fr(fr(b - a) * t));
 const smooth = (f) => fr(fr(f * f) * fr(3 - fr(2 * f)));
 
+// Integer hash, bit for bit the shader's: Math.imul is uint multiplication
+// modulo 2^32, and x, y are always whole numbers here (lattice corners).
 function hash21(x, y) {
-  let px = fract(fr(x * 123.34));
-  let py = fract(fr(y * 345.45));
-  const d = fr(fr(px * fr(px + 34.345)) + fr(py * fr(py + 34.345)));
-  px = fr(px + d);
-  py = fr(py + d);
-  return fract(fr(px * py));
+  const qx = Math.imul((x + 32768) | 0, 1597334673);
+  const qy = Math.imul((y + 32768) | 0, 3812015801 | 0);
+  const n = Math.imul(qx ^ qy, 1597334673) >>> 0;
+  return fr(fr(n) * 2.3283064365386963e-10);
 }
 
 function vnoise(x, y) {

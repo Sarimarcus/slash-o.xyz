@@ -34,10 +34,15 @@ const float PROBE_AMP   = 0.16;  // how far the probe lifts the field
 const float PROBE_SIGMA = 0.11;  // probe radius in plate heights
 const mat2  ROT         = mat2(0.8, 0.6, -0.6, 0.8);
 
+// An integer hash. The float hash it replaces kept only the fraction of a
+// large product, so a compiler that reassociated the arithmetic (Mali does)
+// gave neighbouring cells different values for the corner they share, and the
+// contours broke into shards. Integer multiplication wraps exactly on every
+// GPU. The offset keeps negative lattice coordinates out of the uint cast.
 float hash21(vec2 p) {
-  p = fract(p * vec2(123.34, 345.45));
-  p += dot(p, p + 34.345);
-  return fract(p.x * p.y);
+  uvec2 q = uvec2(ivec2(p) + 32768) * uvec2(1597334673u, 3812015801u);
+  uint n = (q.x ^ q.y) * 1597334673u;
+  return float(n) * (1.0 / 4294967296.0);
 }
 
 float vnoise(vec2 p) {
