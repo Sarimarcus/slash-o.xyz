@@ -4,6 +4,7 @@ import PlateHead from '@/components/PlateHead.astro';
 import Hero from '@/components/Hero.astro';
 import Band from '@/components/Band.astro';
 import Row from '@/components/Row.astro';
+import Mark from '@/components/Mark.astro';
 import { SITE, PERSON, isPlaceholder, displayName } from '@/data/site';
 import { HERO, PROBLEMS, WORK, READINGS, SITES, ASKED, HOW, CONTACT, COLOPHON } from '@/data/copy';
 import { OWNED_SITES, readSitemap } from '@/data/sites';
@@ -141,7 +142,7 @@ const asked = ASKED.items.filter(
               <dt>{ASKED.marginBy}</dt>
               <dd class:list={{ placeholder: !q.confirmed }}>{q.by}</dd>
             </dl>
-            <h3>{q.question}</h3>
+            <h3 class="asked-q">{q.question}</h3>
             {q.answer.map((p) => <p>{p}</p>)}
           </Row>
         ))}
@@ -158,14 +159,16 @@ const asked = ASKED.items.filter(
           <h3>{HOW.engagement.title}</h3>
           {HOW.engagement.body.map((p) => <p>{p}</p>)}
         </Row>
-        <Row>
-          <div class="refusal">
-            <h3>{HOW.refusal.title}</h3>
-            <p>
-              <span class="mark-text"><span class="slash">/</span>O</span> {HOW.refusal.lead}
-            </p>
+        <Row class="row--refusal">
+          <div class="refusal" id="refusal">
+            <h3>
+              <span class="visually-hidden">{HOW.refusal.title}: </span>
+              <Mark class="mark-inline" /> {HOW.refusal.lead}
+            </h3>
             <p>{HOW.refusal.body}</p>
           </div>
+        </Row>
+        <Row>
           <p class="capacity">{HOW.capacity}</p>
         </Row>
         <Row>

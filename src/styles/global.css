@@ -33,7 +33,8 @@
   --band-pad: clamp(3rem, 7vw, 6rem);
 
   --fs-h1: clamp(2.75rem, 2rem + 4.1vw, 5.5rem);
-  --fs-h2: clamp(1.75rem, 1.45rem + 1.1vw, 2.25rem);
+  --fs-h2: clamp(2.25rem, 1.55rem + 2.9vw, 4.25rem);
+  --fs-h3-display: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
   --fs-lede: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem);
   --fs-body: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
   --fs-ui: 0.9375rem;
@@ -232,9 +233,20 @@ html.mark-cut .mark .mark-slash {
   text-decoration-color: var(--oxide);
 }
 
-/* Inline mark in running text: the slash in oxide, once on the page. */
-.mark-text .slash {
-  color: var(--oxide);
+/* The mark inline in the refusal's sentence, sized to the type around it.
+   Its box runs from the slash's foot, 0.16em below the baseline, to its top
+   at 0.708em: 0.868em tall, with the baseline 0.16em up from the bottom. */
+.mark-inline {
+  display: inline-block;
+  height: 0.868em;
+  width: auto;
+  vertical-align: -0.16em;
+}
+.mark-inline .mark-slash {
+  fill: var(--oxide);
+}
+.mark-inline .mark-o {
+  fill: currentColor;
 }
 
 /* ---------- bands ---------- */
@@ -269,10 +281,13 @@ html.mark-cut .mark .mark-slash {
 .band-title {
   font-size: var(--fs-h2);
   font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.005em;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
   text-wrap: balance;
-  margin-bottom: 1.5rem;
+  max-width: 16ch;
+}
+.content > .band-title + * {
+  margin-top: 1.75rem;
 }
 
 .content {
@@ -361,15 +376,7 @@ html.mark-cut .mark .mark-slash {
 }
 .band:has(.row) > .margin,
 .band:has(.row) > .content {
-  padding-bottom: 1.5rem;
-}
-/* With rows below, the intro sits against the first rule beside the title's
-   last lines rather than floating at the top of a tall cell. */
-.band:has(.row) > .content {
-  align-self: end;
-}
-.band:has(.row) > .margin .band-title {
-  margin-bottom: 0;
+  padding-bottom: 2.5rem;
 }
 .note dt {
   font-style: italic;
@@ -430,11 +437,25 @@ html.mark-cut .mark .mark-slash {
   font-variant-numeric: tabular-nums lining-nums;
 }
 
+/* ---------- questions I get asked ---------- */
+
+/* A question is someone else's words, so it is set in italic, a step above the
+   other rows' titles; the answer stays in the page's own roman. */
+.asked-q {
+  font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
 /* ---------- owned sites ---------- */
 
 .site-link {
   font-weight: 500;
-  font-size: var(--fs-lede);
+  font-size: var(--fs-h3-display);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
 }
 .site-what {
   display: block;
@@ -444,26 +465,45 @@ html.mark-cut .mark .mark-slash {
 /* ---------- how I work ---------- */
 
 /* The refusal is drawn as a hatched field, the way a plate marks terrain that
-   is excluded from the survey. Hatching at the slash's angle. */
-.refusal {
-  padding: 1.75rem var(--gutter);
-  border-top: 1px solid var(--linen-shade);
+   is excluded from the survey. Hatching at the slash's angle, across the whole
+   plate, margin column included: the one row that is not annotated but ruled
+   out. Its one sentence is set at the band titles' size. */
+.row--refusal {
+  position: relative;
+  isolation: isolate;
   border-bottom: 1px solid var(--linen-shade);
+}
+/* The hatch is its own layer so that arriving from "See what I will not do"
+   can redraw it, swept in behind a 70deg edge (the plate head script). */
+.row--refusal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: repeating-linear-gradient(
     var(--hatch),
     var(--linen-shade) 0 1px,
     transparent 1px 9px
   );
 }
+.row--refusal > .row-content {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
 .refusal h3 {
   margin-top: 0;
+  max-width: 18ch;
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
-.refusal p + p {
-  margin-top: 0.75rem;
+.refusal p {
+  margin-top: 1.75rem;
 }
 
 .capacity {
-  margin-top: 1.5rem;
+  margin-top: 0;
 }
 .pending {
   font-style: italic;
@@ -612,8 +652,11 @@ html:not(.live-field) .band--void .field {
 /* ---------- contact & colophon ---------- */
 
 .contact-email {
-  font-size: var(--fs-lede);
+  font-size: var(--fs-h3-display);
   font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  overflow-wrap: anywhere;
 }
 .person {
   margin-top: 2rem;
@@ -651,7 +694,7 @@ html:not(.live-field) .band--void .field {
   outline-offset: 2px;
 }
 
-/* ---------- narrow screens: the margin becomes a header row ---------- */
+/* ---------- narrow screens: one column, margin notes become footnotes ---------- */
 
 @media (max-width: 47.99rem) {
   body {
@@ -682,12 +725,21 @@ html:not(.live-field) .band--void .field {
   }
   .margin {
     padding: 2rem var(--gutter) 0;
-    background: var(--margin-tint);
-    border-bottom: 1px solid var(--linen-shade);
-    padding-bottom: 1.25rem;
   }
-  .band-title {
-    margin-bottom: 1rem;
+  .margin--empty,
+  .colophon .margin {
+    display: none;
+  }
+  /* A band's own margin note (the contact clock) follows the band's opening
+     as a footnote, like a row's, never a tinted label above the title. */
+  .band:not(.band--hero) > .margin {
+    order: 1;
+    background: none;
+    border-bottom: 0;
+    padding: 0 var(--gutter) 2.5rem;
+  }
+  .band > .row {
+    order: 2;
   }
   .meta {
     grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
