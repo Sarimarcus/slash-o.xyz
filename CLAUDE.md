@@ -13,7 +13,6 @@ ships is the hero field (OGL, one quad), the nav highlighter and a clock.
 | `npm run preview` | Serve the built `dist/` locally |
 | `npm run check` | `astro check` — TypeScript and template typecheck |
 | `npm run todo` | Lists every `TODO(content)` placeholder still in the source |
-| `npm run refresh:factory` | Re-counts the content factory into `src/data/factory.ts` |
 
 `npm run build` and `npm run check` are the quality gate; CI runs both on every
 push and pull request (`.github/workflows/ci.yml`). There is no linter and no test
@@ -27,8 +26,6 @@ Node 22+ (`.nvmrc`), npm.
   voice, plain verbs, no superlatives, no "AI-powered", agents named by role.
 - **`src/data/site.ts`** is the single source of truth for the canonical origin,
   the site's name and the person. `astro.config.mjs` imports `SITE_URL` from it.
-- **`src/data/factory.ts`** holds counts measured from the content factory with a
-  `measuredOn` date. Never edit by hand; `npm run refresh:factory` rewrites it.
 - **`src/data/sites.ts`** fetches the three owned sites' sitemaps at build time and
   falls back to recorded values if a fetch fails.
 - **`src/integrations/provenance.mjs`** fills `%%COMMIT%%` and `%%PAGE_KB%%` in the

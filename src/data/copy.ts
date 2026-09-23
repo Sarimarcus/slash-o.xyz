@@ -142,15 +142,12 @@ export const SITES = {
   title: 'I still run my own sites, with agents',
   intro:
     'Three sites, owned, operated and published to. They are where I test what I recommend before I recommend it.',
-  /** {agents}, {validators}, {gates}, {tests} are filled from src/data/factory.ts. */
   factory: [
-    'They are run through one content factory: {agents} named agents with written briefs, {validators} validators that a piece of content passes before it publishes, {gates} commit and push gates, and {tests} test suites, one of which tests the validators themselves. A build-determinism check runs before anything deploys.',
+    'They are run through one content factory. Each agent has a role and a written brief. A piece of content passes validators before it publishes, every commit and push runs through gates, and a build-determinism check runs before anything deploys.',
     'Nothing publishes because an agent said it was fine. It publishes because the gates passed, and the gates have their own tests.',
   ],
   marginUrls: 'URLs in sitemap',
   marginLastmod: 'last published',
-  marginMeasured: 'factory counted on',
-  marginCommits: 'commits',
 } as const;
 
 export const HOW = {

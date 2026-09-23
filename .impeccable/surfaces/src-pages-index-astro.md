@@ -28,8 +28,8 @@ correctly decides not to.
 ## Content & proof
 
 All copy in `src/data/copy.ts`. Proof is measured, never asserted: three owned sites
-with sitemap counts fetched at build; the agent factory's counts with a measured
-date; the page's own commit and transferred bytes computed at build; a live computed
+with sitemap counts fetched at build; the agent factory described in prose, not
+counted, because its repository is private and a visitor cannot check it; the page's own commit and transferred bytes computed at build; a live computed
 field in the hero whose margin readouts report real values. Employer named in a
 personal-capacity sentence. No testimonials, no logos. The "four readings" band draws
 on the owned sites only and ships hidden in production until real figures exist.

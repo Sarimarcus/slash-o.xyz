@@ -6,7 +6,6 @@ import Band from '@/components/Band.astro';
 import Row from '@/components/Row.astro';
 import { SITE, PERSON, isPlaceholder, displayName } from '@/data/site';
 import { HERO, PROBLEMS, WORK, READINGS, SITES, HOW, CONTACT, COLOPHON } from '@/data/copy';
-import { FACTORY } from '@/data/factory';
 import { OWNED_SITES, readSitemap } from '@/data/sites';
 
 // Build-time facts. Sitemaps are fetched now, on the build machine.
@@ -18,13 +17,6 @@ const readingsReal = READINGS.items.every(
   (r) => !isPlaceholder(r.measured) && !isPlaceholder(r.done) && !isPlaceholder(r.after),
 );
 const showReadings = readingsReal || import.meta.env.DEV;
-
-const factoryText = (s: string) =>
-  s
-    .replace('{agents}', String(FACTORY.agents))
-    .replace('{validators}', String(FACTORY.validators))
-    .replace('{gates}', String(FACTORY.gates))
-    .replace('{tests}', String(FACTORY.testSuites));
 
 const buildIso = new Date().toISOString();
 const buildDate = buildIso.slice(0, 10);
@@ -130,16 +122,7 @@ const fmt = new Intl.NumberFormat('en-GB');
           </Row>
         ))}
         <Row>
-          <dl class="note" slot="margin">
-            <dt>{SITES.marginMeasured}</dt>
-            <dd>{FACTORY.measuredOn}</dd>
-            <dt>{SITES.marginCommits}</dt>
-            <dd>{fmt.format(FACTORY.commits)}</dd>
-          </dl>
-          {SITES.factory.map((p) => <p>{factoryText(p)}</p>)}
-          <p>
-            <a href={FACTORY.repo}>The factory's source</a>, counted on {FACTORY.measuredOn}.
-          </p>
+          {SITES.factory.map((p) => <p>{p}</p>)}
         </Row>
       </Fragment>
     </Band>

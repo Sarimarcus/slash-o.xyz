@@ -10,7 +10,6 @@ npm run dev          # http://localhost:4321
 npm run build        # dist/
 npm run check        # astro check
 npm run todo         # lists every TODO(content) placeholder
-npm run refresh:factory   # re-counts the content factory into src/data/factory.ts
 ```
 
 Node 22+ (`.nvmrc`).
@@ -32,9 +31,6 @@ Components hide a fake value rather than print it (`isPlaceholder()` in
 
 - `src/data/copy.ts`: every word on the page.
 - `src/data/site.ts`: identity, person, canonical origin.
-- `src/data/factory.ts`: counts from the content factory, with the date they were
-  measured. Never edit by hand; run `npm run refresh:factory` with
-  `FACTORY_DIR` pointing at a checkout of `content-sites-factory`.
 - `src/data/sites.ts`: the three owned sites. Sitemap URL counts and last-modified
   dates are fetched at build time; if a fetch fails the recorded fallback is used
   and the number is not marked live (blue) in the margin.
