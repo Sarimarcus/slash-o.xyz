@@ -310,7 +310,7 @@ export const HOW = {
       'I build. I do it every day, with agents, on the sites above. What I will not do is find you a problem and then sell you the solution to it. If what I measure says you need a team, I will help you find one and I will not be it. An auditor who also sells the fix has already decided what the fix is.',
   },
   capacity:
-    'I advise in a personal capacity. Webedia is not party to any engagement, and I do not take work that competes with it.',
+    'I advise in a personal capacity. Webedia Group is not party to any engagement, and I do not take work that competes with it.',
   languages: {
     title: 'Working languages',
     body: 'English, French and Spanish. Anything I write for you is in English unless you ask otherwise.',
