@@ -22,10 +22,11 @@
   /* Derived, not a seventh value: the margin column's tint. */
   --margin-tint: color-mix(in srgb, var(--linen) 55%, var(--linen-shade));
 
-  /* The slash's angle from the horizontal, and its complement for CSS gradients
-     (a gradient's angle is perpendicular to the stripes it draws). */
+  /* The slash's angle from the horizontal, and the gradient angle that draws
+     stripes at it. A gradient's angle is measured clockwise from the top and
+     runs perpendicular to its stripes, so 70deg stripes need 180deg - 70deg. */
   --slash: 70deg;
-  --hatch: 160deg;
+  --hatch: calc(180deg - var(--slash));
 
   --margin-w: clamp(9.5rem, 17vw, 14rem);
   --gutter: clamp(1.25rem, 3.5vw, 3rem);
