@@ -180,14 +180,33 @@ strong {
 }
 .mark svg {
   display: block;
-  width: 3.25rem;
-  height: auto;
+  width: auto;
+  height: 2.5rem;
 }
 .mark .mark-slash {
-  stroke: var(--oxide);
+  fill: var(--oxide);
 }
 .mark .mark-o {
-  stroke: var(--ink);
+  fill: var(--ink);
+}
+
+/* The slash is cut once the hero's last contour lands: held back from first
+   paint on a visit that starts at the top of the home page, then drawn from
+   its foot to its top. Base.astro and hero.js set the classes, and release
+   the slash at once if the field never goes live. */
+html.mark-pending:has([data-hero]) .mark .mark-slash {
+  clip-path: inset(100% 0 0 0);
+}
+html.mark-cut .mark .mark-slash {
+  animation: slash-cut 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slash-cut {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 .path-nav ul {

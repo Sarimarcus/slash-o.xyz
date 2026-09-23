@@ -7,19 +7,18 @@
  *
  * The card is the plate: the same field the hero plots, at rest, from the same
  * noise and the same seed 0 as /field-rest.svg, with the mark set in a
- * cartouche over it. This is the only surface where the mark is big enough to
- * carry its measured form, so this is where src/data/mark.ts is used.
+ * cartouche over it.
  *
- * It carries no type. Rasterising text here would mean either a system font on
- * the build machine, which CI does not have and which would not be Source Serif
- * anyway, or a font library to convert glyphs to outlines. The card is an
- * image; the title and description beside it are the platform's job, and they
+ * It carries no type. Rasterising text here would mean a system font on the
+ * build machine, which CI does not have and which would not be Source Serif
+ * anyway. The mark is already outlines (src/data/mark.ts), so it needs no font.
+ * The title and description beside the card are the platform's job, and they
  * come from the Open Graph tags in Base.astro.
  */
 import type { APIRoute } from 'astro';
 import sharp from 'sharp';
 import { fieldRestSvg } from '@/hero/plot.js';
-import { MARK_SLASH, MARK_O_CUT } from '@/data/mark';
+import { MARK_BOX, MARK_O_MID, MARK_SLASH, MARK_O } from '@/data/mark';
 
 const W = 1200;
 const H = 630;
@@ -46,24 +45,20 @@ export const GET: APIRoute = async () => {
     colors: { paper: LINEN, minor: LICHEN, cool: ALTITUDE, warm: OXIDE },
   });
 
-  // The mark is centred on its ink, not on its viewBox. The viewBox is 64 wide
-  // but the drawn mark runs x 19.66 to 63.5 once the 5-wide strokes are counted
-  // (the slash's cap extends 2.34 either side at 70deg), so its optical centre
-  // is 41.58, not 32. Centring the box instead pushes the mark visibly right.
-  const MARK_INK = { cx: 41.58, cy: 20, w: 43.84 };
-  // Ink 316px wide inside the 600x330 cartouche: the O lands at ~97px radius,
-  // past the ~100px diameter where the field displacement starts to read.
-  const scale = 316 / MARK_INK.w;
-  const x = CARD.cx - MARK_INK.cx * scale;
-  const y = CARD.cy - MARK_INK.cy * scale;
+  // Centred across on the box, which the ink fills edge to edge, and down on
+  // the O: the slash descends below the baseline, so the box centre sits low.
+  // 220px tall inside the 330px cartouche.
+  const scale = 220 / MARK_BOX.h;
+  const x = CARD.cx - (MARK_BOX.w / 2) * scale;
+  const y = CARD.cy - MARK_O_MID * scale;
 
   // A cartouche, the way a plate carries its title block: the field is quieted
   // under the mark rather than cropped, as the hero quiets it under the copy.
   const card =
     `<rect x="${CARD.x}" y="${CARD.y}" width="${CARD.w}" height="${CARD.h}" fill="${LINEN}" fill-opacity="0.88" stroke="${SHADE}" stroke-width="2"/>` +
     `<g transform="translate(${x} ${y}) scale(${scale})">` +
-    `<path d="${MARK_SLASH}" fill="none" stroke="${OXIDE}" stroke-width="5" stroke-linecap="butt"/>` +
-    `<path d="${MARK_O_CUT}" fill="none" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>` +
+    `<path d="${MARK_SLASH}" fill="${OXIDE}"/>` +
+    `<path d="${MARK_O}" fill="${INK}"/>` +
     `</g>`;
 
   const svg = plate

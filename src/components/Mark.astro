@@ -1,16 +1,13 @@
 ---
 /**
- * The /O mark: a slash in oxide and an O in ink, drawn at the same stroke so
- * the slash cuts the paper rather than sitting beside the letter. The slash
- * runs from (22,36) to (34,4): about 70° from the horizontal, the one angle
- * every hatch and tick on the page shares.
- *
- * The O here is a true circle. The mark is optically sized like the type it
- * sits beside: this form ships at 3.25rem in the plate head, where the large
- * form's field displacement is under half a pixel and would only read as an
- * imprecise circle. The measured form is in src/data/mark.ts and is drawn on
- * the card image, which is the one place the mark is large enough to carry it.
+ * The /O mark: Source Serif 4's O and a slash redrawn at 70deg, the one angle
+ * every hatch and tick on the page shares. The slash is oxide, the O ink (or the surrounding text colour inline). Both
+ * are outlines from src/data/mark.ts, so the mark does not wait for the web font.
+ * It is used twice, in the plate head and inline in the refusal, so it carries
+ * no id.
  */
+import { MARK_BOX, MARK_SLASH, MARK_O } from '@/data/mark';
+
 interface Props {
   class?: string;
 }
@@ -19,12 +16,12 @@ const { class: className } = Astro.props;
 
 <svg
   class={className}
-  viewBox="0 0 64 40"
+  viewBox={`0 0 ${MARK_BOX.w} ${MARK_BOX.h}`}
   role="img"
-  aria-labelledby="mark-title"
+  aria-label="Slash O"
   xmlns="http://www.w3.org/2000/svg"
 >
-  <title id="mark-title">Slash O</title>
-  <path class="mark-slash" d="M22 36 L34 4" fill="none" stroke-width="5" stroke-linecap="butt" />
-  <circle class="mark-o" cx="47.5" cy="20" r="13.5" fill="none" stroke-width="5" />
+  <title>Slash O</title>
+  <path class="mark-slash" d={MARK_SLASH} />
+  <path class="mark-o" d={MARK_O} />
 </svg>
