@@ -186,11 +186,10 @@ export const ASKED = {
       ],
     },
     {
-      // TODO(content): proposed by Claude, confirm the month and the asker.
       on: '2026-07',
       by: 'the head of SEO at a publisher',
       show: true,
-      confirmed: false,
+      confirmed: true,
       question: 'How do we find pages that compete with each other in search?',
       answer: [
         'Start from Search Console, not from the content. Cannibalisation shows up as several of your URLs taking impressions for the same query, with the one Google ranks changing from week to week. Group by query, keep the queries where two or more URLs share the impressions, and code has built the list for nothing.',
@@ -199,11 +198,10 @@ export const ASKED = {
       ],
     },
     {
-      // TODO(content): proposed by Claude, confirm the month and the asker.
       on: '2026-06',
       by: 'the CTO of a media group',
       show: true,
-      confirmed: false,
+      confirmed: true,
       question: 'Should we let coding agents work on our legacy CMS?',
       answer: [
         'Yes, once you know how it behaves today. Record the baseline first: which tests exist and pass, how long a build takes, the error rates in production, what a page costs to render. It is a short piece of work next to what comes after it.',
@@ -212,11 +210,10 @@ export const ASKED = {
       ],
     },
     {
-      // TODO(content): proposed by Claude, confirm the month and the asker.
       on: '2026-08',
       by: 'the CEO of a digital publisher',
       show: true,
-      confirmed: false,
+      confirmed: true,
       question: 'Can AI tell us why our traffic dropped?',
       answer: [
         'Not on its own. A drop has many candidate causes: a deploy, a template change, the consent banner, a migration, an algorithm update, a competitor, the season. A model can line them up against the chart, but only the ones somebody recorded, with a date.',
