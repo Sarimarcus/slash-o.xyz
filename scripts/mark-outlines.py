@@ -7,10 +7,9 @@ angle, 70deg, so it is redrawn at that angle with the glyph's stem width and
 height. The O sits GAP font units further from the slash than the typeset pair
 would, measured at their closest approach.
 
-It also writes public/favicon.svg, sized for 16px the way the font sizes its
-own text: the O comes from the smallest optical size (opsz 8), whose hairlines
-are about three times as thick, with a thin ink stroke on top, and the slash is
-drawn twice as heavy. At the display cut both would be under a pixel wide.
+It also writes public/favicon.svg: the same two outlines, so the tab shows the
+logo, emboldened by an even stroke in each shape's own colour. At 16px the
+display cut's hairlines would otherwise be under a pixel wide.
 
 Outlines rather than text, so the mark does not wait for the web font and can be
 rasterised on the card at build, where there is no font at all.
@@ -33,8 +32,7 @@ OUT = ROOT / 'src/data/mark.ts'
 FAVICON = ROOT / 'public/favicon.svg'
 
 AXES = {'opsz': 60, 'wght': 600}
-FAV_AXES = {'opsz': 8, 'wght': 600}
-FAV_STROKE = 0.8  # mark units of ink stroke on the favicon's O
+FAV_STROKE = 1.6  # mark units of stroke on both favicon shapes
 ANGLE = 70  # degrees from the horizontal, --slash in global.css
 GAP = 80  # font units added to the typeset pair's closest approach
 K = 0.05  # 1000 font units -> 50 mark units
@@ -42,7 +40,6 @@ K = 0.05  # 1000 font units -> 50 mark units
 font = TTFont(FONT)
 cmap = font.getBestCmap()
 glyphs = instantiateVariableFont(font, AXES).getGlyphSet()
-fav_glyphs = instantiateVariableFont(TTFont(FONT), FAV_AXES).getGlyphSet()
 slash_name, o_name = cmap[ord('/')], cmap[ord('O')]
 
 
@@ -151,23 +148,18 @@ export const MARK_SLASH = '{slash_path}';
 /** The O, Source Serif 4's outline. Filled, with its counter as a second contour. */
 export const MARK_O = '{o_path}';
 """)
-# The favicon: the slash widened to the left so its right edge, and the gap,
-# stay put; the small-size O placed at the same closest approach; the whole
-# centred on a 32-unit linen square.
-fav_corners = [(-w, y0), (w, y0), (w + run, y1), (-w + run, y1)]
-fav_slash = 'M' + ' '.join(f'{n((x + w) * K)} {n((y1 - y) * K)}' for x, y in fav_corners) + 'Z'
-fop, fav_left = outline(fav_glyphs)
-fav_dx = place(redrawn, target, fav_left)
-pen = SVGPathPen(None, ntos=n)
-fav_glyphs[o_name].draw(TransformPen(pen, (K, 0, 0, -K, (fav_dx + w) * K, y1 * K)))
-fav_w = (fav_dx + w + max(x for x, _ in fop)) * K + FAV_STROKE / 2
+# The favicon: the logo's own outlines on a 32-unit linen square, each shape
+# stroked in its own colour so the whole mark thickens evenly.
+fav_w = width + FAV_STROKE
+fav_h = height + FAV_STROKE
 scale = 28 / fav_w
 FAVICON.write_text(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Slash O">\n'
     '  <rect width="32" height="32" fill="#e4dfd1"/>\n'
-    f'  <g transform="translate(2 {n((32 - height * scale) / 2)}) scale({round(scale, 5)})">\n'
-    f'    <path d="{fav_slash}" fill="#9c4b2f"/>\n'
-    f'    <path d="{pen.getCommands()}" fill="#24302b" stroke="#24302b" stroke-width="{FAV_STROKE}"/>\n'
+    f'  <g transform="translate({n(2 + FAV_STROKE / 2 * scale)} {n((32 - fav_h * scale) / 2 + FAV_STROKE / 2 * scale)}) scale({round(scale, 5)})"'
+    f' stroke-width="{FAV_STROKE}" stroke-linejoin="round">\n'
+    f'    <path d="{slash_path}" fill="#9c4b2f" stroke="#9c4b2f"/>\n'
+    f'    <path d="{o_path}" fill="#24302b" stroke="#24302b"/>\n'
     '  </g>\n'
     '</svg>\n'
 )

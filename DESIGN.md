@@ -149,7 +149,7 @@ A single sheet of aged paper with its own shade for structure, ink for text, lic
 ### Neutral
 - **Linen** (#e4dfd1): the ground of every surface, the hero field's paper, the favicon's square, the text colour on the filled button and in `::selection`, the `theme-color`.
 - **Linen shade** (#d3ccba): every structural line: the plate head's bottom rule, band rules, row hairlines, the margin column's 1px edge, the note dividers, the hatching and bottom rule of the refusal field, the scrollbar track. Also one half of the margin tint.
-- **Deep ink** (#24302b): all running text, headings, the mark's O (inline in the refusal it takes `currentColor`, which is ink), the favicon O's 0.8-unit stroke, the filled button's hover background and border.
+- **Deep ink** (#24302b): all running text, headings, the mark's O (inline in the refusal it takes `currentColor`, which is ink), the favicon O's stroke, the filled button's hover background and border.
 - **Margin tint** (derived): `color-mix(in srgb, var(--linen) 55%, var(--linen-shade))`, the fill of the margin column on desktop. It is a mix of two existing values, never a new hex. Below 48rem no margin is tinted.
 
 ### Named Rules
@@ -230,7 +230,7 @@ The mark is two filled outlines, generated from the self-hosted font by `scripts
 ### The mark (`.mark`, `.mark-inline`)
 - In the plate head the mark sits in the margin column, 2.5rem tall with width auto, padded `0.9rem var(--gutter)`: slash oxide, O ink. It links home.
 - Inline in the refusal heading it is `.mark-inline`: 0.868em tall, width auto, `vertical-align: -0.16em` (its box runs from the slash's foot 0.16em below the baseline to its top), slash oxide, O in `currentColor`. It stands in for the name in the sentence "/O does not sell the fix it recommends."
-- The favicon (`public/favicon.svg`, a linen square) uses the O from the smallest optical size, `opsz` 8, with a 0.8-unit ink stroke on top, and a slash drawn at twice the stem weight, so both survive at 16px.
+- The favicon (`public/favicon.svg`, a linen square) draws the logo's own two outlines, each stroked 1.6 units in its own colour so the mark thickens evenly and its hairlines survive at 16px. Its link carries a version query, changed whenever the icon changes, because browsers cache favicons past their headers.
 - The social card (`og.png`, rasterised at build over the resting field) centres the mark on the O in a linen cartouche ruled in linen shade, 220px tall.
 
 ### Margin notes (`dl.note`, `dl.meta`)

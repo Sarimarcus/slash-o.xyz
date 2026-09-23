@@ -64,7 +64,8 @@ const canonical = new URL(canonicalPath, SITE_URL).href;
       }
     </script>
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {/* The query changes when the icon does: browsers cache favicons past their headers. */}
+    <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     {/* The roman sets the hero text, the LCP element; preload only that one. */}

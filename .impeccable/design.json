@@ -309,7 +309,7 @@
         },
         {
           "where": "favicon",
-          "size": "32 by 32 on linen; O from opsz 8 with a 0.8-unit ink stroke; slash at double stem weight"
+          "size": "32 by 32 on linen; the logo's own outlines, each stroked 1.6 units in its own colour"
         },
         {
           "where": "social card",
