@@ -89,11 +89,20 @@ const items = NAV.filter((n) => !hide.includes(n.href.replace(/^\/?#/, '')));
     const { width, height } = row.getBoundingClientRect();
     const run = height / TAN_SLASH;
     const edge = (x: number) => `polygon(0 0, ${x}px 0, ${x - run}px 100%, 0 100%)`;
-    row.animate([{ clipPath: edge(0) }, { clipPath: edge(width + run) }], {
-      duration: 700,
-      easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-      pseudoElement: '::before',
-    });
+    const from = edge(0);
+    const to = edge(width + run);
+    // An even pace, so the edge is seen travelling rather than arriving.
+    const sweep = { duration: 900, easing: 'cubic-bezier(0.65, 0, 0.35, 1)' };
+    row.animate([{ clipPath: from }, { clipPath: to }], { ...sweep, pseudoElement: '::before' });
+    // The dark pass: swept with the paper hatch, then faded into it.
+    row.animate(
+      [
+        { clipPath: from, opacity: 1, easing: sweep.easing },
+        { clipPath: to, opacity: 1, offset: 0.6 },
+        { clipPath: to, opacity: 0 },
+      ],
+      { duration: 1500, easing: 'linear', pseudoElement: '::after' },
+    );
   }
 
   async function arrive(id: string) {

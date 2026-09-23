@@ -6,11 +6,13 @@
  */
 interface Props {
   class?: string;
+  /** A fragment target, when a link lands on this row rather than its band. */
+  id?: string;
 }
-const { class: className } = Astro.props;
+const { class: className, id } = Astro.props;
 ---
 
-<div class:list={['row', className]}>
+<div class:list={['row', className]} id={id}>
   <div class="row-margin"><slot name="margin" /></div>
   <div class="row-content"><slot /></div>
 </div>

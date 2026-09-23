@@ -512,8 +512,11 @@ section[id],
   border-bottom: 1px solid var(--linen-shade);
 }
 /* The hatch is its own layer so that arriving from "See what I will not do"
-   can redraw it, swept in behind a 70deg edge (the plate head script). */
-.row--refusal::before {
+   can redraw it, swept in behind a 70deg edge (the plate head script). The
+   ::after layer is the same hatch in lichen, shown only during the sweep:
+   the fresh strokes are drawn dark, then settle into the paper. */
+.row--refusal::before,
+.row--refusal::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -523,6 +526,15 @@ section[id],
     var(--linen-shade) 0 1px,
     transparent 1px 9px
   );
+  pointer-events: none;
+}
+.row--refusal::after {
+  background: repeating-linear-gradient(
+    var(--hatch),
+    var(--lichen) 0 1px,
+    transparent 1px 9px
+  );
+  opacity: 0;
 }
 .row--refusal > .row-content {
   padding-block: clamp(3rem, 6vw, 5rem);
