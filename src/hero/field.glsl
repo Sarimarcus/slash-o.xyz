@@ -122,7 +122,9 @@ void main() {
   vec3 col = mix(paper, lineCol, line * alpha);
 
   // Grain biased toward the linen, so it reads as paper tooth, not video noise.
-  float g = hash21(gl_FragCoord.xy + fract(uTime) * vec2(13.7, 71.3)) - 0.5;
+  // Fixed per pixel: paper tooth does not move, and re-rolled every frame it
+  // shimmers once a phone upscales the DPR-capped canvas.
+  float g = hash21(gl_FragCoord.xy) - 0.5;
   col = mix(col, uPaper, g * 0.10);
 
   fragColor = vec4(col, 1.0);

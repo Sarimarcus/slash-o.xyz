@@ -18,6 +18,7 @@ const MAX_AREA = 3.2e6;       // device pixels the field may cover; DPR drops ab
 const MAX_FPS = 40;           // the field drifts slowly; 60 buys heat
 const PLOT_MS = 1800;         // plot-in duration
 const POINTER_EASE = 0.04;    // per frame at MAX_FPS: weather, not a UI control
+const ZONE_EASE = 0.1;        // per frame at MAX_FPS: a fling eases in over ~0.3s instead of jumping the zoom
 const READOUT_MS = 100;       // how often the margin text updates
 
 const hexToRgb = (hex) => {
@@ -106,13 +107,17 @@ export function initHero({ host, field, copy, readout }) {
   }
 
   // ---- descent ----
-  let zone = 0;
+  // Scroll sets the target; the frame loop eases toward it. A touch fling
+  // crosses the hero in a few frames, and an unsmoothed zone turns that into a
+  // zoom that lurches tens of pixels per frame.
+  let zoneTarget = 0;
   function onScroll() {
     const h = host.offsetHeight || 1;
-    zone = Math.min(1, Math.max(0, window.scrollY / h));
+    zoneTarget = Math.min(1, Math.max(0, window.scrollY / h));
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+  let zone = zoneTarget;
 
   // ---- readout ----
   const out = {
@@ -166,6 +171,8 @@ export function initHero({ host, field, copy, readout }) {
     eased.x += (target.x - eased.x) * POINTER_EASE;
     eased.y += (target.y - eased.y) * POINTER_EASE;
     eased.probe += (target.probe - eased.probe) * POINTER_EASE;
+    zone += (zoneTarget - zone) * ZONE_EASE;
+    if (Math.abs(zoneTarget - zone) < 1e-4) zone = zoneTarget;
 
     uniforms.uTime.value = elapsed;
     uniforms.uPointer.value = [eased.x, eased.y];

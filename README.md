@@ -74,13 +74,14 @@ Behaviour:
 - **Readout.** `noise.js` is a float32-faithful port of the shader's noise. It
   samples the field at the eased probe ten times a second and prints the isotherm
   value, contour index, zone and probe position in the margin.
-- **Descent.** `uZone` follows scroll through the hero: contours are tighter and
-  cooler at the top, looser and warmer at the bottom.
+- **Descent.** `uZone` follows scroll through the hero, eased per frame so a touch
+  fling does not jolt the zoom: contours are tighter and cooler at the top, looser
+  and warmer at the bottom.
 - **Plot-in.** Over 1.8s each contour starts at its own time, majors first, and is
   swept in left to right. The margin counts `n 1 / 9` up as they land. The only
   orchestrated motion on the page.
-- **Grain.** The dither is biased toward the linen colour, so it reads as paper
-  tooth rather than video noise.
+- **Grain.** The dither is biased toward the linen colour and fixed per pixel, so it
+  reads as paper tooth rather than video noise.
 - **Cartouche.** Lines are dimmed to 30% under the headline block; the rectangle is
   measured from the DOM and passed as `uQuiet`.
 
@@ -114,6 +115,7 @@ marked before first paint and never download it (about 18 KB gzipped).
 | `MAX_DPR`, `MAX_AREA`, `MAX_FPS` | `hero.js` | 1.5, 3.2e6, 40 | Resolution and frame-rate ceilings |
 | `PLOT_MS` | `hero.js` | 1800 | Plot-in duration |
 | `POINTER_EASE` | `hero.js` | 0.04 | Probe lag; lower is more sluggish |
+| `ZONE_EASE` | `hero.js` | 0.1 | Per-frame easing of the zone toward scroll |
 
 Constants marked "both" exist in `field.glsl` and `noise.js` and must be changed
 together, or the readout stops describing the picture.
