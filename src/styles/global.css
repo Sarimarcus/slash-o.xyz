@@ -200,7 +200,7 @@ html.mark-pending:has([data-hero]) .mark .mark-slash {
   clip-path: inset(100% 0 0 0);
 }
 html.mark-cut .mark .mark-slash {
-  animation: slash-cut 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slash-cut 1000ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 @keyframes slash-cut {
   from {
