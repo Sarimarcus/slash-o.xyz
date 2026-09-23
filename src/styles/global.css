@@ -200,7 +200,7 @@ html.mark-pending:has([data-hero]) .mark .mark-slash {
   clip-path: inset(100% 0 0 0);
 }
 html.mark-cut .mark .mark-slash {
-  animation: slash-cut 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slash-cut 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 @keyframes slash-cut {
   from {
@@ -259,16 +259,23 @@ html.mark-cut .mark .mark-slash {
 }
 
 /* Arrival: following a link to a band rules it off again, left to right in
-   altitude, the colour of what was linked to. The plate head script adds
-   .arrived once the scroll has settled; the rule stays until the next
-   arrival. Under reduced motion it appears without being drawn. */
+   altitude, the colour of what was linked to, at twice the weight of a
+   structural rule so it reads over one. The plate head script adds .arrived
+   once the scroll has settled; the rule stays until the next arrival. Under
+   reduced motion it appears without being drawn. A linked band lands 3rem
+   below the top of the screen, so the rule is drawn where the reader is
+   looking rather than on the screen's edge. */
+section[id],
+#refusal {
+  scroll-margin-top: 3rem;
+}
 .band::after {
   content: '';
   position: absolute;
   top: -1px;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 2px;
   background: var(--altitude);
   transform: scaleX(0);
   transform-origin: left;
@@ -276,7 +283,7 @@ html.mark-cut .mark .mark-slash {
 }
 .band.arrived::after {
   transform: scaleX(1);
-  animation: rule-draw 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: rule-draw 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 @keyframes rule-draw {
   from {

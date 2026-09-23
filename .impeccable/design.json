@@ -192,13 +192,13 @@
       },
       {
         "name": "slash-cut",
-        "value": "500ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "value": "900ms cubic-bezier(0.16, 1, 0.3, 1)",
         "purpose": "The mark's slash drawn foot to top once the plot-in lands, on a visit that starts at the top of the home page."
       },
       {
         "name": "arrival-rule",
-        "value": "400ms cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "A followed in-page link rules off the band it lands on, left to right in altitude, after the scroll settles."
+        "value": "600ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "A followed in-page link rules off the band it lands on with a 2px altitude line, left to right, after the scroll settles; linked bands land 3rem below the top of the screen."
       },
       {
         "name": "hatch-sweep",
@@ -402,7 +402,7 @@
   ],
   "narrative": {
     "northStar": "The Annotated Plate",
-    "overview": "**Creative North Star: \"The Annotated Plate\"**\n\nThe page is one scientific plate read as a descent: a narrow margin column carrying only true measurements, a body of text beside it, and at the top a machine plotting isolines live. Everything is drawn on a single sheet of aged linen. Structure is not a second surface but a darker shade of the same paper: 1px rules, the tinted margin column, hatching. Text is a deep green-black ink, hairlines and minor contours are lichen, and two poles (altitude blue, oxide) belong to the field and reach the page only three times: the mark's slash, the one filled button, and the live/altitude accents (links, focus, selection, live readings).\n\nDensity is that of a printed plate, not a dashboard. Six colour values, one typeface with its optical-size axis, one angle for every hatch and tick (the slash's, 70° from horizontal). Square corners, no shadows, no gradient used as decoration, no dark mode. The plate refuses the consultancy landing page: no split hero, no feature cards, no stat tiles, no scroll reveals, no contact form, and no depiction of AI.\n\nThere is one authored motion on the page, the plot-in of the hero field (1.8s), followed by the field bending slowly under the pointer and the slash of the mark cut once the last contour lands (500ms, foot to top). Two small motions answer the reader, never the scroll: following an in-page link rules off the band it lands on in altitude (400ms, left to right, after the scroll settles), and landing on the refusal redraws its hatch behind a 70deg edge (700ms). Nothing moves on scroll or on entry. Under reduced motion, no JavaScript or no WebGL2 the same field at rest is served as an SVG plotted at build, the slash is never held back, and the arrival rule appears without being drawn.",
+    "overview": "**Creative North Star: \"The Annotated Plate\"**\n\nThe page is one scientific plate read as a descent: a narrow margin column carrying only true measurements, a body of text beside it, and at the top a machine plotting isolines live. Everything is drawn on a single sheet of aged linen. Structure is not a second surface but a darker shade of the same paper: 1px rules, the tinted margin column, hatching. Text is a deep green-black ink, hairlines and minor contours are lichen, and two poles (altitude blue, oxide) belong to the field and reach the page only three times: the mark's slash, the one filled button, and the live/altitude accents (links, focus, selection, live readings).\n\nDensity is that of a printed plate, not a dashboard. Six colour values, one typeface with its optical-size axis, one angle for every hatch and tick (the slash's, 70° from horizontal). Square corners, no shadows, no gradient used as decoration, no dark mode. The plate refuses the consultancy landing page: no split hero, no feature cards, no stat tiles, no scroll reveals, no contact form, and no depiction of AI.\n\nThere is one authored motion on the page, the plot-in of the hero field (1.8s), followed by the field bending slowly under the pointer and the slash of the mark cut once the last contour lands (900ms, foot to top). Two small motions answer the reader, never the scroll: following an in-page link rules off the band it lands on with a 2px altitude line (600ms, left to right, after the scroll settles, the band landing 3rem below the top of the screen), and landing on the refusal redraws its hatch behind a 70deg edge (700ms). Nothing moves on scroll or on entry. Under reduced motion, no JavaScript or no WebGL2 the same field at rest is served as an SVG plotted at build, the slash is never held back, and the arrival rule appears without being drawn.",
     "keyCharacteristics": [
       "One sheet: linen ground, structure in linen shade, ink for text; the margin tint is derived with `color-mix`, not a seventh value",
       "Margin column of measured facts, ruled rows, subgrid alignment; band titles open the content column at display size, and the margin beside them holds only real annotations; below 48rem notes become footnotes and empty margins disappear",
