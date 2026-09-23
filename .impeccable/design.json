@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-16T19:52:35Z",
+  "generatedAt": "2026-09-23T12:00:00Z",
   "title": "Design System: Slash O",
   "extensions": {
     "colorMeta": {
@@ -8,105 +8,356 @@
         "role": "neutral",
         "displayName": "Linen",
         "canonical": "#e4dfd1",
-        "tonalRamp": ["oklch(15% 0.02 90)", "oklch(27% 0.02 90)", "oklch(39% 0.02 90)", "oklch(51% 0.02 90)", "oklch(63% 0.02 90)", "oklch(75% 0.02 90)", "oklch(87% 0.02 90)", "oklch(95% 0.02 90)"]
+        "tonalRamp": [
+          "oklch(15% 0.02 90)",
+          "oklch(27% 0.02 90)",
+          "oklch(39% 0.02 90)",
+          "oklch(51% 0.02 90)",
+          "oklch(63% 0.02 90)",
+          "oklch(75% 0.02 90)",
+          "oklch(87% 0.02 90)",
+          "oklch(95% 0.02 90)"
+        ]
       },
       "linen-shade": {
         "role": "neutral",
         "displayName": "Linen shade",
         "canonical": "#d3ccba",
-        "tonalRamp": ["oklch(15% 0.03 90)", "oklch(27% 0.03 90)", "oklch(39% 0.03 90)", "oklch(51% 0.03 90)", "oklch(63% 0.03 90)", "oklch(75% 0.03 90)", "oklch(87% 0.03 90)", "oklch(95% 0.03 90)"]
+        "tonalRamp": [
+          "oklch(15% 0.03 90)",
+          "oklch(27% 0.03 90)",
+          "oklch(39% 0.03 90)",
+          "oklch(51% 0.03 90)",
+          "oklch(63% 0.03 90)",
+          "oklch(75% 0.03 90)",
+          "oklch(87% 0.03 90)",
+          "oklch(95% 0.03 90)"
+        ]
       },
       "ink": {
         "role": "neutral",
         "displayName": "Deep ink",
         "canonical": "#24302b",
-        "tonalRamp": ["oklch(15% 0.02 165)", "oklch(27% 0.02 165)", "oklch(39% 0.02 165)", "oklch(51% 0.02 165)", "oklch(63% 0.02 165)", "oklch(75% 0.02 165)", "oklch(87% 0.02 165)", "oklch(95% 0.02 165)"]
+        "tonalRamp": [
+          "oklch(15% 0.02 165)",
+          "oklch(27% 0.02 165)",
+          "oklch(39% 0.02 165)",
+          "oklch(51% 0.02 165)",
+          "oklch(63% 0.02 165)",
+          "oklch(75% 0.02 165)",
+          "oklch(87% 0.02 165)",
+          "oklch(95% 0.02 165)"
+        ]
       },
       "lichen": {
         "role": "tertiary",
         "displayName": "Lichen",
         "canonical": "#6e7f5c",
-        "tonalRamp": ["oklch(15% 0.06 130)", "oklch(27% 0.06 130)", "oklch(39% 0.06 130)", "oklch(51% 0.06 130)", "oklch(63% 0.06 130)", "oklch(75% 0.06 130)", "oklch(87% 0.06 130)", "oklch(95% 0.06 130)"]
+        "tonalRamp": [
+          "oklch(15% 0.06 130)",
+          "oklch(27% 0.06 130)",
+          "oklch(39% 0.06 130)",
+          "oklch(51% 0.06 130)",
+          "oklch(63% 0.06 130)",
+          "oklch(75% 0.06 130)",
+          "oklch(87% 0.06 130)",
+          "oklch(95% 0.06 130)"
+        ]
       },
       "altitude": {
         "role": "secondary",
         "displayName": "Altitude blue",
         "canonical": "#3c5a6b",
-        "tonalRamp": ["oklch(15% 0.05 230)", "oklch(27% 0.05 230)", "oklch(39% 0.05 230)", "oklch(51% 0.05 230)", "oklch(63% 0.05 230)", "oklch(75% 0.05 230)", "oklch(87% 0.05 230)", "oklch(95% 0.05 230)"]
+        "tonalRamp": [
+          "oklch(15% 0.05 230)",
+          "oklch(27% 0.05 230)",
+          "oklch(39% 0.05 230)",
+          "oklch(51% 0.05 230)",
+          "oklch(63% 0.05 230)",
+          "oklch(75% 0.05 230)",
+          "oklch(87% 0.05 230)",
+          "oklch(95% 0.05 230)"
+        ]
       },
       "oxide": {
         "role": "primary",
         "displayName": "Oxide",
         "canonical": "#9c4b2f",
-        "tonalRamp": ["oklch(15% 0.12 40)", "oklch(27% 0.12 40)", "oklch(39% 0.12 40)", "oklch(51% 0.12 40)", "oklch(63% 0.12 40)", "oklch(75% 0.12 40)", "oklch(87% 0.12 40)", "oklch(95% 0.12 40)"]
+        "tonalRamp": [
+          "oklch(15% 0.12 40)",
+          "oklch(27% 0.12 40)",
+          "oklch(39% 0.12 40)",
+          "oklch(51% 0.12 40)",
+          "oklch(63% 0.12 40)",
+          "oklch(75% 0.12 40)",
+          "oklch(87% 0.12 40)",
+          "oklch(95% 0.12 40)"
+        ]
       }
     },
     "derivedColors": [
       {
         "name": "margin-tint",
         "value": "color-mix(in srgb, var(--linen) 55%, var(--linen-shade))",
-        "purpose": "Fill of the margin column on desktop and of the band header row below 48rem. A mix of two existing values, not a seventh colour."
+        "purpose": "Fill of the margin column on desktop, painted once on body. A mix of two existing values, not a seventh colour. Below 48rem no margin is tinted."
       }
     ],
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "The h1 only; balanced, max 14ch on desktop; the LCP element." },
-      "headline": { "displayName": "Headline", "purpose": "Band titles, set in the margin column." },
-      "title": { "displayName": "Title", "purpose": "h3 in a row or the refusal field; also owned-site links and the contact email." },
-      "lede": { "displayName": "Lede", "purpose": "Hero lede (max 52ch) and each band's intro." },
-      "body": { "displayName": "Body", "purpose": "Running text at a 66ch measure, 70ch from 90rem." },
-      "label": { "displayName": "Label", "purpose": "Nav paths, the filled button, the text link." },
-      "caption": { "displayName": "Caption", "purpose": "Margin notes and readouts; labels italic, values roman in tabular lining figures." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "The h1 only; balanced, max 14ch on desktop. Hero text is the LCP element (the h1 on desktop, the h1 or the lede on phones), never the canvas."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Band titles at the top of the content column, max 16ch, 1.75rem before the intro; also the refusal sentence, max 18ch."
+      },
+      "title-display": {
+        "displayName": "Title display",
+        "purpose": "Owned-site links and the contact email (--fs-h3-display)."
+      },
+      "question": {
+        "displayName": "Question",
+        "purpose": "Italic questions in the questions band. A literal on .asked-q, not a size token."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "h3 inside a ruled row."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Hero lede (max 52ch) and each band's intro."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text at a 66ch measure, 70ch from 90rem."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Nav paths, the filled button, the text link. Nav paths shrink to clamp(0.75rem, 3.85vw, 0.9375rem) below 48rem."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Margin notes and readouts; labels italic, values roman in tabular lining figures."
+      }
     },
     "fonts": [
-      { "family": "Source Serif 4", "style": "normal", "weight": "400 600", "axes": ["opsz", "wght"], "file": "public/fonts/source-serif-4-opsz-normal.woff2", "preloaded": true },
-      { "family": "Source Serif 4", "style": "italic", "weight": "400", "axes": ["opsz"], "file": "public/fonts/source-serif-4-opsz-italic.woff2", "preloaded": false },
-      { "family": "Source Serif Fallback", "local": ["Georgia", "Times New Roman"], "sizeAdjust": "95%", "ascentOverride": "92%", "descentOverride": "26%" }
+      {
+        "family": "Source Serif 4",
+        "style": "normal",
+        "weight": "400 600",
+        "axes": [
+          "opsz",
+          "wght"
+        ],
+        "file": "public/fonts/source-serif-4-opsz-normal.woff2",
+        "preloaded": true
+      },
+      {
+        "family": "Source Serif 4",
+        "style": "italic",
+        "weight": "400",
+        "axes": [
+          "opsz"
+        ],
+        "file": "public/fonts/source-serif-4-opsz-italic.woff2",
+        "preloaded": false
+      },
+      {
+        "family": "Source Serif Fallback",
+        "local": [
+          "Georgia",
+          "Times New Roman"
+        ],
+        "sizeAdjust": "95%",
+        "ascentOverride": "92%",
+        "descentOverride": "26%"
+      }
     ],
     "shadows": [],
     "motion": [
-      { "name": "plot-in", "value": "1800ms", "purpose": "The hero field's contours plotting in, majors first, each swept left to right. The page's one authored motion." },
-      { "name": "pointer-ease", "value": "0.04 per frame at max fps", "purpose": "How the field bends toward the pointer: weather, not a UI control." },
-      { "name": "readout-interval", "value": "100ms", "purpose": "How often the margin readouts update while the field is live." },
-      { "name": "scroll-behavior", "value": "smooth", "purpose": "Anchor navigation only, under prefers-reduced-motion: no-preference." }
+      {
+        "name": "plot-in",
+        "value": "1800ms",
+        "purpose": "The hero field's contours plotting in, majors first, each swept left to right. The page's one authored motion."
+      },
+      {
+        "name": "pointer-ease",
+        "value": "0.04 per frame at max fps",
+        "purpose": "How the field bends toward the pointer: weather, not a UI control."
+      },
+      {
+        "name": "readout-ease",
+        "value": "0.3 per frame at max fps",
+        "purpose": "The isotherm figure in the margin easing toward the sampled value; text written only when the printed value changes."
+      },
+      {
+        "name": "slash-cut",
+        "value": "500ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The mark's slash drawn foot to top once the plot-in lands, on a visit that starts at the top of the home page."
+      },
+      {
+        "name": "arrival-rule",
+        "value": "400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "A followed in-page link rules off the band it lands on, left to right in altitude, after the scroll settles."
+      },
+      {
+        "name": "hatch-sweep",
+        "value": "700ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Landing on the refusal redraws its hatch behind a 70deg edge."
+      },
+      {
+        "name": "scroll-behavior",
+        "value": "smooth",
+        "purpose": "Anchor navigation only, under prefers-reduced-motion: no-preference."
+      }
     ],
     "angles": [
-      { "name": "slash", "value": "70deg", "purpose": "The mark's slash and the lichen ticks, measured from the horizontal." },
-      { "name": "hatch", "value": "160deg", "purpose": "Gradient angle that draws stripes perpendicular to itself at the slash's angle; used by the refusal field." }
+      {
+        "name": "slash",
+        "value": "70deg",
+        "purpose": "The mark's slash and the lichen ticks (rotate(calc(90deg - var(--slash)))), measured from the horizontal."
+      },
+      {
+        "name": "hatch",
+        "value": "calc(180deg - var(--slash))",
+        "computed": "110deg",
+        "purpose": "Gradient angle for the refusal hatch. A gradient angle runs clockwise from the top, perpendicular to its stripes, so 110deg draws stripes at 70deg."
+      }
     ],
     "breakpoints": [
-      { "name": "narrow", "value": "max-width: 47.99rem", "purpose": "One column; margin becomes a tinted header row; notes become footnotes; ticks and the body's painted margin are dropped." },
-      { "name": "wide", "value": "min-width: 90rem", "purpose": "Measure widens from 66ch to 70ch." }
+      {
+        "name": "narrow",
+        "value": "max-width: 47.99rem",
+        "purpose": "One column; ticks and the body's painted margin are dropped; empty margins and the colophon's margin are hidden; band and row notes follow as untinted footnotes; the nav stays on one line."
+      },
+      {
+        "name": "wide",
+        "value": "min-width: 90rem",
+        "purpose": "Measure widens from 66ch to 70ch."
+      }
     ],
     "detectorExceptions": [
-      { "rule": "cream-palette", "files": ["dist/index.html", "src/styles/global.css"], "createdAt": "2026-09-16T19:32:33.804Z", "reason": "user pinned aged linen #E4DFD1 as the ground in the brief (2026-09-16)" },
-      { "rule": "gray-on-color", "files": ["dist/index.html", "src/styles/global.css"], "createdAt": "2026-09-16T19:32:49.351Z", "reason": "user confirmed in plan: linen #E4DFD1 text on the oxide button, the page's one filled button; measured 4.6:1" },
-      { "rule": "cramped-padding", "files": ["dist/index.html"], "createdAt": "2026-09-16T19:32:49.370Z", "reason": "computed padding verified in browser 2026-09-16: .meta>div 12px top, .margin 44.8px desktop / 20px mobile; detector cannot resolve custom properties" }
-    ]
+      {
+        "rule": "cream-palette",
+        "files": [
+          "dist/index.html",
+          "src/styles/global.css"
+        ],
+        "createdAt": "2026-09-16T19:32:33.804Z",
+        "reason": "user pinned aged linen #E4DFD1 as the ground in the brief (2026-09-16)"
+      },
+      {
+        "rule": "gray-on-color",
+        "files": [
+          "dist/index.html",
+          "src/styles/global.css"
+        ],
+        "createdAt": "2026-09-16T19:32:49.351Z",
+        "reason": "user confirmed in plan: linen #E4DFD1 text on the oxide button, the page's one filled button; measured 4.6:1"
+      },
+      {
+        "rule": "cramped-padding",
+        "files": [
+          "dist/index.html"
+        ],
+        "createdAt": "2026-09-16T19:32:49.370Z",
+        "reason": "computed padding verified in browser 2026-09-16: .meta>div 12px top, .margin 44.8px desktop / 20px mobile; detector cannot resolve custom properties"
+      },
+      {
+        "rule": "gray-on-color",
+        "files": [
+          "dist/404.html"
+        ],
+        "createdAt": "2026-09-16T21:32:51.644Z",
+        "reason": "same oxide button as index; user-confirmed, 4.6:1"
+      },
+      {
+        "rule": "cramped-padding",
+        "files": [
+          "dist/404.html"
+        ],
+        "createdAt": "2026-09-16T21:32:51.654Z",
+        "reason": "same .meta/.margin rules as index, computed padding verified 12px/44.8px; detector cannot resolve custom properties"
+      },
+      {
+        "rule": "cream-palette",
+        "files": [
+          "dist/404.html"
+        ],
+        "createdAt": "2026-09-16T21:32:51.666Z",
+        "reason": "user pinned aged linen #E4DFD1 as the ground in the brief"
+      }
+    ],
+    "mark": {
+      "source": "src/data/mark.ts, generated by scripts/mark-outlines.py from public/fonts/source-serif-4-opsz-normal.woff2",
+      "o": "Source Serif 4 O at opsz 60, weight 600, filled outline with its counter as a second contour",
+      "slash": "Filled parallelogram at 70deg with the glyph stem width and height, in oxide",
+      "gap": "80 font units added to the typeset pair's closest approach",
+      "box": {
+        "w": 52.39,
+        "h": 43.4
+      },
+      "oMid": 18.8,
+      "uses": [
+        {
+          "where": "plate head",
+          "size": "height 2.5rem, width auto"
+        },
+        {
+          "where": "refusal heading (.mark-inline)",
+          "size": "height 0.868em, width auto, vertical-align -0.16em, O in currentColor"
+        },
+        {
+          "where": "favicon",
+          "size": "32 by 32 on linen; O from opsz 8 with a 0.8-unit ink stroke; slash at double stem weight"
+        },
+        {
+          "where": "social card",
+          "size": "220px tall, centred on the O (MARK_O_MID) in a linen cartouche"
+        }
+      ]
+    }
   },
   "components": [
     {
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The page's one filled button, oxide on linen text; hover goes to ink. Appears twice, both 'Book a diagnostic'.",
-      "html": "<a class=\"ds-button\" href=\"#\">Book a diagnostic</a>",
+      "description": "The page's one filled button, oxide with linen text; hover goes to ink. Appears twice, in the hero and the working-languages row, both 'Book a call'.",
+      "html": "<a class=\"ds-button\" href=\"#\">Book a call</a>",
       "css": ".ds-button { display: inline-block; padding: 0.8rem 1.4rem; background: var(--oxide, #9c4b2f); color: var(--linen, #e4dfd1); font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 500; line-height: 1; text-decoration: none; border: 1px solid var(--oxide, #9c4b2f); border-radius: 0; } .ds-button:hover { background: var(--ink, #24302b); border-color: var(--ink, #24302b); } .ds-button:focus-visible { outline: 2px solid var(--ink, #24302b); outline-offset: 3px; }"
     },
     {
       "name": "Text Link",
       "kind": "button",
       "refersTo": "text-link",
-      "description": "The secondary action: an underlined link in label type, underline in altitude, 1px to 2px on hover.",
-      "html": "<a class=\"ds-text-link\" href=\"#\">See the terms</a>",
+      "description": "The secondary action: an underlined link in label type, underline in altitude, 1px to 2px on hover. In the hero it points at the refusal.",
+      "html": "<a class=\"ds-text-link\" href=\"#refusal\">See what I will not do</a>",
       "css": ".ds-text-link { color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 500; text-decoration: underline; text-decoration-color: var(--altitude, #3c5a6b); text-decoration-thickness: 1px; text-underline-offset: 0.18em; } .ds-text-link:hover { text-decoration-thickness: 2px; } .ds-text-link:focus-visible { outline: 2px solid var(--altitude, #3c5a6b); outline-offset: 3px; }"
     },
     {
       "name": "Path Nav",
       "kind": "nav",
       "refersTo": "path-nav-link",
-      "description": "Anchor nav whose labels are the fragment paths; the band in view is marked aria-current and set in oxide.",
-      "html": "<nav class=\"ds-path-nav\" aria-label=\"Sections\"><ul><li><a href=\"#problems\" aria-current=\"true\">/problems</a></li><li><a href=\"#work\">/work</a></li><li><a href=\"#sites\">/sites</a></li><li><a href=\"#terms\">/terms</a></li><li><a href=\"#contact\">/contact</a></li></ul></nav>",
-      "css": ".ds-path-nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; padding: 0.9rem 0; margin: 0; list-style: none; } .ds-path-nav a { color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 500; text-decoration: none; white-space: nowrap; } .ds-path-nav a:hover { text-decoration: underline; text-decoration-color: var(--altitude, #3c5a6b); text-decoration-thickness: 1px; text-underline-offset: 0.18em; } .ds-path-nav a[aria-current='true'] { color: var(--oxide, #9c4b2f); text-decoration: underline; text-decoration-color: var(--oxide, #9c4b2f); text-underline-offset: 0.18em; } .ds-path-nav a:focus-visible { outline: 2px solid var(--altitude, #3c5a6b); outline-offset: 3px; }"
+      "description": "Anchor nav whose labels are the fragment paths; the band in view is marked aria-current and set in oxide. Below 48rem it spreads across one line and the type gives way instead of wrapping.",
+      "html": "<nav class=\"ds-path-nav\" aria-label=\"Sections\"><ul><li><a href=\"#problems\">/problems</a></li><li><a href=\"#work\" aria-current=\"true\">/work</a></li><li><a href=\"#readings\">/readings</a></li><li><a href=\"#sites\">/sites</a></li><li><a href=\"#asked\">/asked</a></li><li><a href=\"#how\">/how</a></li><li><a href=\"#contact\">/contact</a></li></ul></nav>",
+      "css": ".ds-path-nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; padding: 0.9rem 0; margin: 0; list-style: none; } .ds-path-nav a { color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; font-size: 0.9375rem; font-weight: 500; text-decoration: none; white-space: nowrap; text-decoration-color: var(--altitude, #3c5a6b); text-decoration-thickness: 1px; text-underline-offset: 0.18em; } .ds-path-nav a:hover { text-decoration: underline; } .ds-path-nav a[aria-current='true'] { color: var(--oxide, #9c4b2f); text-decoration: underline; text-decoration-color: var(--oxide, #9c4b2f); } .ds-path-nav a:focus-visible { outline: 2px solid var(--altitude, #3c5a6b); outline-offset: 3px; } @media (max-width: 47.99rem) { .ds-path-nav ul { gap: 0.25rem 0.375rem; justify-content: space-between; } .ds-path-nav a { font-size: clamp(0.75rem, 3.85vw, 0.9375rem); } }"
+    },
+    {
+      "name": "Mark",
+      "kind": "custom",
+      "refersTo": "mark",
+      "description": "The /O mark: Source Serif 4's O (opsz 60, weight 600) in ink beside a slash redrawn at 70deg as a filled parallelogram in oxide. Outlines from src/data/mark.ts. 2.5rem tall in the plate head.",
+      "html": "<a class=\"ds-mark\" href=\"/\" aria-label=\"Slash O, home\"><svg viewBox=\"0 0 52.39 43.4\" role=\"img\" aria-label=\"Slash O\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"ds-mark-slash\" d=\"M0 43.4 2.55 43.4 18.35 0 15.8 0Z\"/><path class=\"ds-mark-o\" d=\"M38.44 36.2Q35.64 36.2 33.11 35.09Q30.58 33.98 28.64 31.79Q26.69 29.6 25.57 26.35Q24.44 23.1 24.44 18.75Q24.44 14.55 25.56 11.31Q26.68 8.08 28.63 5.86Q30.59 3.65 33.12 2.52Q35.64 1.4 38.43 1.4Q41.21 1.4 43.73 2.5Q46.24 3.6 48.2 5.83Q50.15 8.06 51.27 11.3Q52.39 14.55 52.39 18.9Q52.39 23.1 51.27 26.35Q50.15 29.6 48.17 31.77Q46.19 33.95 43.67 35.07Q41.14 36.2 38.44 36.2ZM38.44 35Q40.59 35 42.17 33.83Q43.74 32.65 44.77 30.5Q45.79 28.35 46.27 25.38Q46.74 22.4 46.74 18.89Q46.74 15.33 46.27 12.39Q45.79 9.45 44.77 7.25Q43.74 5.05 42.17 3.82Q40.59 2.6 38.44 2.6Q36.24 2.6 34.67 3.77Q33.09 4.95 32.07 7.15Q31.04 9.35 30.57 12.26Q30.09 15.18 30.09 18.74Q30.09 22.25 30.57 25.25Q31.04 28.25 32.07 30.43Q33.09 32.6 34.67 33.8Q36.24 35 38.44 35Z\"/></svg></a>",
+      "css": ".ds-mark { display: inline-flex; align-items: center; padding: 0.9rem var(--gutter, clamp(1.25rem, 3.5vw, 3rem)); text-decoration: none; } .ds-mark svg { display: block; width: auto; height: 2.5rem; } .ds-mark .ds-mark-slash { fill: var(--oxide, #9c4b2f); } .ds-mark .ds-mark-o { fill: var(--ink, #24302b); } .ds-mark:focus-visible { outline: 2px solid var(--altitude, #3c5a6b); outline-offset: 3px; }"
+    },
+    {
+      "name": "Band Opening with Tick",
+      "kind": "custom",
+      "refersTo": "band-title",
+      "description": "A band's top rule in linen shade with the 1px lichen tick at the margin edge, rotated to the slash's 70 degrees. The title opens the content column at Headline size; the margin beside it holds only real annotations, here the contact clock.",
+      "html": "<section class=\"ds-band\"><div class=\"ds-band-margin\"><dl class=\"ds-note\"><dt>Madrid, local time</dt><dd><time>14:32 CEST</time></dd></dl></div><div class=\"ds-band-content\"><h2>Contact</h2><p class=\"ds-intro\">Write to me with the group, the titles, and what you think is wrong. I reply within two working days.</p></div></section>",
+      "css": ".ds-band { position: relative; display: grid; grid-template-columns: var(--margin-w, clamp(9.5rem, 17vw, 14rem)) minmax(0, 1fr); border-top: 1px solid var(--linen-shade, #d3ccba); background: linear-gradient(90deg, color-mix(in srgb, var(--linen, #e4dfd1) 55%, var(--linen-shade, #d3ccba)) 0 calc(var(--margin-w, clamp(9.5rem, 17vw, 14rem)) - 1px), var(--linen-shade, #d3ccba) calc(var(--margin-w, clamp(9.5rem, 17vw, 14rem)) - 1px) var(--margin-w, clamp(9.5rem, 17vw, 14rem)), var(--linen, #e4dfd1) var(--margin-w, clamp(9.5rem, 17vw, 14rem))); color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; } .ds-band::before { content: ''; position: absolute; top: -0.5rem; left: calc(var(--margin-w, clamp(9.5rem, 17vw, 14rem)) - 1px); width: 1px; height: 1rem; background: var(--lichen, #6e7f5c); transform: rotate(calc(90deg - var(--slash, 70deg))); } .ds-band-margin, .ds-band-content { padding: clamp(3rem, 7vw, 6rem) var(--gutter, clamp(1.25rem, 3.5vw, 3rem)); } .ds-band-content { max-width: calc(66ch + 2 * var(--gutter, clamp(1.25rem, 3.5vw, 3rem))); } .ds-band-content h2 { margin: 0; max-width: 16ch; font-size: clamp(2.25rem, 1.55rem + 2.9vw, 4.25rem); font-weight: 500; line-height: 1.04; letter-spacing: -0.01em; text-wrap: balance; } .ds-intro { margin: 1.75rem 0 0; font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem); line-height: 1.45; } .ds-note { margin: 0; font-size: 0.8125rem; line-height: 1.35; font-variant-numeric: tabular-nums lining-nums; } .ds-note dt { font-style: italic; } .ds-note dd { margin: 0.1rem 0 0; } .ds-note dd + dd { margin-top: 0.05rem; } .ds-note dd + dt { margin-top: 0.75rem; } @media (max-width: 47.99rem) { .ds-band { grid-template-columns: minmax(0, 1fr); background: var(--linen, #e4dfd1); } .ds-band::before { display: none; } .ds-band-content { padding: 2rem var(--gutter, clamp(1.25rem, 3.5vw, 3rem)) 3rem; } .ds-band-margin { order: 1; padding: 0 var(--gutter, clamp(1.25rem, 3.5vw, 3rem)) 2.5rem; } }"
     },
     {
       "name": "Margin Note",
@@ -114,80 +365,121 @@
       "refersTo": "margin-note",
       "description": "A measured annotation in the margin column: italic label, tabular roman values, a build-fetched value marked live in altitude.",
       "html": "<dl class=\"ds-note\"><dt>urls in sitemap</dt><dd><span class=\"ds-live\">1,284</span></dd><dt>last modified</dt><dd>2026-09-14</dd></dl>",
-      "css": ".ds-note { margin: 0; color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; font-size: 0.8125rem; line-height: 1.35; font-variant-numeric: tabular-nums lining-nums; } .ds-note dt { font-style: italic; } .ds-note dd { margin: 0.1rem 0 0; } .ds-note dd + dd { margin-top: 0.05rem; } .ds-note dt + dt, .ds-note dd + dt { margin-top: 0.75rem; } .ds-live { color: var(--altitude, #3c5a6b); }"
+      "css": ".ds-note { margin: 0; font-size: 0.8125rem; line-height: 1.35; font-variant-numeric: tabular-nums lining-nums; } .ds-note dt { font-style: italic; } .ds-note dd { margin: 0.1rem 0 0; } .ds-note dd + dd { margin-top: 0.05rem; } .ds-note dd + dt { margin-top: 0.75rem; } .ds-note { color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; } .ds-live { color: var(--altitude, #3c5a6b); }"
     },
     {
       "name": "Ruled Row",
       "kind": "card",
       "refersTo": "margin-note",
       "description": "The plate's repeating unit: one hairline across margin and body, the note beside the passage it annotates. Below 48rem the note follows the passage as a footnote.",
-      "html": "<div class=\"ds-row\"><div class=\"ds-row-margin\"><dl class=\"ds-note\"><dt>measured as</dt><dd>time to first byte</dd><dd>crawl budget, 30 d</dd></dl></div><div class=\"ds-row-content\"><h3>The obvious fix cost traffic</h3><p>Nobody recorded the baseline, so nobody can prove what the change did.</p></div></div>",
-      "css": ".ds-row { display: grid; grid-template-columns: clamp(9.5rem, 17vw, 14rem) minmax(0, 1fr); border-top: 1px solid var(--linen-shade, #d3ccba); background: linear-gradient(90deg, color-mix(in srgb, var(--linen, #e4dfd1) 55%, var(--linen-shade, #d3ccba)) 0 calc(clamp(9.5rem, 17vw, 14rem) - 1px), var(--linen-shade, #d3ccba) calc(clamp(9.5rem, 17vw, 14rem) - 1px) clamp(9.5rem, 17vw, 14rem), var(--linen, #e4dfd1) clamp(9.5rem, 17vw, 14rem)); color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; } .ds-row-margin, .ds-row-content { padding: 1.5rem clamp(1.25rem, 3.5vw, 3rem); } .ds-row-content { max-width: calc(66ch + 2 * clamp(1.25rem, 3.5vw, 3rem)); font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem); line-height: 1.55; } .ds-row-content h3 { margin: 0; font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem); font-weight: 500; line-height: 1.3; } .ds-row-content p { margin: 0.75rem 0 0; } .ds-note { margin: 0; font-size: 0.8125rem; line-height: 1.35; font-variant-numeric: tabular-nums lining-nums; } .ds-note dt { font-style: italic; } .ds-note dd { margin: 0.1rem 0 0; } .ds-note dd + dd { margin-top: 0.05rem; } @media (max-width: 47.99rem) { .ds-row { grid-template-columns: minmax(0, 1fr); background: var(--linen, #e4dfd1); } .ds-row-margin { order: 2; padding: 0 clamp(1.25rem, 3.5vw, 3rem) 1.5rem; } .ds-row-content { padding: 1.25rem clamp(1.25rem, 3.5vw, 3rem) 0.75rem; } }"
+      "html": "<div class=\"ds-row\"><div class=\"ds-row-margin\"><dl class=\"ds-note\"><dt>measured as</dt><dd>indexed URLs, 90 days</dd><dd>click share by template</dd><dd>crawl budget spent on waste</dd></dl></div><div class=\"ds-row-content\"><h3>Search decay that resists post-mortem</h3><p>Organic traffic slides for eighteen months. Every team has a theory, every theory fits the chart, and nothing was measured before the redesign.</p></div></div>",
+      "css": ".ds-row { display: grid; grid-template-columns: var(--margin-w, clamp(9.5rem, 17vw, 14rem)) minmax(0, 1fr); border-top: 1px solid var(--linen-shade, #d3ccba); background: linear-gradient(90deg, color-mix(in srgb, var(--linen, #e4dfd1) 55%, var(--linen-shade, #d3ccba)) 0 calc(var(--margin-w, clamp(9.5rem, 17vw, 14rem)) - 1px), var(--linen-shade, #d3ccba) calc(var(--margin-w, clamp(9.5rem, 17vw, 14rem)) - 1px) var(--margin-w, clamp(9.5rem, 17vw, 14rem)), var(--linen, #e4dfd1) var(--margin-w, clamp(9.5rem, 17vw, 14rem))); color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; } .ds-row-margin, .ds-row-content { padding: 1.5rem var(--gutter, clamp(1.25rem, 3.5vw, 3rem)); } .ds-row-content { max-width: calc(66ch + 2 * var(--gutter, clamp(1.25rem, 3.5vw, 3rem))); font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem); line-height: 1.55; } .ds-row-content h3 { margin: 0; font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem); font-weight: 500; line-height: 1.3; } .ds-row-content p { margin: 0.75rem 0 0; } .ds-note { margin: 0; font-size: 0.8125rem; line-height: 1.35; font-variant-numeric: tabular-nums lining-nums; } .ds-note dt { font-style: italic; } .ds-note dd { margin: 0.1rem 0 0; } .ds-note dd + dd { margin-top: 0.05rem; } .ds-note dd + dt { margin-top: 0.75rem; } @media (max-width: 47.99rem) { .ds-row { grid-template-columns: minmax(0, 1fr); background: var(--linen, #e4dfd1); } .ds-row-margin { order: 2; padding: 0 var(--gutter, clamp(1.25rem, 3.5vw, 3rem)) 1.5rem; } .ds-row-content { padding: 1.25rem var(--gutter, clamp(1.25rem, 3.5vw, 3rem)) 0.75rem; } }"
+    },
+    {
+      "name": "Question Row",
+      "kind": "card",
+      "refersTo": "margin-note",
+      "description": "A ruled row in the questions band: the question in italic, a step above a row title, the answer in roman, the date and asker in the margin.",
+      "html": "<div class=\"ds-qrow\"><div class=\"ds-qrow-margin\"><dl class=\"ds-note\"><dt>asked on</dt><dd><time>2026-09-23</time></dd><dt>asked by</dt><dd>an SEO analyst</dd></dl></div><div class=\"ds-qrow-content\"><h3 class=\"ds-asked-q\">How do I analyse a lot of Apache logs with AI?</h3><p>Not by sending the logs to a chat model. It reads every line as tokens, so the bill grows with the log.</p></div></div>",
+      "css": ".ds-qrow { display: grid; grid-template-columns: var(--margin-w, clamp(9.5rem, 17vw, 14rem)) minmax(0, 1fr); border-top: 1px solid var(--linen-shade, #d3ccba); color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; } .ds-qrow-margin, .ds-qrow-content { padding: 1.5rem var(--gutter, clamp(1.25rem, 3.5vw, 3rem)); } .ds-qrow-content { max-width: calc(66ch + 2 * var(--gutter, clamp(1.25rem, 3.5vw, 3rem))); font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem); line-height: 1.55; } .ds-qrow .ds-asked-q { margin: 0; font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); font-style: italic; font-weight: 400; line-height: 1.25; text-wrap: balance; } .ds-qrow-content p { margin: 0.75rem 0 0; } .ds-note { margin: 0; font-size: 0.8125rem; line-height: 1.35; font-variant-numeric: tabular-nums lining-nums; } .ds-note dt { font-style: italic; } .ds-note dd { margin: 0.1rem 0 0; } .ds-note dd + dd { margin-top: 0.05rem; } .ds-note dd + dt { margin-top: 0.75rem; } @media (max-width: 47.99rem) { .ds-qrow { grid-template-columns: minmax(0, 1fr); } .ds-qrow-margin { order: 2; padding: 0 var(--gutter, clamp(1.25rem, 3.5vw, 3rem)) 1.5rem; } }"
     },
     {
       "name": "Refusal Field",
       "kind": "card",
       "refersTo": "refusal-field",
-      "description": "Excluded terrain: a block hatched in linen shade at the slash's angle, ruled top and bottom. Used once, for the thing not sold.",
-      "html": "<div class=\"ds-refusal\"><h3>Not for sale</h3><p><span class=\"ds-mark-text\"><span class=\"ds-slash\">/</span>O</span> does not sell implementation, and refuses to sell it on the back of its own audit.</p></div>",
-      "css": ".ds-refusal { padding: 1.75rem clamp(1.25rem, 3.5vw, 3rem); border-top: 1px solid var(--linen-shade, #d3ccba); border-bottom: 1px solid var(--linen-shade, #d3ccba); background: var(--linen, #e4dfd1) repeating-linear-gradient(160deg, var(--linen-shade, #d3ccba) 0 1px, transparent 1px 9px); color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem); line-height: 1.55; } .ds-refusal h3 { margin: 0; font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem); font-weight: 500; line-height: 1.3; } .ds-refusal p { margin: 0.75rem 0 0; } .ds-slash { color: var(--oxide, #9c4b2f); }"
+      "description": "Excluded terrain: a full-width row hatched in linen shade at the slash's angle across both columns, margin included. One sentence at Headline size, opened by the inline mark. Used once.",
+      "html": "<div class=\"ds-refusal\"><div class=\"ds-refusal-margin\"></div><div class=\"ds-refusal-content\"><h3><span class=\"ds-visually-hidden\">What I do not do: </span><svg class=\"ds-mark-inline\" viewBox=\"0 0 52.39 43.4\" role=\"img\" aria-label=\"Slash O\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"ds-mark-slash\" d=\"M0 43.4 2.55 43.4 18.35 0 15.8 0Z\"/><path class=\"ds-mark-o\" d=\"M38.44 36.2Q35.64 36.2 33.11 35.09Q30.58 33.98 28.64 31.79Q26.69 29.6 25.57 26.35Q24.44 23.1 24.44 18.75Q24.44 14.55 25.56 11.31Q26.68 8.08 28.63 5.86Q30.59 3.65 33.12 2.52Q35.64 1.4 38.43 1.4Q41.21 1.4 43.73 2.5Q46.24 3.6 48.2 5.83Q50.15 8.06 51.27 11.3Q52.39 14.55 52.39 18.9Q52.39 23.1 51.27 26.35Q50.15 29.6 48.17 31.77Q46.19 33.95 43.67 35.07Q41.14 36.2 38.44 36.2ZM38.44 35Q40.59 35 42.17 33.83Q43.74 32.65 44.77 30.5Q45.79 28.35 46.27 25.38Q46.74 22.4 46.74 18.89Q46.74 15.33 46.27 12.39Q45.79 9.45 44.77 7.25Q43.74 5.05 42.17 3.82Q40.59 2.6 38.44 2.6Q36.24 2.6 34.67 3.77Q33.09 4.95 32.07 7.15Q31.04 9.35 30.57 12.26Q30.09 15.18 30.09 18.74Q30.09 22.25 30.57 25.25Q31.04 28.25 32.07 30.43Q33.09 32.6 34.67 33.8Q36.24 35 38.44 35Z\"/></svg> does not sell the fix it recommends.</h3><p>What I will not do is find you a problem and then sell you the solution to it.</p></div></div>",
+      "css": ".ds-refusal { display: grid; grid-template-columns: var(--margin-w, clamp(9.5rem, 17vw, 14rem)) minmax(0, 1fr); border-top: 1px solid var(--linen-shade, #d3ccba); border-bottom: 1px solid var(--linen-shade, #d3ccba); background: var(--linen, #e4dfd1) repeating-linear-gradient(var(--hatch, calc(180deg - 70deg)), var(--linen-shade, #d3ccba) 0 1px, transparent 1px 9px); color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; } .ds-refusal-content { padding: clamp(3rem, 6vw, 5rem) var(--gutter, clamp(1.25rem, 3.5vw, 3rem)); max-width: calc(66ch + 2 * var(--gutter, clamp(1.25rem, 3.5vw, 3rem))); font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem); line-height: 1.55; } .ds-refusal h3 { margin: 0; max-width: 18ch; font-size: clamp(2.25rem, 1.55rem + 2.9vw, 4.25rem); font-weight: 500; line-height: 1.04; letter-spacing: -0.01em; text-wrap: balance; } .ds-refusal p { margin: 1.75rem 0 0; } .ds-mark-inline { display: inline-block; height: 0.868em; width: auto; vertical-align: -0.16em; } .ds-mark-inline .ds-mark-slash { fill: var(--oxide, #9c4b2f); } .ds-mark-inline .ds-mark-o { fill: currentColor; } .ds-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } @media (max-width: 47.99rem) { .ds-refusal { grid-template-columns: minmax(0, 1fr); } .ds-refusal-margin { display: none; } }"
     },
     {
-      "name": "Band Rule with Tick",
+      "name": "Destination Link",
       "kind": "custom",
-      "refersTo": "margin-note",
-      "description": "A band's top rule in linen shade with the 1px lichen tick where it crosses the margin edge, rotated to the slash's 70 degrees.",
-      "html": "<div class=\"ds-band\"><div class=\"ds-band-margin\"><h2>What goes wrong</h2></div><div class=\"ds-band-content\"><p>Three failures that recur across media groups.</p></div></div>",
-      "css": ".ds-band { position: relative; display: grid; grid-template-columns: clamp(9.5rem, 17vw, 14rem) minmax(0, 1fr); border-top: 1px solid var(--linen-shade, #d3ccba); background: linear-gradient(90deg, color-mix(in srgb, var(--linen, #e4dfd1) 55%, var(--linen-shade, #d3ccba)) 0 calc(clamp(9.5rem, 17vw, 14rem) - 1px), var(--linen-shade, #d3ccba) calc(clamp(9.5rem, 17vw, 14rem) - 1px) clamp(9.5rem, 17vw, 14rem), var(--linen, #e4dfd1) clamp(9.5rem, 17vw, 14rem)); color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; } .ds-band::before { content: ''; position: absolute; top: -0.5rem; left: calc(clamp(9.5rem, 17vw, 14rem) - 1px); width: 1px; height: 1rem; background: var(--lichen, #6e7f5c); transform: rotate(20deg); } .ds-band-margin, .ds-band-content { padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 3.5vw, 3rem); } .ds-band-margin h2 { margin: 0; font-size: clamp(1.75rem, 1.45rem + 1.1vw, 2.25rem); font-weight: 500; line-height: 1.12; letter-spacing: -0.005em; text-wrap: balance; } .ds-band-content p { margin: 0; font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem); line-height: 1.45; max-width: 66ch; }"
-    },
-    {
-      "name": "Mark",
-      "kind": "custom",
-      "refersTo": "path-nav-link",
-      "description": "The /O mark: a slash in oxide and an O in ink at the same 5-unit stroke. The slash runs from (22,36) to (34,4), the one angle every hatch and tick shares.",
-      "html": "<a class=\"ds-mark\" href=\"/\" aria-label=\"Slash O, home\"><svg viewBox=\"0 0 64 40\" role=\"img\" aria-label=\"Slash O\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"ds-mark-slash\" d=\"M22 36 L34 4\" fill=\"none\" stroke-width=\"5\" stroke-linecap=\"butt\"/><circle class=\"ds-mark-o\" cx=\"47.5\" cy=\"20\" r=\"13.5\" fill=\"none\" stroke-width=\"5\"/></svg></a>",
-      "css": ".ds-mark { display: inline-flex; align-items: center; padding: 0.9rem clamp(1.25rem, 3.5vw, 3rem); text-decoration: none; } .ds-mark svg { display: block; width: 3.25rem; height: auto; } .ds-mark-slash { stroke: var(--oxide, #9c4b2f); } .ds-mark-o { stroke: var(--ink, #24302b); } .ds-mark:focus-visible { outline: 2px solid var(--altitude, #3c5a6b); outline-offset: 3px; }"
+      "refersTo": "text-link",
+      "description": "An owned-site link or the contact email, set in Title display with the altitude underline; the site's purpose follows on its own line at body size.",
+      "html": "<p class=\"ds-dest\"><a class=\"ds-site-link\" href=\"https://explorecordoba.com\">explorecordoba.com</a><span class=\"ds-site-what\">Córdoba, in English, for people who are actually going</span></p>",
+      "css": ".ds-dest { margin: 0; color: var(--ink, #24302b); font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem); line-height: 1.55; } .ds-site-link { color: inherit; font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem); font-weight: 500; line-height: 1.15; letter-spacing: -0.005em; text-decoration-color: var(--altitude, #3c5a6b); text-decoration-thickness: 1px; text-underline-offset: 0.18em; overflow-wrap: anywhere; } .ds-site-link:hover { text-decoration-thickness: 2px; } .ds-site-link:focus-visible { outline: 2px solid var(--altitude, #3c5a6b); outline-offset: 3px; } .ds-site-what { display: block; margin-top: 0.25rem; }"
     }
   ],
   "narrative": {
     "northStar": "The Annotated Plate",
-    "overview": "The page is one scientific plate read as a descent: a narrow margin column carrying only true measurements, a body of text beside it, and at the top a machine plotting isolines live. Everything is drawn on a single sheet of aged linen. Structure is not a second surface but a darker shade of the same paper: 1px rules, the tinted margin column, hatching. Text is a deep green-black ink, hairlines and minor contours are lichen, and two poles (altitude blue, oxide) belong to the field and reach the page only three times: the mark's slash, the one filled button, and the live/altitude accents (links, focus, selection, live readings).\n\nDensity is that of a printed plate, not a dashboard. Six colour values, one typeface with its optical-size axis, one angle for every hatch and tick (the slash's, 70° from horizontal). Square corners, no shadows, no gradient used as decoration, no dark mode. The plate refuses the consultancy landing page: no split hero, no feature cards, no stat tiles, no scroll reveals, no contact form, and no depiction of AI.\n\nThere is one authored motion on the page, the plot-in of the hero field (1.8s), followed by the field bending slowly under the pointer. Nothing else moves on scroll or on entry. Under reduced motion, no JavaScript or no WebGL2 the same field at rest is served as an SVG plotted at build.",
+    "overview": "**Creative North Star: \"The Annotated Plate\"**\n\nThe page is one scientific plate read as a descent: a narrow margin column carrying only true measurements, a body of text beside it, and at the top a machine plotting isolines live. Everything is drawn on a single sheet of aged linen. Structure is not a second surface but a darker shade of the same paper: 1px rules, the tinted margin column, hatching. Text is a deep green-black ink, hairlines and minor contours are lichen, and two poles (altitude blue, oxide) belong to the field and reach the page only three times: the mark's slash, the one filled button, and the live/altitude accents (links, focus, selection, live readings).\n\nDensity is that of a printed plate, not a dashboard. Six colour values, one typeface with its optical-size axis, one angle for every hatch and tick (the slash's, 70° from horizontal). Square corners, no shadows, no gradient used as decoration, no dark mode. The plate refuses the consultancy landing page: no split hero, no feature cards, no stat tiles, no scroll reveals, no contact form, and no depiction of AI.\n\nThere is one authored motion on the page, the plot-in of the hero field (1.8s), followed by the field bending slowly under the pointer and the slash of the mark cut once the last contour lands (500ms, foot to top). Two small motions answer the reader, never the scroll: following an in-page link rules off the band it lands on in altitude (400ms, left to right, after the scroll settles), and landing on the refusal redraws its hatch behind a 70deg edge (700ms). Nothing moves on scroll or on entry. Under reduced motion, no JavaScript or no WebGL2 the same field at rest is served as an SVG plotted at build, the slash is never held back, and the arrival rule appears without being drawn.",
     "keyCharacteristics": [
-      "One sheet: linen ground, structure in linen shade, ink for text; the margin tint is derived with color-mix, not a seventh value",
-      "Margin column of measured facts, ruled rows, subgrid alignment; below 48rem the margin becomes a header row and notes become footnotes",
-      "One face (Source Serif 4, opsz + wght), tabular lining figures wherever numbers sit in the margin",
-      "One angle: --slash: 70deg for the mark, the lichen ticks and the hatched refusal field (--hatch: 160deg is its gradient complement)",
-      "Square corners, no shadows, no decorative gradients, one authored motion, no scroll-triggered reveals",
+      "One sheet: linen ground, structure in linen shade, ink for text; the margin tint is derived with `color-mix`, not a seventh value",
+      "Margin column of measured facts, ruled rows, subgrid alignment; band titles open the content column at display size, and the margin beside them holds only real annotations; below 48rem notes become footnotes and empty margins disappear",
+      "One face (Source Serif 4, `opsz` + `wght`), tabular lining figures wherever numbers sit in the margin",
+      "One angle: `--slash: 70deg` for the mark's slash, the lichen ticks and the hatched refusal field; the hatch gradient is `--hatch: calc(180deg - var(--slash))` (110deg), which draws its stripes at 70°",
+      "The mark is Source Serif 4's own O beside a slash redrawn at the page's angle, carried as outlines so it never waits for the web font",
+      "Square corners, no shadows, no decorative gradients, one authored motion plus two answers to a followed link, no scroll-triggered reveals",
       "Every margin number traces to a file, a build step or a public URL and carries a date when it is not computed at build"
     ],
     "rules": [
-      { "name": "The Six Values Rule", "body": "The palette is six hex values and nothing else. A new tone is a color-mix of two of them or it does not exist; there is no dark mode and no alpha-tinted variant.", "section": "colors" },
-      { "name": "The Lichen Is Not Text Rule", "body": "Lichen draws 1px hairlines, ticks and minor contours. It never sets type, not even a caption.", "section": "colors" },
-      { "name": "The Two Poles Rule", "body": "Altitude blue and oxide are the field's temperature poles first. On the page, oxide fills one button and cuts one slash; altitude marks what is live, linked, focused or selected. Neither is a brand wash: no oxide headings, no blue panels.", "section": "colors" },
-      { "name": "The One Face Rule", "body": "Source Serif 4 is the only family. Hierarchy comes from optical size, four weights and italic. No second face, no monospace, no system display face.", "section": "typography" },
-      { "name": "The Tabular Margin Rule", "body": "Anything numeric in the margin column or a readout is set with tabular-nums lining-nums so values line up and change without jitter.", "section": "typography" },
-      { "name": "The One Angle Rule", "body": "Every diagonal on the page is the slash's: --slash: 70deg from the horizontal. CSS gradients that draw stripes use --hatch: 160deg, its perpendicular. No other angle is introduced.", "section": "layout" },
-      { "name": "The Traceable Margin Rule", "body": "Every number in a margin column traces to a file in the repository, a build step or a public URL, and carries a date when it is not computed at build. A value fetched live at build is marked in altitude; a fallback is not. No invented metadata.", "section": "layout" },
-      { "name": "The Footnote Rule", "body": "On a narrow plate the note follows its passage as a footnote. It is never rendered as a label above the heading.", "section": "layout" },
-      { "name": "The One Sheet Rule", "body": "Nothing floats. A region is set apart by a rule, a tint or a hatch drawn in linen shade, never by a shadow or a raised surface.", "section": "elevation" }
+      {
+        "name": "The Six Values Rule",
+        "body": "The palette is six hex values and nothing else. A new tone is a `color-mix` of two of them or it does not exist; there is no dark mode and no alpha-tinted variant on the page. The social card's cartouche is the one recorded exception.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lichen Is Not Text Rule",
+        "body": "Lichen draws 1px hairlines, ticks and minor contours. It never sets type, not even a caption.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Poles Rule",
+        "body": "Altitude blue and oxide are the field's temperature poles first. On the page, oxide fills one button and cuts one slash; altitude marks what is live, linked, focused or selected. Neither is a brand wash: no oxide headings, no blue panels.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Face Rule",
+        "body": "Source Serif 4 is the only family. Hierarchy comes from optical size, four weights and italic. No second face, no monospace, no system display face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Margin Rule",
+        "body": "Anything numeric in the margin column or a readout is set with `tabular-nums lining-nums` so values line up and change without jitter.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Angle Rule",
+        "body": "Every diagonal on the page is the slash's: `--slash: 70deg` from the horizontal. A CSS gradient's angle is measured clockwise from the top and runs perpendicular to its stripes, so the hatch uses `--hatch: calc(180deg - var(--slash))` (110deg) to draw stripes at 70°. No other angle is introduced.",
+        "section": "layout"
+      },
+      {
+        "name": "The Traceable Margin Rule",
+        "body": "Every number in a margin column traces to a file in the repository, a build step or a public URL, and carries a date when it is not computed at build. A value fetched live at build is marked in altitude; a fallback is not. No invented metadata.",
+        "section": "layout"
+      },
+      {
+        "name": "The Footnote Rule",
+        "body": "On a narrow plate the note follows its passage as a footnote. It is never rendered as a label above the heading.",
+        "section": "layout"
+      },
+      {
+        "name": "The One Sheet Rule",
+        "body": "Nothing floats. A region is set apart by a rule, a tint or a hatch drawn in linen shade, never by a shadow or a raised surface.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do draw every structural line in linen shade at 1px; tick band rules with a 1px lichen stroke at the slash's angle.",
-      "Do derive any new tint with color-mix from two of the six values; the margin tint is the precedent.",
-      "Do set every margin number in tabular lining figures, with its label in italic, and mark a build-fetched value with .live in altitude.",
-      "Do keep the two-column plate on every structural element and let the margin become a tinted header row, and notes become footnotes, below 48rem.",
+      "Do derive any new tint with `color-mix` from two of the six values; the margin tint is the precedent.",
+      "Do set every margin number in tabular lining figures, with its label in italic, and mark a build-fetched value with `.live` in altitude.",
+      "Do keep the two-column plate on every structural element; open each band with its title in the content column and leave the margin beside it to real annotations only.",
+      "Do let notes follow their passage as untinted footnotes below 48rem, and hide an empty margin there.",
       "Do use oxide for the mark's slash and the one filled button, and altitude for links, focus, selection and live values.",
+      "Do take the mark from `src/data/mark.ts` (regenerated by `scripts/mark-outlines.py`), never retype it as text or redraw it geometrically, and centre it on the O.",
       "Do serve the field at rest as the build-time SVG under reduced motion, no JavaScript or no WebGL2, with static readouts.",
+      "Do keep hero text as the LCP element, painted before any script; never the canvas.",
       "Do trace every margin value to a file, a build step or a public URL, and date it when it is not computed at build."
     ],
     "donts": [
       "Don't add a seventh colour value, an alpha-tinted variant or a dark mode.",
       "Don't set text in lichen, at any size.",
-      "Don't introduce a border-radius, a box-shadow, a text-shadow or a raised surface.",
+      "Don't introduce a `border-radius`, a `box-shadow`, a `text-shadow` or a raised surface.",
       "Don't use a gradient for decoration; gradients draw the margin column, the hatch and the contour poles only.",
       "Don't introduce a second typeface, a monospace or a system display face; use optical size, weight and italic.",
-      "Don't add scroll-triggered reveals, parallax, cursor effects, transitions on hover or any authored motion beyond the plot-in and the field's pointer response.",
-      "Don't introduce a diagonal at any angle other than 70° (--slash) or its gradient complement --hatch: 160deg.",
+      "Don't add scroll-triggered reveals, parallax, cursor effects, transitions on hover or any authored motion beyond the plot-in, the field's pointer response, the slash cut and the arrival rule and hatch.",
+      "Don't introduce a diagonal at any angle other than the slash's 70° (`--slash`); draw hatching with `--hatch: calc(180deg - var(--slash))`, never a hand-typed gradient angle.",
+      "Don't put a band title back in the margin column, or fill the margin beside a band's opening with anything that is not a measured annotation.",
       "Don't render a margin note above its heading on a narrow plate; it is a footnote.",
       "Don't add eyebrow labels, 01/02/03 numbering, arrow glyphs on buttons, middle-dot meta strings, one accented headline word, stat tiles or feature cards."
     ]

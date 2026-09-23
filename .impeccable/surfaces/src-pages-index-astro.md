@@ -64,7 +64,8 @@ column, path-style anchor nav across the content column. Margin column (left, ~9
 shows four live readouts in 13px caption size: isotherm value, contour n/9, zone,
 probe x/y. Content column, lower-left: h1 "Evidence before intervention." at
 44 to 72px, a lede at 20 to 22px, then the filled oxide button "Book a call" and the
-underlined text link "See what I will not do". The h1 is the LCP element;
+underlined text link "See what I will not do". The LCP element is hero text
+(the h1 on desktop, the h1 or the lede on phones), never the canvas;
 the canvas arrives after idle and intersection.
 
 FORM: the annotated plate with descent, position 1 of the ordered structures
@@ -81,11 +82,12 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
 The plot-in: nine contours landing in order, majors first, each swept left to right
 like a pen, while the margin counts `n 1 / 9` up to `n 9 / 9`. Then the field bends
 around the cursor like isobars around a pressure anomaly and the reading changes.
+When the last contour lands, the mark's slash is cut, foot to top.
 
 ## Constraints
 
 Static Astro 7, no UI framework, plain CSS, OGL for one fullscreen quad, everything
-else vanilla JS. JS budget 60 KB gzipped. h1 is the LCP element. DPR ≤ 1.5, ≤ 40fps,
+else vanilla JS. JS budget 60 KB gzipped. LCP is hero text, never the canvas. DPR ≤ 1.5, ≤ 40fps,
 rAF stopped on tab hide and scroll-out. `prefers-reduced-motion`: no canvas, a
 build-time SVG plot of the same field at rest, static readouts. Works with JS disabled. WCAG AA; lichen never carries text.
 CSP: `script-src 'self' 'unsafe-inline'`, `font-src 'self'`, `form-action 'none'`.

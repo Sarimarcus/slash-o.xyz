@@ -82,7 +82,8 @@ Behaviour:
   measured from the DOM and passed as `uQuiet`.
 
 Loading and budget: the chunk is fetched after `requestIdleCallback` *and* the
-hero intersecting the viewport. The h1 is the LCP element. DPR is capped at 1.5
+hero intersecting the viewport. The LCP element is hero text (the h1 on
+desktop, the h1 or the lede on phones), never the canvas. DPR is capped at 1.5
 and lowered further if the canvas would exceed 3.2 M device pixels. Frames are
 capped at 40fps and stop on tab hide and when the hero scrolls out.
 `prefers-reduced-motion` never initialises the canvas. In its place, and for
@@ -112,6 +113,7 @@ marked before first paint and never download it (about 18 KB gzipped).
 | `PLOT_MS` | `hero.js` | 1800 | Plot-in duration |
 | `POINTER_EASE` | `hero.js` | 0.04 | Probe lag; lower is more sluggish |
 | `ZONE_EASE` | `hero.js` | 0.1 | Per-frame easing of the zone toward scroll |
+| `READOUT_EASE` | `hero.js` | 0.3 | Per-frame easing of the isotherm figure in the margin |
 
 Constants marked "both" exist in `field.glsl` and `noise.js` and must be changed
 together, or the readout stops describing the picture.

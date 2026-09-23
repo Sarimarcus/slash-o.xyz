@@ -54,6 +54,7 @@ export const GET: APIRoute = async () => {
 
   // A cartouche, the way a plate carries its title block: the field is quieted
   // under the mark rather than cropped, as the hero quiets it under the copy.
+  // The 0.88 alpha is the system's one recorded alpha tint (DESIGN.md).
   const card =
     `<rect x="${CARD.x}" y="${CARD.y}" width="${CARD.w}" height="${CARD.h}" fill="${LINEN}" fill-opacity="0.88" stroke="${SHADE}" stroke-width="2"/>` +
     `<g transform="translate(${x} ${y}) scale(${scale})">` +
