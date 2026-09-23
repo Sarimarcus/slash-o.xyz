@@ -5,6 +5,7 @@ import Hero from '@/components/Hero.astro';
 import Band from '@/components/Band.astro';
 import Row from '@/components/Row.astro';
 import Mark from '@/components/Mark.astro';
+import Slides from '@/components/Slides.astro';
 import { SITE, PERSON, isPlaceholder, displayName } from '@/data/site';
 import { HERO, PROBLEMS, WORK, READINGS, SITES, ASKED, HOW, CONTACT, COLOPHON } from '@/data/copy';
 import { OWNED_SITES, readSitemap } from '@/data/sites';
@@ -134,6 +135,7 @@ const asked = ASKED.items.filter(
     <Band id="asked" title={ASKED.title}>
       <p class="intro">{ASKED.intro}</p>
       <Fragment slot="rows">
+        <Slides label={ASKED.title} count={asked.length}>
         {asked.map((q) => (
           <Row>
             <dl class="note" slot="margin">
@@ -146,6 +148,7 @@ const asked = ASKED.items.filter(
             {q.answer.map((p) => <p>{p}</p>)}
           </Row>
         ))}
+        </Slides>
       </Fragment>
     </Band>
 

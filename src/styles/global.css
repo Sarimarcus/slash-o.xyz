@@ -487,6 +487,73 @@ section[id],
   text-wrap: balance;
 }
 
+/* Several questions are set side by side, one on show: a track that snaps to
+   each row, and a ruled row of controls beneath. Without JavaScript the track
+   is not built and the questions stack as ruled rows, as any band's do. Built,
+   each row keeps the plate's two columns on its own, since subgrid cannot
+   reach through the track, and the track is as tall as its longest row, so
+   turning never moves the page. */
+.slides,
+.slides-track {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+.slides--turning .slides-track {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.slides--turning .slides-track::-webkit-scrollbar {
+  display: none;
+}
+.slides-track:focus-visible {
+  outline-offset: -2px;
+}
+.slides--turning .slides-track > .row {
+  grid-column: auto;
+  grid-template-columns: var(--margin-w) minmax(0, 1fr);
+  align-content: start;
+  scroll-snap-align: start;
+}
+.slides--turning .slides-track > .row:last-child > * {
+  padding-bottom: 1.5rem;
+}
+.slides-controls[hidden] {
+  display: none;
+}
+.slides-count {
+  font-style: italic;
+}
+.slides-turn {
+  display: flex;
+  gap: 1rem;
+}
+.slides-button {
+  padding: 0.7rem 1.2rem;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--fs-ui);
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+}
+.slides-button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--linen);
+}
+.slides-button:disabled {
+  color: var(--linen-shade);
+  border-color: var(--linen-shade);
+  cursor: default;
+}
+
 /* ---------- owned sites ---------- */
 
 .site-link {
@@ -788,8 +855,18 @@ html:not(.live-field) .band--void .field {
     border-bottom: 0;
     padding: 0 var(--gutter) 2.5rem;
   }
-  .band > .row {
+  .band > .row,
+  .band > .slides {
     order: 2;
+  }
+  .slides--turning .slides-track > .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .slides--turning .slides-track > .row:last-child > .row-content {
+    padding-bottom: 0.75rem;
+  }
+  .slides--turning .slides-track > .row:last-child > .row-margin {
+    padding-bottom: 1.5rem;
   }
   .meta {
     grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
@@ -848,6 +925,18 @@ html:not(.live-field) .band--void .field {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .readout-note {
+    display: none;
+  }
+}
+
+/* ---------- print: every question on paper, stacked ---------- */
+
+@media print {
+  .slides--turning .slides-track {
+    grid-auto-flow: row;
+    overflow: visible;
+  }
+  .slides-controls {
     display: none;
   }
 }

@@ -219,7 +219,7 @@ The mark is two filled outlines, generated from the self-hosted font by `scripts
 - **Shape:** square (radius 0), 1px border matching the fill.
 - **Primary (`.button`):** oxide fill, linen text, label type (500, 0.9375rem, line-height 1), padding 0.8rem 1.4rem. Appears twice on the page, in the hero and in the working-languages row of `/how`, both "Book a call". Linen on oxide measures 4.6:1.
 - **Hover / Focus:** fill and border go to ink; no transition, no transform. `:focus-visible` uses the global 2px outline, recoloured to ink on the button so it does not read as a link ring.
-- **Secondary (`.text-link`):** a plain underlined link in label type (500, 0.9375rem), underline in altitude, 1px going to 2px on hover. In the hero it reads "See what I will not do" and points at the refusal. There is no ghost or outline button.
+- **Secondary (`.text-link`):** a plain underlined link in label type (500, 0.9375rem), underline in altitude, 1px going to 2px on hover. In the hero it reads "See what I will not do" and points at the refusal. The only outlined buttons are the question slider's step buttons (see below).
 
 ### Links
 - Inherit ink; the underline is altitude, 1px, offset 0.18em; 2px on hover. Owned-site links and the contact email are set in Title display (500, `--fs-h3-display`). The calendar link sits inside a running sentence ("Or book a call directly."), and the LinkedIn profile is a plain link under the role, at body size.
@@ -238,6 +238,11 @@ The mark is two filled outlines, generated from the self-hosted font by `scripts
 
 ### Ruled rows (`.row`)
 - The plate's repeating unit: a subgrid row with one linen-shade hairline across both columns, the note in the margin cell and the passage in the content cell, 1.5rem vertical padding, 0.75rem internal stack, h3 at the top with no extra margin. Empty margin cells collapse to zero padding. In the questions band the row's heading is the italic question.
+
+### Question slider (`.slides`, `Slides.astro`)
+- When the questions band has more than one question, its rows sit side by side in a track that snaps to each, one on show, with a ruled row of controls beneath: the counter ("2 of 4", italic caption, no zero padding) in the margin cell and two word buttons, "Previous" and "Next", in the content cell. The buttons are 1px ink outlines on linen in label type, padding 0.7rem 1.2rem, filled ink with linen text on hover, and in linen shade when there is nowhere further to turn. No arrow glyphs, no dots.
+- The track is as tall as its longest question, so turning never moves the page. A turn scrolls smoothly under `no-preference` and jumps under reduced motion; the counter updates when the scroll settles. Every question stays in the document, so reading order and find-in-page reach the ones off screen.
+- The script builds the slider. Without JavaScript the questions stack as ordinary ruled rows and the controls stay hidden. With one question there is no track and no control at all, which is the case in production until the gated questions are confirmed.
 
 ### Refusal field (`.row--refusal`)
 - A full-width row of excluded terrain: `repeating-linear-gradient(var(--hatch), var(--linen-shade) 0 1px, transparent 1px 9px)` across both columns, margin included, ruled above by the row hairline and below by a 1px linen-shade rule. Its content pads `clamp(3rem, 6vw, 5rem)` vertically. The heading is one sentence at Headline size (max 18ch) opened by the inline mark; its topic, "What I do not do", is visually hidden for assistive technology. The body follows 1.75rem below. Used once on the page; the sentence that follows it sits in a plain row of its own.

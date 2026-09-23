@@ -2,7 +2,8 @@
 
 Static Astro 7 site for slash-o.xyz, one page. English only, no client-side
 framework, no third-party script, no analytics. Plain CSS. The only JavaScript that
-ships is the hero field (OGL, one quad), the nav highlighter and a clock.
+ships is the hero field (OGL, one quad), the nav highlighter, a clock and the
+question slider.
 
 ## Commands
 
