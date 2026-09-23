@@ -67,9 +67,9 @@ evidence, not a feature.
 
 ## Capabilities and Constraints
 
-- One page with anchor navigation, seven bands: hero, what usually goes wrong, where
+- One page with anchor navigation, eight bands: hero, what usually goes wrong, where
   I am useful (closing with its mirror, "Where I am not"), four readings from recent
-  work, I still run my own sites, how I work, contact.
+  work, I still run my own sites, questions I get asked, how I work, contact.
 - Contact is an email link and a calendar link. No form (CSP and product decision).
 - A social card at `/og.png`, 1200x630, rasterised at build from the same field
   the hero plots. The page exists to be forwarded, and a forwarded link renders as

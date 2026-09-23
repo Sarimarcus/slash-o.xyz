@@ -2,7 +2,8 @@
  * Every word on the page, in one place.
  *
  * Voice: sentence case, active voice, plain verbs, no filler, no superlatives.
- * Agents are named by role, never by vendor. Numbers come from data files, not
+ * Agents are named by role, never by vendor. A tool recommended in an answer
+ * (ASKED) may be named, because the recommendation is the answer. Numbers come from data files, not
  * from here. Strings starting with `TODO(content)` are placeholders.
  */
 
@@ -11,6 +12,7 @@ export const NAV = [
   { href: '/#work', label: '/work' },
   { href: '/#readings', label: '/readings' },
   { href: '/#sites', label: '/sites' },
+  { href: '/#asked', label: '/asked' },
   { href: '/#how', label: '/how' },
   { href: '/#contact', label: '/contact' },
 ] as const;
@@ -148,6 +150,146 @@ export const SITES = {
   ],
   marginUrls: 'URLs in sitemap',
   marginLastmod: 'last published',
+} as const;
+
+export interface Asked {
+  /** When it was asked, ISO: a day, or a month when the day is not known. */
+  on: string;
+  /** Who asked, by role, never by name. */
+  by: string;
+  /** On the page. Four at most, so the band reads as a sample, not an FAQ. */
+  show: boolean;
+  /** Olivier has checked `on` and `by`. Unconfirmed items never reach production. */
+  confirmed: boolean;
+  question: string;
+  answer: string[];
+}
+
+export const ASKED = {
+  title: 'Questions I get asked',
+  intro:
+    'Asked by people doing the work, answered the way I would answer them in a room. Each one is dated and attributed by role.',
+  marginOn: 'asked on',
+  marginBy: 'asked by',
+  /** Production shows an item only when it is shown and confirmed. */
+  items: [
+    {
+      on: '2026-09-23',
+      by: 'an SEO analyst',
+      show: true,
+      confirmed: true,
+      question: 'How do I analyse a lot of Apache logs with AI?',
+      answer: [
+        'Not by sending the logs to a chat model. It reads every line as tokens, so the bill grows with the log, and a month of access logs is millions of lines that a parser reads exactly, for nothing. Filter to the crawlers you care about and confirm they are who they say they are. Then count hits, status codes and response times by URL. None of that needs a model.',
+        'The model is useful where the rules run out: deciding which section or page type a URL belongs to when the URL patterns stopped being consistent years ago. Ask that once per distinct URL, not once per line, and use a model built for that kind of judgment, such as TypeSafe’s Jev, which returns a label and a probability instead of writing text. Thousands of questions instead of millions, and answers that code can count.',
+        'Then the question that was asked in the first place has an answer you can check: where the crawl budget goes, by section, and how much of it lands on pages nobody should be crawling.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, confirm the month and the asker.
+      on: '2026-07',
+      by: 'the head of SEO at a publisher',
+      show: true,
+      confirmed: false,
+      question: 'How do we find pages that compete with each other in search?',
+      answer: [
+        'Start from Search Console, not from the content. Cannibalisation shows up as several of your URLs taking impressions for the same query, with the one Google ranks changing from week to week. Group by query, keep the queries where two or more URLs share the impressions, and code has built the list for nothing.',
+        'Content similarity comes second. Embeddings find the pairs of pages that say the same thing, including across titles that were bought years apart and never compared. A model judges the borderline pairs: the same intent, or two angles on one subject? Two angles can both stay.',
+        'A person decides which page is canonical and what happens to the other: merge, redirect, or rewrite it toward a different query. Then watch the query group, not the page, because the point was that one of them wins.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, confirm the month and the asker.
+      on: '2026-06',
+      by: 'the CTO of a media group',
+      show: true,
+      confirmed: false,
+      question: 'Should we let coding agents work on our legacy CMS?',
+      answer: [
+        'Yes, once you know how it behaves today. Record the baseline first: which tests exist and pass, how long a build takes, the error rates in production, what a page costs to render. It is a short piece of work next to what comes after it.',
+        'Without it, the first incident after the agents arrive gets blamed on the agents and nobody can prove otherwise. Or it gets blamed on the old code, and nobody can prove that either.',
+        'Then give the agents narrow jobs whose result can be checked: tests for code that has none, dependency upgrades behind a passing build. Leave the parts nobody understands for last. An agent will change them with confidence.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, confirm the month and the asker.
+      on: '2026-08',
+      by: 'the CEO of a digital publisher',
+      show: true,
+      confirmed: false,
+      question: 'Can AI tell us why our traffic dropped?',
+      answer: [
+        'Not on its own. A drop has many candidate causes: a deploy, a template change, the consent banner, a migration, an algorithm update, a competitor, the season. A model can line them up against the chart, but only the ones somebody recorded, with a date.',
+        'So the first job is the record: what changed, where and when, from deploy logs, the CMS, the tag manager’s history and Search Console. Then split the drop by template, section and query group. A real cause shows up in one slice before it shows up in the total.',
+        'The model is useful for reading that timeline next to the slices and saying which changes line up. It proposes, and the slices confirm it or do not.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, confirm the month and the asker.
+      on: '2026-05',
+      by: 'an editor-in-chief',
+      show: false,
+      confirmed: false,
+      question: 'Can we use AI to rewrite our old articles for SEO?',
+      answer: [
+        'Start with which old articles still earn clicks. Take twelve months of Search Console data by URL before anything changes. The pages that earn traffic are the ones a rewrite can lose it on.',
+        'Sort the rest: pages worth updating because the facts changed, pages worth merging into a stronger one, pages worth removing. A model can draft the update. An editor signs it, because the article carries your name.',
+        'Roll it out in batches and leave a comparable group of pages alone. Compare clicks after the next crawl. Without the untouched group, a seasonal lift looks like a result.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, confirm the month and the asker.
+      on: '2026-07',
+      by: 'an SEO lead',
+      show: false,
+      confirmed: false,
+      question: 'Can an LLM write our meta titles and descriptions at scale?',
+      answer: [
+        'Yes, the drafts. A model writes a reasonable title from the article, for the whole archive, quickly. The work is in what runs before anything publishes: a length check, a check that no two pages share a title, and a check that the title says what the article says.',
+        'The last check is a judgment, and a model such as TypeSafe’s Jev can make it with a probability attached, so the doubtful ones go to an editor instead of to the page.',
+        'Then test before rolling out. Change a sample, leave a comparable sample alone, and compare click-through over a few weeks. Google rewrites many titles anyway, so also count how often yours are shown as written.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, confirm the month and the asker.
+      on: '2026-08',
+      by: 'an engineering manager',
+      show: false,
+      confirmed: false,
+      question: 'How do we review code that agents wrote when there is ten times more of it?',
+      answer: [
+        'Stop reviewing every line and review what checks the lines: tests, type checks, a build that comes out the same twice, rules on what a change may touch. If those are weak, code arrives faster than anyone can read it and review becomes a formality.',
+        'People keep what a gate cannot judge: the design, the data model, anything that touches money, consent or security. Keep each change small enough to read in one sitting. Ask the agent for that and it will comply.',
+        'That is how my own sites run.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, confirm the month and the asker.
+      on: '2026-09',
+      by: 'a head of platform',
+      show: false,
+      confirmed: false,
+      question: 'Can AI detect incidents in our logs and fix them automatically?',
+      answer: [
+        'Detection first, and without a model. Count what matters by the minute: error rates, latency, status codes by route, against the same hour last week. A threshold on those fires when something is wrong, and you can measure how often it fires for nothing. Know that number before you automate anything.',
+        'The model helps after the alert. It reads the log lines around the spike, lines them up with recent deploys and drafts the incident note, which spares the engineer on call the first round of reading.',
+        'Respond automatically only with actions that are cheap to undo: a rollback, a cache purge, more capacity. A person decides everything else.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, confirm the month and the asker.
+      on: '2026-06',
+      by: 'a chief product officer',
+      show: false,
+      confirmed: false,
+      question: 'Can an LLM answer questions about our analytics so editors stop waiting for the data team?',
+      answer: [
+        'Only on top of definitions that are written down. Ask two analysts what a session, an active subscriber or a page view means on your sites and you may get two answers. A model gives a third, confidently, and a different one the next day.',
+        'So the work comes first: a small set of metrics, each defined once, in queries the data team owns. The model’s job is then narrow. It picks the metric and the filters that fit the question and hands them to the query. It selects, it does not calculate.',
+        'Show the query with every answer. An editor who can see what was counted can tell when the question was misunderstood.',
+      ],
+    },
+  ] satisfies Asked[],
 } as const;
 
 export const HOW = {

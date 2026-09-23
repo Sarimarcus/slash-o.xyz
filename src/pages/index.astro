@@ -5,7 +5,7 @@ import Hero from '@/components/Hero.astro';
 import Band from '@/components/Band.astro';
 import Row from '@/components/Row.astro';
 import { SITE, PERSON, isPlaceholder, displayName } from '@/data/site';
-import { HERO, PROBLEMS, WORK, READINGS, SITES, HOW, CONTACT, COLOPHON } from '@/data/copy';
+import { HERO, PROBLEMS, WORK, READINGS, SITES, ASKED, HOW, CONTACT, COLOPHON } from '@/data/copy';
 import { OWNED_SITES, readSitemap } from '@/data/sites';
 
 // Build-time facts. Sitemaps are fetched now, on the build machine.
@@ -32,6 +32,9 @@ const ph = (v: string) => import.meta.env.DEV && isPlaceholder(v);
 const bookHref = hasCalendar ? PERSON.calendar : hasEmail ? `mailto:${PERSON.email}` : '#contact';
 const notUseful = WORK.notUseful.items.filter((i) => !isPlaceholder(i));
 const fmt = new Intl.NumberFormat('en-GB');
+const asked = ASKED.items.filter(
+  (q) => q.show && (q.confirmed || import.meta.env.DEV),
+);
 ---
 
 <Base title={SITE.name}>
@@ -124,6 +127,24 @@ const fmt = new Intl.NumberFormat('en-GB');
         <Row>
           {SITES.factory.map((p) => <p>{p}</p>)}
         </Row>
+      </Fragment>
+    </Band>
+
+    <Band id="asked" title={ASKED.title}>
+      <p class="intro">{ASKED.intro}</p>
+      <Fragment slot="rows">
+        {asked.map((q) => (
+          <Row>
+            <dl class="note" slot="margin">
+              <dt>{ASKED.marginOn}</dt>
+              <dd class:list={{ placeholder: !q.confirmed }}><time datetime={q.on}>{q.on}</time></dd>
+              <dt>{ASKED.marginBy}</dt>
+              <dd class:list={{ placeholder: !q.confirmed }}>{q.by}</dd>
+            </dl>
+            <h3>{q.question}</h3>
+            {q.answer.map((p) => <p>{p}</p>)}
+          </Row>
+        ))}
       </Fragment>
     </Band>
 
