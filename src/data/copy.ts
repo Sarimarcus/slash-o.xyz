@@ -289,6 +289,84 @@ export const ASKED = {
         'Show the query with every answer. An editor who can see what was counted can tell when the question was misunderstood.',
       ],
     },
+    {
+      // TODO(content): proposed by Claude, question and asker both. Confirm you were asked this.
+      on: '2026-07',
+      by: 'the CEO of a publisher',
+      show: false,
+      confirmed: false,
+      question: 'Should we block AI crawlers from our content?',
+      answer: [
+        'Decide from the logs, not from the news. Count which AI crawlers fetch your pages, how often and in which sections, and set that against the readers each one sends back. That ratio is the decision.',
+        'Blocking is a line in robots.txt for the crawlers that respect it, and a rule at the edge for the ones that do not. Separate the crawlers that collect pages to train a model from the ones that fetch a page to answer a user’s question. Vendors often name them differently, and blocking the second kind can cost you the citation.',
+        'If the content is worth licensing, the same logs are your evidence of what was taken.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, question and asker both. Confirm you were asked this.
+      on: '2026-08',
+      by: 'a head of audience',
+      show: false,
+      confirmed: false,
+      question: 'Are AI answers in search taking our traffic?',
+      answer: [
+        'Perhaps, and it can be measured before anyone argues about it. Search Console gives impressions and clicks by query. If impressions hold while click-through falls on the queries that now get an AI answer, that is the pattern. If impressions fall too, it is something else.',
+        'Split the queries by what they ask for: a fact, which an answer box can settle, or a story, a review or a guide, which it usually cannot. Sorting tens of thousands of queries that way is a judgment code cannot make and a model such as TypeSafe’s Jev can, once per query.',
+        'Then you know which part of the archive is exposed, and the editorial plan can follow the numbers rather than the headlines.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, question and asker both. Confirm you were asked this.
+      on: '2026-05',
+      by: 'a private-equity operating partner',
+      show: false,
+      confirmed: false,
+      question: 'How do we know if coding agents are making the team faster?',
+      answer: [
+        'Not from how much code they write. Measure what the team delivered before the agents arrived: the time from ticket to production, how often a deploy fails, how long recovery takes, how much rework follows a release. Then the same numbers after.',
+        'Some of them may look worse at first. More changes arrive and review becomes the queue. That is a finding, not a failure: it shows where the gates are missing.',
+        'A team that ships more code and fails more deploys has not become faster.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, question and asker both. Confirm you were asked this.
+      on: '2026-09',
+      by: 'an engineering manager',
+      show: false,
+      confirmed: false,
+      question: 'What should an agent never be allowed to do in our codebase?',
+      answer: [
+        'Anything it cannot undo and nobody would review: run migrations against production data, read or change secrets, change the rules it is checked by. Those stay with people, enforced by permissions rather than by instructions.',
+        'The last one matters most. An agent that can edit its own tests or loosen a lint rule can make any change pass. Protect the gates the way you protect the main branch: a change to them needs a person to approve it.',
+        'Everything else depends on how much you can check afterwards, and that is a property of your tests, not of the agent.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, question and asker both. Confirm you were asked this.
+      on: '2026-06',
+      by: 'a data protection officer',
+      show: false,
+      confirmed: false,
+      question: 'Can an LLM check our consent and tag setup across all our sites?',
+      answer: [
+        'The checking is mostly not a language problem. A headless browser can load each template on each site, refuse consent, and record every request that fires anyway. That list is exact, repeatable, and the evidence a regulator would ask for.',
+        'The model helps with what the list means: which of the domains on it serve advertising, analytics or plain content delivery, and whether a vendor’s declared purpose matches what its script does. That is classification with a probability, and a person reviews the uncertain cases.',
+        'Run it on a schedule. A tag setup drifts every time someone adds a partner, and the check is only worth something if it runs after the change.',
+      ],
+    },
+    {
+      // TODO(content): proposed by Claude, question and asker both. Confirm you were asked this.
+      on: '2026-04',
+      by: 'a chief revenue officer',
+      show: false,
+      confirmed: false,
+      question: 'Can AI tell us how much of our traffic is bots?',
+      answer: [
+        'Part of it is simple. Declared crawlers name themselves, and the large ones can be confirmed by their network. The problem is traffic that claims to be a browser. Start with the signals code can compute from logs and analytics: sessions with no scrolling, pages opened faster than anyone reads, bursts from one network, paths no reader would follow.',
+        'A model can then score the sessions the rules cannot settle, with a probability. Where to set the threshold is a business decision: how much you are willing to remove from the audience you sell.',
+        'Report the figure with its uncertainty. An audience number with a stated margin is worth more to a buyer than a precise one nobody believes.',
+      ],
+    },
   ] satisfies Asked[],
 } as const;
 
