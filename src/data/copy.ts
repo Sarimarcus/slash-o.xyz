@@ -20,7 +20,7 @@ export const NAV = [
 export const HERO = {
   h1: 'Evidence before intervention.',
   lede:
-    'I audit the engineering of media groups before anyone changes it, coding agents included. A measured baseline first, because the obvious fixes cost traffic and nobody can prove it afterwards. Below is what I look for, what I found in my own sites, and what I will not do. Read it and decide whether it is worth a conversation.',
+    'I audit the engineering of media groups before anyone changes it, coding agents included. A measured baseline first, because the obvious fixes cost traffic and nobody can prove it afterwards. Below is what I look for, what I have tried on my own sites, and what I will not do. Read it and decide whether it is worth a conversation.',
   primary: 'Book a call',
   secondary: 'See what I will not do',
   readoutNote: 'A live reading of the field under the cursor. On touch, the centre of the plate.',
@@ -110,7 +110,7 @@ export const WORK = {
     intro: 'The same honesty in the other direction. If your situation is one of these, a conversation wastes your time and mine.',
     items: [
       'Building the fix for a problem you paid me to find. That one is a rule; there is a section on it below.',
-      'Anything that competes with Webedia Group, where I am employed. I advise in a personal capacity and I keep that line clean.',
+      'Work that competes with Webedia Group, where I am employed.',
       'TODO(content): one or two more, in your words \u2014 the group size, the stage, or the kind of work you would turn down.',
     ],
   },
@@ -418,7 +418,7 @@ export const COLOPHON = {
     "The plate is Humboldt and Bonpland's Tableau physique des Andes (1807): measure a baseline, draw isolines from it, theorise after. The field above is computed, not drawn, from the same method.",
     'The mark is the O of Source Serif 4 at its largest optical size, with the slash redrawn at 70 degrees, the one angle every hatch and tick on this page shares.',
     'Built with coding agents under the same discipline as the sites above: build and typecheck as hard gates in CI, a design detector run before shipping.',
-    '{kb} KB transferred before the hero chunk is requested. Commit {commit}, built {date}.',
+    '{kb} KB transferred before the animated field is requested. Commit {commit}, built {date}.',
   ],
   source: 'Source on GitHub',
 } as const;
@@ -431,6 +431,6 @@ export const NOT_FOUND = {
   ],
   measuredAs: 'measured as',
   fallbackPath: 'this address',
-  back: 'Back to the plate',
+  back: 'Back to slash-o.xyz',
   readoutNote: 'Readings taken at the requested address. All instruments agree.',
 } as const;
