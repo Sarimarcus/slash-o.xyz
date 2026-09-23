@@ -598,8 +598,13 @@ html:not(.live-field) .band--void .field {
 .person {
   margin-top: 2rem;
 }
-.person .role {
+.person .role,
+.person .profile {
   display: block;
+}
+.person .profile {
+  margin-top: 0.35rem;
+  width: fit-content;
 }
 
 .colophon {

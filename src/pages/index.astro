@@ -196,11 +196,12 @@ const asked = ASKED.items.filter(
         <p class:list={['pending', { placeholder: ph(PERSON.email) }]}>{CONTACT.emailPending}</p>
       )}
       {hasCalendar && (
-        <p>{CONTACT.calendarLead} <a href={PERSON.calendar}>Book a first call</a>.</p>
+        <p>{CONTACT.calendarBefore} <a href={PERSON.calendar}>{CONTACT.calendarLink}</a> {CONTACT.calendarAfter}</p>
       )}
       <p class="person">
         <strong class:list={{ placeholder: ph(PERSON.surname) }}>{displayName()}</strong>
         <span class="role">{PERSON.role}</span>
+        <a class="profile" href={PERSON.linkedin} rel="me">{CONTACT.linkedin}</a>
       </p>
     </Band>
   </main>

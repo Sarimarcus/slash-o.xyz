@@ -33,8 +33,7 @@ export const SITE = {
 
 export const PERSON = {
   firstName: 'Olivier',
-  /** TODO(content): surname. */
-  surname: 'TODO(content): surname',
+  surname: 'Depiesse',
   role: 'Engineering Manager at Webedia Group, Madrid',
   city: 'Madrid',
   /** IANA zone for the contact band's clock. */
@@ -44,6 +43,8 @@ export const PERSON = {
   /** Booking page. The primary button points here; email is the fallback. */
   calendar: 'https://calendar.proton.me/bookings#Z2PrOwwdoCL1ehvCZ_DK88_3T2FkLV756Yuj8DU3Q-Y=',
   languages: ['English', 'French', 'Spanish'],
+  /** Public profile, linked from the contact band with rel="me". */
+  linkedin: 'https://www.linkedin.com/in/olivierdepiesse/',
 } as const;
 
 /** True while a value is still a placeholder. */

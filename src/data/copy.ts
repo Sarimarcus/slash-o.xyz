@@ -400,7 +400,11 @@ export const CONTACT = {
   title: 'Contact',
   body:
     'Write to me with the group, the titles, and what you think is wrong. I reply within two working days. If I cannot help, I will say so, and I will try to tell you who can.',
-  calendarLead: 'Or book a call directly.',
+  /** "Or {link} directly.": the calendar link sits inside the sentence. */
+  calendarBefore: 'Or',
+  calendarLink: 'book a call',
+  calendarAfter: 'directly.',
+  linkedin: 'LinkedIn',
   marginLabel: 'local time',
   marginStatic: 'Central European Time',
   /** Shown in production while the address is still a placeholder. */
