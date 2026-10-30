@@ -402,6 +402,9 @@ export const CONTACT = {
   calendarLink: 'book a call',
   calendarAfter: 'directly.',
   linkedin: 'LinkedIn',
+  x: 'X',
+  linkedinLabel: 'LinkedIn profile',
+  xLabel: 'X profile',
   marginLabel: 'local time',
   marginStatic: 'Central European Time',
   /** Shown in production while the address is still a placeholder. */

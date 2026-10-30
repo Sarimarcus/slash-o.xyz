@@ -207,7 +207,10 @@ const asked = ASKED.items.filter(
       <p class="person">
         <strong class:list={{ placeholder: ph(PERSON.surname) }}>{displayName()}</strong>
         <span class="role">{PERSON.role}</span>
-        <a class="profile" href={PERSON.linkedin} rel="me">{CONTACT.linkedin}</a>
+        <span class="profiles">
+          <a href={PERSON.linkedin} rel="me" aria-label={CONTACT.linkedinLabel}>{CONTACT.linkedin}</a>
+          <a href={PERSON.x} rel="me" aria-label={CONTACT.xLabel}>{CONTACT.x}</a>
+        </span>
       </p>
     </Band>
   </main>

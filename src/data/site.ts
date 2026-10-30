@@ -45,6 +45,8 @@ export const PERSON = {
   languages: ['English', 'French', 'Spanish'],
   /** Public profile, linked from the contact band with rel="me". */
   linkedin: 'https://www.linkedin.com/in/olivierdepiesse/',
+  /** Public X profile, linked beside LinkedIn with rel="me". */
+  x: 'https://x.com/carismarus',
 } as const;
 
 /** True while a value is still a placeholder. */

@@ -779,12 +779,18 @@ html:not(.live-field) .band--void .field {
   margin-top: 2rem;
 }
 .person .role,
-.person .profile {
+.person .profiles {
   display: block;
 }
-.person .profile {
+.person .profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
   margin-top: 0.35rem;
-  width: fit-content;
+}
+.person .profiles a {
+  padding: 0.4rem 0.375rem;
+  margin: -0.4rem -0.375rem;
 }
 
 .colophon {

@@ -222,7 +222,7 @@ The mark is two filled outlines, generated from the self-hosted font by `scripts
 - **Secondary (`.text-link`):** a plain underlined link in label type (500, 0.9375rem), underline in altitude, 1px going to 2px on hover. In the hero it reads "See what I will not do" and points at the refusal. The only outlined buttons are the question slider's step buttons (see below).
 
 ### Links
-- Inherit ink; the underline is altitude, 1px, offset 0.18em; 2px on hover. Owned-site links and the contact email are set in Title display (500, `--fs-h3-display`). The calendar link sits inside a running sentence ("Or book a call directly."), and the LinkedIn profile is a plain link under the role, at body size.
+- Inherit ink; the underline is altitude, 1px, offset 0.18em; 2px on hover. Owned-site links and the contact email are set in Title display (500, `--fs-h3-display`). The calendar link sits inside a running sentence ("Or book a call directly."), and the LinkedIn and X profiles are plain links side by side under the role, at body size, 0.5rem apart with padded tap targets, wrapping on narrow screens.
 
 ### Navigation (`.path-nav`)
 - Path-style anchor labels (the fragment paths themselves: `/problems /work /readings /sites /asked /how /contact`) in label type, no underline at rest, underline on hover, `white-space: nowrap`, flex-wrapped with a 0.25rem by 1.5rem gap, 0.9rem vertical padding. The band in view is marked with `aria-current="true"` and rendered in oxide with an oxide underline. Without JavaScript the nav is a plain list of anchors. Below 48rem it spreads across one line (see Layout).
