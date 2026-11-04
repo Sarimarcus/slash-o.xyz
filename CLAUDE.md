@@ -27,7 +27,7 @@ Node 22+ (`.nvmrc`), npm.
   voice, plain verbs, no superlatives, no "AI-powered", agents named by role.
 - **`src/data/site.ts`** is the single source of truth for the canonical origin,
   the site's name and the person. `astro.config.mjs` imports `SITE_URL` from it.
-- **`src/data/sites.ts`** fetches the three owned sites' sitemaps at build time and
+- **`src/data/sites.ts`** fetches the four owned sites' sitemaps at build time and
   falls back to recorded values if a fetch fails.
 - **`src/integrations/provenance.mjs`** fills `%%COMMIT%%` and `%%PAGE_KB%%` in the
   colophon after build. The page must keep both tokens exactly once.

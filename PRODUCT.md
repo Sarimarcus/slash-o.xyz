@@ -49,7 +49,7 @@ recommends, and he will not take the implementation contract that follows his ow
 findings. The refusals are the selling point, and they are on the page so a reader
 can rule himself out without asking.
 
-He develops with coding agents as his primary method, and runs three content sites
+He develops with coding agents as his primary method, and runs four content sites
 through an agent-operated factory with its own quality gates. That practice is
 evidence, not a feature.
 
@@ -109,14 +109,14 @@ evidence, not a feature.
 
 ## Evidence on Hand
 
-- Three owned and operated sites, publicly checkable: explorecordoba.com (573 URLs
-  in sitemap, 2026-09-16), exploregranada.org (519), darkskiesatlas.com (638).
+- Four owned and operated sites, publicly checkable: explorecordoba.com (573 URLs
+  in sitemap, 2026-09-16), exploregranada.org (519), darkskiesatlas.com (638), cadizexperience.com (246 URLs, 2026-11-04).
 - The content factory that runs them, at `~/dev/projects/content-sites-factory`
   (GitHub: Sarimarcus/content-sites-factory): 2,112 commits, 16 named agents with
   written briefs, 54 validator/audit/lint scripts, 14 commit-and-push gates, 10
   test suites that test the validators, a build-determinism check. Measured
   2026-09-16.
-- The "four readings" band draws on these three sites only, never on Webedia
+- The "four readings" band draws on these four sites only, never on Webedia
   properties. Figures are not yet supplied; they ship as `TODO(content)`.
 - No testimonials, no client logos, no press. None are to be fabricated.
 - The site's own build is evidence: commit SHA, CI gates and transferred bytes are

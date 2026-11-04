@@ -1,5 +1,5 @@
 /**
- * The three owned sites, with sitemap counts fetched at build time.
+ * The four owned sites, with sitemap counts fetched at build time.
  *
  * `astro build` runs this on the build machine, so the margin of the sites band
  * reports what each sitemap said on the day the page was built. If a fetch
@@ -33,6 +33,12 @@ export const OWNED_SITES: OwnedSite[] = [
     url: 'https://www.darkskiesatlas.com',
     what: 'Where the sky is still dark, and how to get there',
     fallback: { urls: 638, lastmod: '2026-09-16' },
+  },
+  {
+    domain: 'cadizexperience.com',
+    url: 'https://www.cadizexperience.com',
+    what: 'Cádiz, in English, for people who are actually going',
+    fallback: { urls: 246, lastmod: '2026-11-04' },
   },
 ];
 

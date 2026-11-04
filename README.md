@@ -31,7 +31,7 @@ Components hide a fake value rather than print it (`isPlaceholder()` in
 
 - `src/data/copy.ts`: every word on the page.
 - `src/data/site.ts`: identity, person, canonical origin.
-- `src/data/sites.ts`: the three owned sites. Sitemap URL counts and last-modified
+- `src/data/sites.ts`: the four owned sites. Sitemap URL counts and last-modified
   dates are fetched at build time; if a fetch fails the recorded fallback is used
   and the number is not marked live (blue) in the margin.
 - `src/integrations/provenance.mjs`: fills the colophon after build with the commit
