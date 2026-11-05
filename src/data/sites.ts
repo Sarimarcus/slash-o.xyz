@@ -64,6 +64,9 @@ interface Snapshot {
   >;
 }
 
+// JSON imports widen tuples to arrays; the script writes this file, so assert its shape once.
+const SNAPSHOT = snapshot as unknown as Snapshot;
+
 export interface TrafficLine {
   value: number;
   key: 'visits' | 'impressions' | 'clicks' | 'aiReferrals';
@@ -78,7 +81,7 @@ export interface TrafficGroup {
 
 /** Lines grouped by the window they measure, usually one group. */
 export function trafficFor(domain: string): TrafficGroup[] {
-  const s = (snapshot as Snapshot).sites[domain];
+  const s = SNAPSHOT.sites[domain];
   if (!s) return [];
   const groups = new Map<string, TrafficGroup>();
   const add = (w: { from: string; to: string } | undefined, key: TrafficLine['key'], value?: number) => {
@@ -104,7 +107,7 @@ export interface TrafficDay {
 
 /** The GA4 window day by day, or null when the snapshot has none for the site. */
 export function dailyFor(domain: string): { from: string; to: string; days: TrafficDay[] } | null {
-  const s = (snapshot as Snapshot).sites[domain];
+  const s = SNAPSHOT.sites[domain];
   if (!s?.ga4 || !s.daily?.length) return null;
   return {
     from: s.ga4.from,

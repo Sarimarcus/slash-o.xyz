@@ -475,6 +475,38 @@
         "to": "2026-11-01"
       }
     },
-    "cadizexperience.com": {}
+    "cadizexperience.com": {
+      "impressions": 435,
+      "clicks": 15,
+      "gsc": {
+        "property": "www.cadizexperience.com",
+        "from": "2026-10-28",
+        "to": "2026-11-04"
+      },
+      "visits": 20,
+      "aiReferrals": 0,
+      "daily": [
+        [
+          "2026-11-02",
+          2,
+          0
+        ],
+        [
+          "2026-11-03",
+          9,
+          0
+        ],
+        [
+          "2026-11-04",
+          9,
+          0
+        ]
+      ],
+      "ga4": {
+        "property": "properties/561427331",
+        "from": "2026-11-02",
+        "to": "2026-11-04"
+      }
+    }
   }
 }

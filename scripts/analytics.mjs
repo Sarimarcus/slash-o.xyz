@@ -22,8 +22,8 @@
  *   - impressions  GSC web search impressions
  *   - clicks       GSC web search clicks
  *
- * A source prints only when its data covers every day of the window, so a new
- * site shows nothing rather than a few days under a 28-day label. A source
+ * A site too new for the full window shows every day it has instead, up to the
+ * dashboard's latest day, and the page labels it with its real day count. A source
  * missing today keeps its previous, dated figures for MAX_AGE_DAYS, then drops.
  */
 import { execFileSync } from 'node:child_process';
@@ -66,17 +66,22 @@ function ownedDomains() {
 const sum = (rows, col, from, to) =>
   rows.filter((r) => inWindow(r[0], from, to)).reduce((n, r) => n + (r[col] ?? 0), 0);
 
-function gscFigures(site, from, to) {
+/** `partial` lets the window start after `from`, at the series' first day. */
+function gscFigures(site, from, to, partial = false) {
   const t = site.totals;
-  if (!t?.daily?.length || !t.historyStart || t.historyStart > from) return null;
+  if (!t?.daily?.length || !t.historyStart) return null;
+  if (t.historyStart > from && !partial) return null;
+  if (partial) from = t.historyStart > from ? t.historyStart : from;
   if ((t.missingDates ?? []).some((d) => inWindow(d, from, to))) return null;
   if (t.daily.at(-1)[0] < to) return null;
-  return { impressions: sum(t.daily, 2, from, to), clicks: sum(t.daily, 1, from, to) };
+  return { from, to, impressions: sum(t.daily, 2, from, to), clicks: sum(t.daily, 1, from, to) };
 }
 
-function gaFigures(ga, from, to) {
+function gaFigures(ga, from, to, partial = false) {
   if (!ga?.fetched || ga.thresholded || ga.sampled || !ga.daily?.length) return null;
-  if (ga.daily[0][0] > from || ga.daily.at(-1)[0] < to) return null;
+  if (ga.daily[0][0] > from && !partial) return null;
+  if (partial && ga.daily[0][0] > from) from = ga.daily[0][0];
+  if (ga.daily.at(-1)[0] < to) return null;
   if ((ga.uncoveredDates ?? []).some((d) => inWindow(d, from, to))) return null;
   const ai = ga.channels?.names?.indexOf(AI_CHANNEL) ?? -1;
   // Channel rows are [date, ...one column per channel name].
@@ -90,6 +95,8 @@ function gaFigures(ga, from, to) {
     daily.push([d, visitsByDay.get(d) ?? 0, aiByDay.get(d) ?? 0]);
   }
   return {
+    from,
+    to,
     visits: sum(ga.daily, 1, from, to),
     aiReferrals: ai < 0 ? 0 : sum(ga.channels.daily ?? [], ai + 1, from, to),
     daily,
@@ -140,17 +147,27 @@ try {
 
     const to = site?.provisionalFrom ? addDays(site.provisionalFrom, -1) : null;
     const from = to ? addDays(to, -(WINDOW_DAYS - 1)) : null;
-    const g = site && gscFigures(site, from, to);
-    const a = ga && gaFigures(ga, from, to);
+    // A site too new for a full final window shows every day it has, up to the
+    // dashboard's latest (provisional) day; the label counts the real days.
+    const g = site && (gscFigures(site, from, to) ?? gscFigures(site, from, site.asOf, true));
+    const a = ga && site && (gaFigures(ga, from, to) ?? gaFigures(ga, from, site.asOf, true));
 
-    if (g) Object.assign(out, g, { gsc: { property: o.domain, from, to } });
+    if (g) {
+      const { from: gFrom, to: gTo, ...figures } = g;
+      Object.assign(out, figures, { gsc: { property: o.domain, from: gFrom, to: gTo } });
+    }
     else if (fresh(prev.gsc)) Object.assign(out, { impressions: prev.impressions, clicks: prev.clicks, gsc: prev.gsc });
-    if (a) Object.assign(out, a, { ga4: { property: ga.property, from, to } });
+    if (a) {
+      const { from: aFrom, to: aTo, ...figures } = a;
+      Object.assign(out, figures, { ga4: { property: ga.property, from: aFrom, to: aTo } });
+    }
     else if (fresh(prev.ga4)) {
       Object.assign(out, { visits: prev.visits, aiReferrals: prev.aiReferrals, daily: prev.daily, ga4: prev.ga4 });
     }
 
-    const note = (got, name, kept) => (got ? '' : kept ? `${name} kept from ${kept.to}` : `${name} has no full window`);
+    const note = (got, name, kept) =>
+      got ? (got.from !== from || got.to !== to ? `${name} partial, ${got.from} to ${got.to}` : '')
+        : kept ? `${name} kept from ${kept.to}` : `${name} has no data`;
     const notes = [note(g, 'GSC', out.gsc), note(a, 'GA4', out.ga4)].filter(Boolean);
     console.log(`${domain}  ${from ?? '?'} to ${to ?? '?'}${notes.length ? `  (${notes.join(', ')})` : ''}`);
     sites[domain] = out;
