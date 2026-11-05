@@ -8,10 +8,13 @@ import Mark from '@/components/Mark.astro';
 import Slides from '@/components/Slides.astro';
 import { SITE, PERSON, isPlaceholder, displayName } from '@/data/site';
 import { HERO, PROBLEMS, WORK, READINGS, SITES, ASKED, HOW, CONTACT, COLOPHON } from '@/data/copy';
-import { OWNED_SITES, readSitemap } from '@/data/sites';
+import { OWNED_SITES, readSitemap, trafficFor } from '@/data/sites';
 
 // Build-time facts. Sitemaps are fetched now, on the build machine.
 const siteReadings = await Promise.all(OWNED_SITES.map(readSitemap));
+// Traffic is a dated snapshot (`npm run analytics`); absent figures print nothing.
+const traffic = OWNED_SITES.map((s) => trafficFor(s.domain));
+const hasTraffic = traffic.some((t) => t.length > 0);
 
 // The readings band stays out of production while any figure is a placeholder.
 // In dev it renders with the placeholders marked, so the layout can be seen.
@@ -119,6 +122,12 @@ const asked = ASKED.items.filter(
               <dd><span class:list={{ live: siteReadings[i].live }}>{fmt.format(siteReadings[i].urls)}</span></dd>
               <dt>{SITES.marginLastmod}</dt>
               <dd>{siteReadings[i].lastmod}</dd>
+              {traffic[i].map((g) => (
+                <Fragment>
+                  <dt>{SITES.marginTraffic.replace('{days}', String(g.days)).replace('{to}', g.to)}</dt>
+                  {g.lines.map((l) => <dd>{fmt.format(l.value)} {SITES.traffic[l.key]}</dd>)}
+                </Fragment>
+              ))}
             </dl>
             <p>
               <a class="site-link" href={s.url} rel="me">{s.domain}</a>
@@ -128,6 +137,7 @@ const asked = ASKED.items.filter(
         ))}
         <Row>
           {SITES.factory.map((p) => <p>{p}</p>)}
+          {hasTraffic && <p>{SITES.trafficNote}</p>}
         </Row>
       </Fragment>
     </Band>

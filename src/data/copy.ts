@@ -150,6 +150,16 @@ export const SITES = {
   ],
   marginUrls: 'URLs in sitemap',
   marginLastmod: 'last published',
+  /** `{days}` is the window's length, `{to}` its last day, ISO. */
+  marginTraffic: '{days} days to {to}',
+  traffic: {
+    visits: 'visits',
+    impressions: 'search impressions',
+    clicks: 'search clicks',
+    aiReferrals: 'from AI assistants',
+  },
+  trafficNote:
+    'Visits come from Google Analytics, which counts only visitors who accept its cookies, so it undercounts. Search figures come from Search Console. Visits from AI assistants count only those that say where they came from. Google counts its own AI answers inside search and does not separate them.',
 } as const;
 
 export interface Asked {

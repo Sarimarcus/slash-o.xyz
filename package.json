@@ -12,6 +12,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",
+    "analytics": "node scripts/analytics.mjs",
     "todo": "grep -rn \"TODO(content)\" src || echo \"No content placeholders left.\""
   },
   "dependencies": {

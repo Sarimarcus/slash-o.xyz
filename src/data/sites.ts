@@ -6,6 +6,7 @@
  * fails (offline build, a site down), the recorded fallback is used and marked
  * with its own date, so the page never shows a number nobody measured.
  */
+import snapshot from './analytics.json';
 
 export interface OwnedSite {
   domain: string;
@@ -41,6 +42,57 @@ export const OWNED_SITES: OwnedSite[] = [
     fallback: { urls: 246, lastmod: '2026-11-04' },
   },
 ];
+
+/**
+ * Traffic, from the snapshot `npm run analytics` copies out of the content
+ * factory's analytics dashboard (see the script for what each number counts).
+ * Not fetched at build, so every figure carries the end date of its window.
+ */
+interface Snapshot {
+  sites: Record<
+    string,
+    {
+      visits?: number;
+      aiReferrals?: number;
+      impressions?: number;
+      clicks?: number;
+      ga4?: { from: string; to: string };
+      gsc?: { from: string; to: string };
+    }
+  >;
+}
+
+export interface TrafficLine {
+  value: number;
+  key: 'visits' | 'impressions' | 'clicks' | 'aiReferrals';
+}
+
+export interface TrafficGroup {
+  /** Days in the window, counted from its own dates. */
+  days: number;
+  to: string;
+  lines: TrafficLine[];
+}
+
+/** Lines grouped by the window they measure, usually one group. */
+export function trafficFor(domain: string): TrafficGroup[] {
+  const s = (snapshot as Snapshot).sites[domain];
+  if (!s) return [];
+  const groups = new Map<string, TrafficGroup>();
+  const add = (w: { from: string; to: string } | undefined, key: TrafficLine['key'], value?: number) => {
+    if (!w || typeof value !== 'number') return;
+    const id = `${w.from}/${w.to}`;
+    const days = Math.round((Date.parse(w.to) - Date.parse(w.from)) / 86_400_000) + 1;
+    const g = groups.get(id) ?? { days, to: w.to, lines: [] };
+    g.lines.push({ key, value });
+    groups.set(id, g);
+  };
+  add(s.ga4, 'visits', s.visits);
+  add(s.gsc, 'impressions', s.impressions);
+  add(s.gsc, 'clicks', s.clicks);
+  add(s.ga4, 'aiReferrals', s.aiReferrals);
+  return [...groups.values()].sort((a, b) => b.to.localeCompare(a.to));
+}
 
 export interface SiteReading {
   urls: number;

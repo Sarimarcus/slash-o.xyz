@@ -131,3 +131,30 @@ CSS after the finish review, not before the build.
 Cloudflare Pages, build command `npm run build`, output `dist`, `NODE_VERSION=22`.
 `public/_headers` carries the CSP; `functions/_middleware.js` keeps preview hosts
 out of search results.
+
+## Traffic snapshot
+
+The sites band shows each owned site's visits (GA4 sessions), search impressions and
+clicks (Search Console), and visits from AI assistants (the GA4 "AI Assistant"
+channel), summed over 28 days that end before Search Console's provisional days, so
+every figure is final. The build never calls Google: `npm run analytics` reads the
+content factory's analytics dashboard data
+(`content-sites-factory/apps/gsc-dashboard/public/data`, rebuilt there every morning
+at 06:45) and writes `src/data/analytics.json`. The page prints only what that file
+holds, dated by its window. A source that does not cover every day of the window
+prints nothing (a new site stays blank until it has 28 days), and figures kept from
+an earlier run drop after 21 days. Set `CONTENT_FACTORY_DIR` if the factory is not a
+sibling checkout.
+
+`--push` writes the file in a throwaway worktree on `origin/main`, commits and
+pushes it there, which triggers a Pages rebuild. The working checkout, its branch
+and any unpushed commits are never touched. Installed cron entry (tagged
+`slash-o-analytics-daily`):
+
+```cron
+30 7 * * * mkdir -p ~/.local/state/slash-o && cd ~/dev/projects/slash-o.xyz && PATH=$HOME/.local/bin:/usr/bin:/bin node scripts/analytics.mjs --push >> ~/.local/state/slash-o/analytics-cron.log 2>&1
+```
+
+Google folds AI Overviews and AI Mode into the ordinary search totals, so "from AI
+assistants" counts only referrals that name an assistant (ChatGPT, Gemini,
+Perplexity, Claude, Copilot).

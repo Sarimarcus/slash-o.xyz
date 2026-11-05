@@ -1,0 +1,54 @@
+{
+  "source": "content-sites-factory analytics dashboard",
+  "sites": {
+    "explorecordoba.com": {
+      "impressions": 452122,
+      "clicks": 7613,
+      "gsc": {
+        "property": "www.explorecordoba.com",
+        "from": "2026-10-05",
+        "to": "2026-11-01"
+      },
+      "visits": 14350,
+      "aiReferrals": 269,
+      "ga4": {
+        "property": "properties/528078974",
+        "from": "2026-10-05",
+        "to": "2026-11-01"
+      }
+    },
+    "exploregranada.org": {
+      "impressions": 354752,
+      "clicks": 3941,
+      "gsc": {
+        "property": "www.exploregranada.org",
+        "from": "2026-10-05",
+        "to": "2026-11-01"
+      },
+      "visits": 7724,
+      "aiReferrals": 295,
+      "ga4": {
+        "property": "properties/545095444",
+        "from": "2026-10-05",
+        "to": "2026-11-01"
+      }
+    },
+    "darkskiesatlas.com": {
+      "impressions": 123507,
+      "clicks": 1406,
+      "gsc": {
+        "property": "www.darkskiesatlas.com",
+        "from": "2026-10-05",
+        "to": "2026-11-01"
+      },
+      "visits": 4223,
+      "aiReferrals": 154,
+      "ga4": {
+        "property": "properties/546193579",
+        "from": "2026-10-05",
+        "to": "2026-11-01"
+      }
+    },
+    "cadizexperience.com": {}
+  }
+}
