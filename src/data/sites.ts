@@ -56,6 +56,8 @@ interface Snapshot {
       aiReferrals?: number;
       impressions?: number;
       clicks?: number;
+      /** [date, visits, aiReferrals], one row per day of the GA4 window. */
+      daily?: [string, number, number][];
       ga4?: { from: string; to: string };
       gsc?: { from: string; to: string };
     }
@@ -92,6 +94,23 @@ export function trafficFor(domain: string): TrafficGroup[] {
   add(s.gsc, 'clicks', s.clicks);
   add(s.ga4, 'aiReferrals', s.aiReferrals);
   return [...groups.values()].sort((a, b) => b.to.localeCompare(a.to));
+}
+
+export interface TrafficDay {
+  date: string;
+  visits: number;
+  ai: number;
+}
+
+/** The GA4 window day by day, or null when the snapshot has none for the site. */
+export function dailyFor(domain: string): { from: string; to: string; days: TrafficDay[] } | null {
+  const s = (snapshot as Snapshot).sites[domain];
+  if (!s?.ga4 || !s.daily?.length) return null;
+  return {
+    from: s.ga4.from,
+    to: s.ga4.to,
+    days: s.daily.map(([date, visits, ai]) => ({ date, visits, ai })),
+  };
 }
 
 export interface SiteReading {

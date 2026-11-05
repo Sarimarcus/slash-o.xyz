@@ -8,13 +8,15 @@ import Mark from '@/components/Mark.astro';
 import Slides from '@/components/Slides.astro';
 import { SITE, PERSON, isPlaceholder, displayName } from '@/data/site';
 import { HERO, PROBLEMS, WORK, READINGS, SITES, ASKED, HOW, CONTACT, COLOPHON } from '@/data/copy';
-import { OWNED_SITES, readSitemap, trafficFor } from '@/data/sites';
+import { OWNED_SITES, readSitemap, trafficFor, dailyFor } from '@/data/sites';
+import TrafficPlot from '@/components/TrafficPlot.astro';
 
 // Build-time facts. Sitemaps are fetched now, on the build machine.
 const siteReadings = await Promise.all(OWNED_SITES.map(readSitemap));
 // Traffic is a dated snapshot (`npm run analytics`); absent figures print nothing.
 const traffic = OWNED_SITES.map((s) => trafficFor(s.domain));
 const hasTraffic = traffic.some((t) => t.length > 0);
+const plots = OWNED_SITES.map((s) => dailyFor(s.domain));
 
 // The readings band stays out of production while any figure is a placeholder.
 // In dev it renders with the placeholders marked, so the layout can be seen.
@@ -133,6 +135,7 @@ const asked = ASKED.items.filter(
               <a class="site-link" href={s.url} rel="me">{s.domain}</a>
               <span class="site-what">{s.what}</span>
             </p>
+            {plots[i] && <TrafficPlot {...plots[i]} />}
           </Row>
         ))}
         <Row>

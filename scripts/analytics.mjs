@@ -79,10 +79,20 @@ function gaFigures(ga, from, to) {
   if (ga.daily[0][0] > from || ga.daily.at(-1)[0] < to) return null;
   if ((ga.uncoveredDates ?? []).some((d) => inWindow(d, from, to))) return null;
   const ai = ga.channels?.names?.indexOf(AI_CHANNEL) ?? -1;
+  // Channel rows are [date, ...one column per channel name].
+  const aiByDay = new Map(
+    ai < 0 ? [] : (ga.channels.daily ?? []).map((r) => [r[0], r[ai + 1] ?? 0]),
+  );
+  const visitsByDay = new Map(ga.daily.map((r) => [r[0], r[1] ?? 0]));
+  // Every day of the window, zero-filled, as [date, visits, aiReferrals].
+  const daily = [];
+  for (let d = from; d <= to; d = addDays(d, 1)) {
+    daily.push([d, visitsByDay.get(d) ?? 0, aiByDay.get(d) ?? 0]);
+  }
   return {
     visits: sum(ga.daily, 1, from, to),
-    // Channel rows are [date, ...one column per channel name].
     aiReferrals: ai < 0 ? 0 : sum(ga.channels.daily ?? [], ai + 1, from, to),
+    daily,
   };
 }
 
@@ -136,7 +146,9 @@ try {
     if (g) Object.assign(out, g, { gsc: { property: o.domain, from, to } });
     else if (fresh(prev.gsc)) Object.assign(out, { impressions: prev.impressions, clicks: prev.clicks, gsc: prev.gsc });
     if (a) Object.assign(out, a, { ga4: { property: ga.property, from, to } });
-    else if (fresh(prev.ga4)) Object.assign(out, { visits: prev.visits, aiReferrals: prev.aiReferrals, ga4: prev.ga4 });
+    else if (fresh(prev.ga4)) {
+      Object.assign(out, { visits: prev.visits, aiReferrals: prev.aiReferrals, daily: prev.daily, ga4: prev.ga4 });
+    }
 
     const note = (got, name, kept) => (got ? '' : kept ? `${name} kept from ${kept.to}` : `${name} has no full window`);
     const notes = [note(g, 'GSC', out.gsc), note(a, 'GA4', out.ga4)].filter(Boolean);

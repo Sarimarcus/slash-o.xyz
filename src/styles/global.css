@@ -567,6 +567,55 @@ section[id],
   margin-top: 0.25rem;
 }
 
+/* The site's GA4 window, day by day, in the space under its name. */
+.traffic {
+  margin: 1.25rem 0 0;
+  max-width: 32rem;
+  font-size: var(--fs-caption);
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.traffic-panel + .traffic-panel {
+  margin-top: 0.75rem;
+}
+.traffic-label {
+  margin: 0 0 0.25rem;
+  font-style: italic;
+}
+.traffic svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+.traffic-base {
+  stroke: var(--linen-shade);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.traffic-line {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.traffic-visits .traffic-line {
+  stroke: var(--altitude);
+}
+.traffic-ai .traffic-line {
+  stroke: var(--oxide);
+}
+.traffic-hit {
+  fill: transparent;
+}
+.traffic-hit:hover {
+  fill: color-mix(in srgb, var(--linen-shade) 60%, transparent);
+}
+.traffic-ends {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.25rem 0 0;
+}
+
 /* ---------- how I work ---------- */
 
 /* The refusal is drawn as a hatched field, the way a plate marks terrain that

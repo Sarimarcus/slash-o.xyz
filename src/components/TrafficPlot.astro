@@ -1,0 +1,72 @@
+---
+/**
+ * One owned site's GA4 window, day by day: visits, and below it visits from AI
+ * assistants. Two panels, each on its own scale (the second is about fifty
+ * times smaller), never two scales on one axis. Each panel names its highest
+ * day, which is its scale. Drawn at build, no script: hovering a day shows its
+ * figures through the SVG's native title.
+ */
+import { SITES } from '@/data/copy';
+import type { TrafficDay } from '@/data/sites';
+
+interface Props {
+  from: string;
+  to: string;
+  days: TrafficDay[];
+}
+const { from, to, days } = Astro.props;
+
+const fmt = new Intl.NumberFormat('en-GB');
+const W = 280;
+const step = W / days.length;
+
+function panel(key: 'visits' | 'ai', h: number) {
+  const values = days.map((d) => d[key]);
+  const peak = Math.max(...values);
+  const low = Math.min(...values);
+  // 1 unit of headroom so the line never sits on the panel's top edge.
+  const y = (v: number) => (peak === 0 ? h : h - (v / peak) * (h - 1));
+  const points = values.map((v, i) => `${((i + 0.5) * step).toFixed(2)},${y(v).toFixed(2)}`).join(' ');
+  return { peak, low, h, points };
+}
+
+const visits = panel('visits', 48);
+const ai = panel('ai', 24);
+const dayTitle = (d: TrafficDay) =>
+  SITES.plotDay
+    .replace('{date}', d.date)
+    .replace('{visits}', fmt.format(d.visits))
+    .replace('{ai}', fmt.format(d.ai));
+const summary = (label: string, p: { low: number; peak: number }) =>
+  `${label} from ${from} to ${to}: lowest ${fmt.format(p.low)}, highest ${fmt.format(p.peak)}.`;
+---
+
+<figure class="traffic">
+  {[
+    { p: visits, cls: 'traffic-visits', label: SITES.plotVisits, name: 'Visits a day' },
+    { p: ai, cls: 'traffic-ai', label: SITES.plotAi, name: 'Visits from AI assistants a day' },
+  ].map(({ p, cls, label, name }) => (
+    <div class:list={['traffic-panel', cls]}>
+      <p class="traffic-label">{label.replace('{peak}', fmt.format(p.peak))}</p>
+      <svg
+        viewBox={`0 0 ${W} ${p.h}`}
+        preserveAspectRatio="none"
+        role="img"
+        aria-label={summary(name, p)}
+        style={`height: ${p.h / 16}rem`}
+      >
+        <line class="traffic-base" x1="0" x2={W} y1={p.h - 0.5} y2={p.h - 0.5} />
+        <polyline class="traffic-line" points={p.points} />
+        {days.map((d, i) => (
+          <rect class="traffic-hit" x={i * step} y="0" width={step} height={p.h}>
+            <title>{dayTitle(d)}</title>
+          </rect>
+        ))}
+      </svg>
+    </div>
+  ))}
+  <p class="traffic-ends">
+    <time datetime={from}>{from}</time>
+    <time datetime={to}>{to}</time>
+  </p>
+</figure>

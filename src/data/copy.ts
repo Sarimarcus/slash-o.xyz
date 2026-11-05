@@ -158,6 +158,11 @@ export const SITES = {
     clicks: 'search clicks',
     aiReferrals: 'from AI assistants',
   },
+  /** Panel labels; `{peak}` is the panel's highest day, which sets its scale. */
+  plotVisits: 'Visits a day, highest {peak}',
+  plotAi: 'From AI assistants a day, highest {peak}',
+  /** Hover text for one day. */
+  plotDay: '{date}: {visits} visits, {ai} from AI assistants',
   trafficNote:
     'Visits come from Google Analytics, which counts only visitors who accept its cookies, so it undercounts. Search figures come from Search Console. Visits from AI assistants count only those that say where they came from. Google counts its own AI answers inside search and does not separate them.',
 } as const;
