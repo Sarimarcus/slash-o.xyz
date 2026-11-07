@@ -2,26 +2,16 @@
   "source": "content-sites-factory analytics dashboard",
   "sites": {
     "explorecordoba.com": {
-      "impressions": 452122,
-      "clicks": 7613,
+      "impressions": 465975,
+      "clicks": 7934,
       "gsc": {
         "property": "www.explorecordoba.com",
-        "from": "2026-10-05",
-        "to": "2026-11-01"
+        "from": "2026-10-07",
+        "to": "2026-11-03"
       },
-      "visits": 14350,
-      "aiReferrals": 269,
+      "visits": 14824,
+      "aiReferrals": 263,
       "daily": [
-        [
-          "2026-10-05",
-          477,
-          14
-        ],
-        [
-          "2026-10-06",
-          481,
-          10
-        ],
         [
           "2026-10-07",
           490,
@@ -151,35 +141,35 @@
           "2026-11-01",
           649,
           14
+        ],
+        [
+          "2026-11-02",
+          725,
+          9
+        ],
+        [
+          "2026-11-03",
+          707,
+          9
         ]
       ],
       "ga4": {
         "property": "properties/528078974",
-        "from": "2026-10-05",
-        "to": "2026-11-01"
+        "from": "2026-10-07",
+        "to": "2026-11-03"
       }
     },
     "exploregranada.org": {
-      "impressions": 354752,
-      "clicks": 3941,
+      "impressions": 364573,
+      "clicks": 4013,
       "gsc": {
         "property": "www.exploregranada.org",
-        "from": "2026-10-05",
-        "to": "2026-11-01"
+        "from": "2026-10-07",
+        "to": "2026-11-03"
       },
-      "visits": 7724,
-      "aiReferrals": 295,
+      "visits": 7796,
+      "aiReferrals": 297,
       "daily": [
-        [
-          "2026-10-05",
-          311,
-          16
-        ],
-        [
-          "2026-10-06",
-          287,
-          4
-        ],
         [
           "2026-10-07",
           298,
@@ -309,35 +299,35 @@
           "2026-11-01",
           309,
           9
+        ],
+        [
+          "2026-11-02",
+          349,
+          11
+        ],
+        [
+          "2026-11-03",
+          321,
+          11
         ]
       ],
       "ga4": {
         "property": "properties/545095444",
-        "from": "2026-10-05",
-        "to": "2026-11-01"
+        "from": "2026-10-07",
+        "to": "2026-11-03"
       }
     },
     "darkskiesatlas.com": {
-      "impressions": 123507,
-      "clicks": 1406,
+      "impressions": 126226,
+      "clicks": 1466,
       "gsc": {
         "property": "www.darkskiesatlas.com",
-        "from": "2026-10-05",
-        "to": "2026-11-01"
+        "from": "2026-10-07",
+        "to": "2026-11-03"
       },
-      "visits": 4223,
-      "aiReferrals": 154,
+      "visits": 4351,
+      "aiReferrals": 158,
       "daily": [
-        [
-          "2026-10-05",
-          118,
-          7
-        ],
-        [
-          "2026-10-06",
-          78,
-          3
-        ],
         [
           "2026-10-07",
           61,
@@ -467,23 +457,33 @@
           "2026-11-01",
           144,
           5
+        ],
+        [
+          "2026-11-02",
+          153,
+          8
+        ],
+        [
+          "2026-11-03",
+          171,
+          6
         ]
       ],
       "ga4": {
         "property": "properties/546193579",
-        "from": "2026-10-05",
-        "to": "2026-11-01"
+        "from": "2026-10-07",
+        "to": "2026-11-03"
       }
     },
     "cadizexperience.com": {
-      "impressions": 435,
-      "clicks": 15,
+      "impressions": 1231,
+      "clicks": 35,
       "gsc": {
         "property": "www.cadizexperience.com",
         "from": "2026-10-28",
-        "to": "2026-11-04"
+        "to": "2026-11-06"
       },
-      "visits": 20,
+      "visits": 60,
       "aiReferrals": 0,
       "daily": [
         [
@@ -500,12 +500,22 @@
           "2026-11-04",
           9,
           0
+        ],
+        [
+          "2026-11-05",
+          22,
+          0
+        ],
+        [
+          "2026-11-06",
+          18,
+          0
         ]
       ],
       "ga4": {
         "property": "properties/561427331",
         "from": "2026-11-02",
-        "to": "2026-11-04"
+        "to": "2026-11-06"
       }
     }
   }
